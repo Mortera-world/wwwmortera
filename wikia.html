@@ -1,0 +1,3496 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mortera Wikia</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.08);
+      --line:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.90);
+      --muted:rgba(255,255,255,.62);
+      --muted2:rgba(255,255,255,.45);
+      --accent:#7c5cff;
+      --accent2:#38bdf8;
+      --radius:18px;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --shadow2: 0 10px 30px rgba(0,0,0,.28);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(124,92,255,.35), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(56,189,248,.18), transparent 55%),
+        radial-gradient(800px 400px at 0% 40%, rgba(124,92,255,.14), transparent 60%),
+        var(--bg);
+    }
+
+    .top{
+      padding:42px 18px 16px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      user-select:none;
+    }
+    .logo{
+      width:40px;height:40px;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(56,189,248,.85));
+      box-shadow: var(--shadow2);
+      display:grid; place-items:center;
+      font-weight:800;
+      letter-spacing:-.5px;
+    }
+    h1{
+      margin:0;
+      font-size:28px;
+      letter-spacing:.2px;
+      font-weight:750;
+    }
+    .sub{
+      margin-top:-6px;
+      color:var(--muted2);
+      font-size:13px;
+      text-align:center;
+    }
+
+    .searchWrap{
+      width:min(860px, 92vw);
+      position:relative;
+    }
+    .search{
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
+    }
+    .search svg{ opacity:.75; }
+    .search input{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:14px;
+      letter-spacing:.1px;
+    }
+    .hint{
+      color:var(--muted2);
+      font-size:12px;
+      margin:10px 4px 0;
+      text-align:center;
+    }
+
+    .results{
+      position:absolute;
+      top:58px;
+      left:0;
+      right:0;
+      background: rgba(15,18,28,.92);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:none;
+      z-index:50;
+      backdrop-filter: blur(10px);
+    }
+    .resultsHeader{
+      padding:10px 12px;
+      font-size:12px;
+      color:var(--muted);
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .resultsList{
+      max-height: 320px;
+      overflow:auto;
+    }
+    .resultItem{
+      padding:12px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      cursor:pointer;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      transition: background .15s ease;
+    }
+    .resultItem:hover{ background: rgba(255,255,255,.06); }
+    .pill{
+      font-size:11px;
+      padding:4px 8px;
+      border:1px solid rgba(124,92,255,.35);
+      border-radius:999px;
+      color: rgba(212,205,255,.95);
+      background: rgba(124,92,255,.12);
+      white-space:nowrap;
+      margin-top:1px;
+    }
+    .resultTitle{ font-size:13.5px; font-weight:650; margin:0; }
+    .resultMeta{ font-size:12px; color:var(--muted2); margin-top:2px; }
+
+    .layout{
+      width:min(1200px, 94vw);
+      margin: 14px auto 40px;
+      display:grid;
+      grid-template-columns: 330px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .card{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+
+    .sidebarHeader{
+      padding:14px 14px 10px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .sidebarHeader .t{
+      font-weight:700;
+      font-size:13px;
+      letter-spacing:.2px;
+      color:rgba(255,255,255,.86);
+    }
+    .sidebarHeader .k{
+      font-size:12px;
+      color:var(--muted2);
+    }
+
+    .cats{ padding:8px; }
+    .cat{
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.03);
+      margin-bottom:10px;
+    }
+    .catBtn{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      padding:12px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      transition: background .15s ease;
+    }
+    .catBtn:hover{ background: rgba(255,255,255,.05); }
+    .left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .ico{
+      width:34px;height:34px;
+      border-radius:12px;
+      display:grid; place-items:center;
+      background: rgba(124,92,255,.12);
+      border:1px solid rgba(124,92,255,.25);
+      flex:0 0 auto;
+    }
+    .catTitle{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+      min-width:0;
+      text-align:left;
+    }
+    .catTitle strong{
+      font-size:13px;
+      font-weight:720;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .catTitle span{
+      font-size:12px;
+      color:var(--muted2);
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.80);
+    }
+    .chev{
+      opacity:.7;
+      margin-left:10px;
+      transition: transform .25s cubic-bezier(.4,0,.2,1);
+    }
+    .cat.open .chev{
+      transform: rotate(180deg);
+    }
+
+    .submenu{
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 10px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition:
+        max-height .35s cubic-bezier(.4,0,.2,1),
+        opacity .25s ease,
+        transform .25s ease,
+        padding .25s ease;
+    }
+    
+    .cat.open .submenu{
+      max-height: 500px; /* suficiente para varias páginas */
+      opacity: 1;
+      transform: translateY(0);
+      padding: 6px 10px 10px;
+    }
+
+    .pageBtn{
+      width:100%;
+      text-align:left;
+      padding:10px 10px;
+      border-radius: 12px;
+      border:1px solid transparent;
+      background: transparent;
+      color: rgba(255,255,255,.86);
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      transition: background .15s ease, border-color .15s ease;
+      margin-top:6px;
+      transition:
+        background .15s ease,
+        border-color .15s ease,
+        transform .15s ease,
+        opacity .15s ease;
+    }
+    .cat.open .pageBtn{
+      animation: fadeUp .25s ease both;
+    }
+    @keyframes fadeUp{
+      from{
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .pageBtn:hover{
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.08);
+    }
+    .pageBtn small{
+      color: var(--muted2);
+      white-space:nowrap;
+      margin-top:2px;
+    }
+    .contentHeader{
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .crumbs{
+      font-size:12px;
+      color: var(--muted2);
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .crumbs .dot{
+      width:4px;height:4px;border-radius:999px;
+      background: rgba(255,255,255,.25);
+      display:inline-block;
+    }
+
+    .content{
+      padding:18px;
+      line-height:1.6;
+    }
+    .content h2{
+      margin:0 0 6px;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .content p{
+      margin: 10px 0;
+      color: rgba(255,255,255,.78);
+      font-size:14px;
+    }
+    .hero{
+      padding:14px 14px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(135deg, rgba(124,92,255,.14), rgba(56,189,248,.10));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .mini{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .chip{
+      font-size:15px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.75);
+    }
+    @media (max-width: 980px){
+      .layout{ grid-template-columns: 1fr; }
+    }
+	.tabs { margin-top: 10px; }
+    .tabbar{
+      display:flex; gap:8px; flex-wrap:wrap;
+      padding:10px;
+      border-radius:14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .tab{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.80);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:650;
+      transition: background .15s ease, transform .15s ease, border-color .15s ease;
+    }
+    .tab:hover{ transform: translateY(-1px); }
+    .tab.active{
+      background: rgba(124,92,255,.22);
+      border-color: rgba(124,92,255,.35);
+      color: rgba(255,255,255,.92);
+    }
+    .tabpanels{ margin-top: 12px; }
+    .panel{ display:none; }
+    .panel.active{ display:block; }
+    
+    .itemTable{
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .itemTable th, .itemTable td{
+      padding:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align: top;
+      font-size:14px;
+    }
+    .itemTable th{
+      color: rgba(255,255,255,.70);
+      font-weight:700;
+      background: rgba(255,255,255,.04);
+    }
+    .itemRow{
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .itemRow img{
+      width:48px; height:48px;
+      image-rendering: pixelated;
+      border-radius: 10px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.15);
+    }
+    .separation {
+      border-collapse: collapse;
+    }
+    
+    .separation td {
+      vertical-align: middle;
+      padding: 4px 4px;
+    }
+    
+    .separation .img {
+      text-align: center;
+      width: 40px;
+    }
+    
+    .separation img {
+      display: block;
+      margin: auto;
+    }
+	.link-center {
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">M</div>
+      <div>
+        <h1>Mortera Wikia</h1>
+      </div>
+    </div>
+
+    <div class="searchWrap">
+      <div class="search" role="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 21l-4.3-4.3m1.3-5.2a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+
+        <input id="q" type="search" placeholder="Buscar en la wiki…" autocomplete="off" />
+      </div>
+
+      <div id="results" class="results" aria-live="polite">
+        <div class="resultsHeader">
+          <span id="resultsTitle">Resultados</span>
+          <span id="resultsCount"></span>
+        </div>
+        <div id="resultsList" class="resultsList"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="card">
+      <div class="sidebarHeader">
+        <div class="t">Categorías</div>
+        <div class="k" id="totalPages"></div>
+      </div>
+      <div class="cats" id="cats"></div>
+    </aside>
+
+    <section class="card">
+      <div class="contentHeader">
+        <div class="crumbs" id="crumbs">
+          <span>Home</span> <span class="dot"></span> <span>Bienvenida</span>
+        </div>
+        <div class="badge" id="contentTag">Inicio</div>
+      </div>
+      <div class="content" id="content"></div>
+    </section>
+  </main>
+
+<script>
+const WIKI = {
+  categories: [
+    {
+      id: "items",
+      icon: "🧩",
+      title: "Ítems Exclusivos",
+      description: "Drops, rarezas y equipo",
+      pages: [
+	    {
+          id: "items-Balls",
+          title: "Balls",
+          summary: "capture tools",
+          content: `
+            <table class="separation">
+              <tr>
+                <td class="name">Basic Pokéball</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61587.gif">
+                </td>
+                <td class="desc">Perfecta para capturar criaturas comunes con su rate de x1. Se consigue con el npc <b>Sir Elixion</b> y en <b>Store</b></td>
+              </tr>
+              <tr>
+                <td class="name">Great Pokéball</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61588.gif">
+                </td>
+                <td class="desc">Ideal para criaturas intermedias con su rate x2. Se consigue con el npc <b>Sir Elixion</b> y en <b>Store</b></td>
+              </tr>
+              <tr>
+                <td class="name">Ultra Pokéball</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61589.gif">
+                </td>
+                <td class="desc">Para las criaturas más difíciles con su rate x4. Se consigue con el npc <b>Sir Elixion</b> y en <b>Store</b></td>
+              </tr>
+              <tr>
+                <td class="name">Master Pokéball</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61590.gif">
+                </td>
+                <td class="desc">¡Captura garantizada de cualquier criatura! Unicamente de Donacion</td>
+              </tr>
+			  <tr>
+                <td colspan="3" style="text-align:center;">
+                  <a href="#" data-open-page="sistemas-capture" class="chip">
+                    aqui puedes ver el sistema completo de las pokeballs
+                  </a>
+                </td>
+              </tr>
+            </table>
+			<br>
+			<h2 style='text-align: center; color: red;'>Ubicacion del npc <b>Sir Elixion</b> en mortera country</h2>
+			<div style="display: flex; justify-content: center;">
+              <img src="https://mortera-world.com/images/map1.png" style="width: 50%; height: auto;">
+            </div>
+          `
+        },
+	    {
+          id: "items-Boxes",
+          title: "Boxes",
+          summary: "mejoras",
+          content: `
+		  <table class="separation">
+		      <tr>
+                <td class="name">Bronze Box</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61876.gif">
+                </td>
+                <td class="desc">Contiene items vip y ultimatums con 10% de chance se consigue en quest y donaciones</td>
+              </tr>
+			  <tr>
+                <td class="name">Legendary Box</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61877.gif">
+                </td>
+                <td class="desc">Contiene items vip y ultimatum con el chance igual para todos los items se consigue en quest y donaciones</td>
+              </tr>
+			  <tr>
+                <td class="name">Silver Box</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61875.gif">
+                </td>
+                <td class="desc">Contiene items vip y ultimatum con 25% de chance se consigue en quest y donaciones</td>
+              </tr>
+              <tr>
+                <td class="name">Vip Box</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61763.gif">
+                </td>
+                <td class="desc">Contiene items vip, se consigue en quest</td>
+              </tr>
+           </table>
+          `
+        },
+		{
+          id: "items-Dummys",
+          title: "Exercise Dummy",
+          summary: "Utilidad",
+          content: `
+		  <table class="separation">
+              <tr>
+                <td class="name">Golden Exercise Dummy</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61909.gif">
+                </td>
+                <td class="desc">tiene 50% mas de skill se consigue mediante store</td>
+              </tr>
+              <tr>
+                <td class="name">Chaotic Exercise Dummy</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61888.gif">
+                </td>
+                <td class="desc">tiene 100% mas de skill se consigue mediante donaciones de 500$mx</td>
+              </tr>
+              <tr>
+                <td class="name">Celestial Exercise Dummy</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61859.gif">
+                </td>
+                <td class="desc">tiene 150% mas de skill se consigue mediante donaciones de 1000$</td>
+              </tr>
+              <tr>
+                <td class="name">Super Exercise Dummy</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61901.gif">
+                </td>
+                <td class="desc">super exercise dummy, tiene 500% mas de skill se consigue mediante donaciones de 2000$</td>
+              </tr>
+            </table>
+          `
+        },
+		{
+          id: "items-Potions",
+          title: "Potions",
+          summary: "soporte",
+          content: `
+		  <table class="separation">
+              <tr>
+                <td class="name">Omega Health Potion</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61894.gif">
+                </td>
+                <td class="desc">cura la vida de 5k a 200k</td>
+              </tr>
+              <tr>
+                <td class="name">Omega Mana Potion</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61892.gif">
+                </td>
+                <td class="desc">cura la mana de 5 a 200k</td>
+              </tr>
+              <tr>
+                <td class="name">Omega Spirit Potion</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61893.gif">
+                </td>
+                <td class="desc">Cura la mana y vida al rededor de 5k a 150k</td>
+              </tr>
+			  <tr>
+                <td class="name">Kooldown-aid</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36723.gif">
+                </td>
+                <td class="desc">Esta poción restablece temporalmente los tiempos de reutilización de todos los hechizos.</td>
+              </tr>
+			  <tr>
+                <td class="name">Strike Enhancement</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36724.gif">
+                </td>
+                <td class="desc">Esta poción incrementa temporalmente tu daño critico</td>
+              </tr>
+			  <tr>
+                <td class="name">Stamina Extension</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36725.gif">
+                </td>
+                <td class="desc">Esta poción incrementa en una hora tu stamina</td>
+              </tr>
+			  <tr>
+                <td class="name">Charm Upgrade</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36726.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente las posibilidades de activación de encantos ofensivos, excepto cripple.</td>
+              </tr>
+			  <tr>
+                <td class="name">Wealth Duplex</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36727.gif">
+                </td>
+                <td class="desc">Esta poción duplica temporalmente el botín de cada monstruo normal que mates.</td>
+              </tr>
+			  <tr>
+                <td class="name">Bestiary Betterment</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36728.gif">
+                </td>
+                <td class="desc">Esta poción hace que las muertes cuenten dos veces para el Bestiario.</td>
+              </tr>
+			  <tr>
+                <td class="name">Fire Resilience</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36729.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente la protección contra el fuego.</td>
+              </tr>
+			  <tr>
+                <td class="name">Ice Resilience</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36730.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente la protección contra el Hielo.</td>
+              </tr>
+			  <tr>
+                <td class="name">Eart Resilience</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36731.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente la protección contra el Earth.</td>
+              </tr>
+			  <tr>
+                <td class="name">Energy Resilience</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36732.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente la protección contra el Energy.</td>
+              </tr>
+			  <tr>
+                <td class="name">Holy resilience</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36733.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente la protección contra el Holy.</td>
+              </tr>
+			  <tr>
+                <td class="name">Death Resilience</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36734.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente la protección contra el Death.</td>
+              </tr>
+			  <tr>
+                <td class="name">Physical Resilience</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36735.gif">
+                </td>
+                <td class="desc">Esta poción aumenta temporalmente la protección contra el Physical.</td>
+              </tr>
+			  <tr>
+                <td class="name">Fire Amplification</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36736.gif">
+                </td>
+                <td class="desc">Esta poción amplifica temporalmente el daño de fuego contra los monstruos.</td>
+              </tr>
+			  <tr>
+                <td class="name">Ice Amplification</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36737.gif">
+                </td>
+                <td class="desc">Esta poción amplifica temporalmente el daño de ice contra los monstruos.</td>
+              </tr>
+			  <tr>
+                <td class="name">Earth Amplification</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36738.gif">
+                </td>
+                <td class="desc">Esta poción amplifica temporalmente el daño de earth contra los monstruos.</td>
+              </tr>
+			  <tr>
+                <td class="name">Energy Amplification</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36739.gif">
+                </td>
+                <td class="desc">Esta poción amplifica temporalmente el daño de energy contra los monstruos.</td>
+              </tr>
+			  <tr>
+                <td class="name">Holy Amplification</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36740.gif">
+                </td>
+                <td class="desc">Esta poción amplifica temporalmente el daño de holy contra los monstruos.</td>
+              </tr>
+			  <tr>
+                <td class="name">Death Amplification</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36741.gif">
+                </td>
+                <td class="desc">Esta poción amplifica temporalmente el daño de death contra los monstruos.</td>
+              </tr>
+			  <tr>
+                <td class="name">Physical Amplification</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/36742.gif">
+                </td>
+                <td class="desc">Esta poción amplifica temporalmente el daño de Physical contra los monstruos.</td>
+              </tr>
+            </table>
+          `
+        },
+        {
+          id: "items-ultimatum",
+          title: "Ultimatum Items",
+          summary: "Estadísticas",
+          content: `
+            <div class="tabs" data-tabs>
+              <div class="tabbar">
+                <button class="tab" data-tab="knight">Knight</button>
+                <button class="tab" data-tab="paladin">Paladin</button>
+                <button class="tab" data-tab="druid">Druid</button>
+                <button class="tab" data-tab="sorcerer">Sorcerer</button>
+              </div>
+              <div class="tabpanels">
+                <div class="panel" data-panel="knight">
+                  <table class="itemTable">
+                    <thead>
+                      <tr>
+                        <th style="width:55%;">Item</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60054.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Backpack</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Solo mediante donacion de 500$ mx
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Vol:80) (club fighting +30, sword fighting +30, axe fighting +30, shielding +30, healing magic level +22, critical extra damage +70%, life leech +30%, mana leech +30%, protection energy +8%, earth +8%, fire +8%, lifedrain +8%, manadrain +8%, drown +8%, ice +8%, holy +8%, death +8%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60055.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Helmet</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight helmets</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:82, club fighting +30, sword fighting +30, axe fighting +30, shielding +30, critical extra damage +32%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60056.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Armor</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight armors</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Arm:105, club fighting +50, sword fighting +50, axe fighting +50, shielding +50, critical extra damage +40%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60057.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Legs</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight legs</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Arm:85, club fighting +30, sword fighting +30, axe fighting +30, shielding +30, healing magic level +18, critical extra damage +29%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60058.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight bots</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight boots</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Arm:82, club fighting +24, sword fighting +24, axe fighting +24, shielding +24, healing magic level +14, critical extra damage +28%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, speed +250
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60059.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Shield</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight shields</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Def:90, club fighting +26, sword fighting +26, axe fighting +26, shielding +26, healing magic level +24, critical extra damage +28%, life leech +13%, mana leech +13%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60060.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Amulet</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight Amulets</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Arm:52, club fighting +30, sword fighting +30, axe fighting +30, shielding +30, critical extra damage +27%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60061.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Ring</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight Rings</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, club fighting +24, sword fighting +24, axe fighting +24, shielding +24, critical extra damage +27%, life leech +13%, mana leech +13%, Healing Magic Level:+12
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60062.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Blade</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight swords</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Atk:200, Def:80 +15, sword fighting +36, critical hit chance 10%, critical extra damage +90%, life leech +10%, mana leech +10%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60064.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Chopper</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight axes</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Atk:210, Def:70, axe fighting +30, critical hit chance 10%, critical extra damage +90%, life leech +1%, mana leech +1%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60066.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight Mace</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight clubs</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Atk:220, Def:20, club fighting +26, critical hit chance 10%, critical extra damage +90%, life leech +10%, mana leech +10%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/44897.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Knight left ring</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip knight skull</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         club fighting +24, sword fighting +24, axe fighting +24, shielding +24, healing magic level +15, critical extra damage +24%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60111.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Explosionfight Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune life drainer</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel" data-panel="paladin">
+                  <table class="itemTable">
+                    <thead>
+                      <tr>
+                        <th style="width:55%;">Item</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60068.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Backpack</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Solo mediante donacion de 500$ MX
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          distance fighting +30, healing magic level +42, holy magic level +20, critical extra damage +90%, life leech +90%, mana leech +90%, protection energy +8%, earth +8%, fire +8%, lifedrain +8%, manadrain +8%, drown +8%, ice +8%, holy +8%, death +8%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60069.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Crossbow</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin crossbows</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Range: 7, Atk +89, Hit% +39, distance fighting +59, healing magic level +29, holy magic level +29, critical hit chance 10%, critical extra damage +200%, life leech +14%, mana leech +14%, perfect shot +200 at range 4, protection physical +10%, energy +10%, earth +10%, fire +10%, lifedrain +10%, manadrain +10%, drown +10%, ice +10%, holy +10%, death +10%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60070.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Headguard</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin helmets</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:85, distance fighting +30, healing magic level +20, holy magic level +20, critical extra damage +29%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60071.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Tabard</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin armors</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:94, distance fighting +44, healing magic level +18, holy magic level +18, critical extra damage +28%, life leech +13%, mana leech +13%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60072.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Greaves</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin legs</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:84, distance fighting +32, healing magic level +21, holy magic level +21, critical extra damage +27%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60073.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Boots</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin boots</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:85, distance fighting +28, magic level +15, healing magic level +27, critical extra damage +27%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, speed +250
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60074.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Quiver</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin escutcheons</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, distance fighting +24, magic level +24, critical extra damage +28%, life leech +14%, mana leech +14%, Healing Magic Level:+20, Holy Magic Level:+20
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60075.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Necklace</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin amulets</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:55, distance fighting +28, healing magic level +18, holy magic level +18, critical extra damage +28%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60076.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Ring</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin rings</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, distance fighting +26, critical extra damage +28%, life leech +14%, mana leech +14%, Healing Magic Level:+16, Holy Magic Level:+16
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60077.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Bow</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin bow</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Range: 7, Atk +64, Hit% +28, distance fighting +74, healing magic level +29, holy magic level +29, critical hit chance 10%, critical extra damage +170%, life leech +14%, mana leech +14%, perfect shot +150 at range 4, protection physical +10%, energy +10%, earth +10%, fire +10%, lifedrain +10%, manadrain +10%, drown +10%, ice +10%, holy +10%, death +10%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60125.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Bolt</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin bolt</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Attack:240
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60126.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Paladin Arrow</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip paladin arrow</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Attack:160
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60118.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Holy Rain Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra holy rain</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel" data-panel="druid">
+                  <table class="itemTable">
+                    <thead>
+                      <tr>
+                        <th style="width:55%;">Item</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60078.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid </div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Solo mediante donacion de 500$ MX
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          magic level +30, earth magic level +30, healing magic level +30, ice magic level +30, critical extra damage +90%, life leech +30%, mana leech +90%, protection energy +8%, earth +8%, fire +8%, lifedrain +8%, manadrain +8%, drown +8%, ice +8%, holy +8%, death +8%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60079.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Mask</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid helmet</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:60, magic level +32, earth magic level +22, healing magic level +22, ice magic level +26, critical extra damage +32%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60080.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Robe</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid armor</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:74, magic level +49, earth magic level +21, healing magic level +21, ice magic level +26, critical extra damage +32%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60081.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Pants</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid legs</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:60, magic level +30, earth magic level +20, healing magic level +20, ice magic level +26, critical extra damage +32%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60082.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Galoshes</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid boots</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:64, magic level +24, earth magic level +20, healing magic level +20, ice magic level +29, critical extra damage +20%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, speed +250
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60083.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Spellbook</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid spellbooks</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Def:100, magic level +26, earth magic level +22, healing magic level +22, ice magic level +26, critical extra damage +32%, mana leech +10%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60084.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Amulet</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid amulets</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:18, magic level +28, earth magic level +22, healing magic level +22, ice magic level +26, critical extra damage +24%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60085.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Ring</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid rings</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, magic level +24, critical extra damage +27%, life leech +14%, mana leech +14%, Earth Magic Level:+19, Healing Magic Level:+19, Ice Magic Level:+24
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60086.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Rod</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid rods</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Atk:1750, magic level +24, earth magic level +24, healing magic level +24, ice magic level +24, critical hit chance 10%, critical extra damage +52%, life leech +14%, mana leech +14%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/44839.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Druid Light</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip druid opal</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%magic level +24, critical extra damage +14%, life leech +14%, mana leech +14%, Earth Magic Level:+19, Healing Magic Level:+19, Ice Magic Level:+24
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60114.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Thunderstorm Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra thunderstorm</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60115.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Great Fireball Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra greatfireball</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60117.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Avalanche Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra avalanche</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60119.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Stoneshower Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra stoneshower</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60124.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sudden Death Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra sudden death</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena de gran daño con hasta 15 repeticiones
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel" data-panel="sorcerer">
+                  <table class="itemTable">
+                    <thead>
+                      <tr>
+                        <th style="width:55%;">Item</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60087.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Backpack</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Solo mediante donacion de 500$ MX
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Vol:80) (magic level +30, energy magic level +30, fire magic level +30, death magic level +30, critical extra damage +70%, life leech +30%, mana leech +30%, protection energy +8%, earth +8%, fire +8%, lifedrain +8%, manadrain +8%, drown +8%, ice +8%, holy +8%, death +8%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60088.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Crown</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer helmets</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:66, magic level +30, energy magic level +20, fire magic level +20, critical extra damage +28%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60089.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Mantle</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer armor</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:70, magic level +46, energy magic level +21, fire magic level +21, death magic level +26, critical extra damage +30%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60090.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Legs</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer legs</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:60, magic level +30, energy magic level +21, fire magic level +21, critical extra damage +29%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60091.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Galoshes</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer boots</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:60, magic level +24, death magic level +29, critical extra damage +28%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, speed +250
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60092.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Spellbook</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer spellbook</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Def:100, magic level +26, energy magic level +22, fire magic level +22, critical extra damage +30%, life leech +14%, mana leech +14%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60093.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Amulet</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer amulet</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Arm:20, magic level +28, critical extra damage +24%, life leech +14%, mana leech +14%, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60094.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Ring</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer ring</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%, magic level +24, critical extra damage +28%, life leech +14%, mana leech +14%, Energy Magic Level:+24, Fire Magic Level:+24
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60095.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer Wand</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer wand</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          Atk:1750, magic level +24, energy magic level +24, fire magic level +24, death magic level +24, critical hit chance 10%, critical extra damage +50%, life leech +14%, mana leech +14%, faster regeneration, protection physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/44803.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sorcerer psychosis</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>vip sorcerer light</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                          physical +7%, energy +7%, earth +7%, fire +7%, lifedrain +7%, manadrain +7%, drown +7%, ice +7%, holy +7%, death +7%magic level +24, critical extra damage +24%, life leech +14%, mana leech +14%, Energy Magic Level:+24, Fire Magic Level:+24, Death Magic Level:+24
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60114.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Thunderstorm Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra thunderstorm</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60115.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Great Fireball Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra greatfireball</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60117.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Avalanche Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra avalanche</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60119.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Stoneshower Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra stoneshower</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena y en area de 3x3 con hasta 15 repeticiones
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                          <div class="itemRow">
+                            <img src="https://mortera-world.com/images/items/60124.gif">
+                            <div>
+                              <div style="font-weight:750; margin-bottom:6px;">Ultimatum Sudden Death Rune</div>
+                              <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                                Se consigue con 15 <b>rune ultra sudden death</b> <br>y con el comando !craft ultimatum.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="color:rgb(108 255 0);">
+                         Ataque en cadena de gran daño con hasta 15 repeticiones
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          `
+        },
+		{
+          id: "items-Varios",
+          title: "Varios",
+          summary: "Utilidad",
+          content: `
+		  <table class="separation">
+		      <tr>
+                <td class="name">Portable Forge</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61919.gif">
+                </td>
+                <td class="desc">Puedes abrir la forja donde quiera que estes.</td>
+              </tr>
+			  <tr>
+                <td class="name">Portable imbuement</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61855.gif">
+                </td>
+                <td class="desc">Puedes imbuir donde quiera que estes.</td>
+              </tr>
+			  <tr>
+                <td class="name">spawn booster chalice</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/60881.gif">
+                </td>
+                <td class="desc">mejoras una zona de 18x18 para que las criaturas respawneen mas rapido</td>
+              </tr>
+			  <tr>
+                <td class="name">greater spawn booster chalice</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/60882.gif">
+                </td>
+                <td class="desc">mejoras una zona de 18x18 para que las criaturas respawneen mucho mas rapido</td>
+              </tr>
+			  <tr>
+                <td class="name">supreme spawn booster chalice</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/60883.gif">
+                </td>
+                <td class="desc">mejoras una zona de 18x18 para que las criaturas respawneen extremadamente rapido</td>
+              </tr>
+			  <tr>
+                <td class="name">cursed lollipop</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/60817.gif">
+                </td>
+                <td class="desc">item necesario para entrar al boss mind eater</td>
+              </tr>
+			  <tr>
+                <td class="name">Tier Upgrade:</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61921.gif">
+                </td>
+                <td class="desc">Aumenta el tier de tu equipamento en 1, con chance de fallar.</td>
+              </tr>
+		      <tr>
+                <td class="name">Tier Upgrade 100%:</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61922.gif">
+                </td>
+                <td class="desc">Aumenta el tier de tu equipamento en 1 sin chance de fallar</td>
+              </tr>
+		      <tr>
+                <td class="name">Forge Dust:</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/61920.gif">
+                </td>
+                <td class="desc">Te da 500 Dust para la Forja</td>
+              </tr>
+           </table>
+          `
+        },
+      ]
+    },
+    {
+      id: "sistemas",
+      icon: "🧠",
+      title: "Sistemas",
+      description: "Reglas y mecánicas",
+      pages: [
+        {
+          id: "sistemas-ascension",
+          title: "Ascension",
+          summary: "Requerimientos",
+          content: `
+            <div class="hero">
+              <h2>Sistema de Ascension (!ascension)</h2>
+              <p>
+                <b>Ascension</b> es un reinicio avanzado que se desbloquea al llegar a cierto número de resets.
+                Al usar <b>!ascension</b>, tus resets vuelven a 0, tu nivel regresa al nivel base, pero a cambio obtienes
+                un aumento grande de estadísticas, skills y recompensas especiales.
+              </p>
+              <div class="mini">
+                <div class="chip">Requiere 100 resets</div>
+                <div class="chip">Requiere estar en PZ</div>
+                <div class="chip">No estar en battle</div>
+                <div class="chip">Sin red skull</div>
+                <div class="chip">HP/Mana +25%</div>
+                <div class="chip">Skills +25 / +500</div>
+              </div>
+            </div>
+          
+            <h2 style="margin-top:14px;">Requisitos para usar !ascension</h2>
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:32%;">Condición</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>100 resets o más</b></td>
+                  <td>Necesitas al menos <b>100</b> resets.</td>
+                </tr>
+                <tr>
+                  <td><b>Sin Red Skull</b></td>
+                  <td>Si tienes red skull, no puedes ascender.</td>
+                </tr>
+                <tr>
+                  <td><b>En Protection Zone (PZ)</b></td>
+                  <td>Debes estar dentro de una zona protegida.</td>
+                </tr>
+                <tr>
+                  <td><b>Sin Battle (Infight)</b></td>
+                  <td>No puedes ascender si estás en combate.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Qué pasa al completar Ascension</h2>
+            <p>
+              Ascension hace un “reborn” del progreso de resets:
+              vuelves a nivel base y tus resets se reinician, pero mejoras tu personaje permanentemente.
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:30%;">Efecto</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Resets → 0</b></td>
+                  <td>Tus resets se reinician a <b>0</b> (Storage 500).</td>
+                </tr>
+                <tr>
+                  <td><b>Nivel base</b></td>
+                  <td>Tu nivel vuelve a <b>8</b>.</td>
+                </tr>
+                <tr>
+                  <td><b>HP máximo +25%</b></td>
+                  <td>Tu vida máxima se multiplica por <b>1.25</b> (se redondea hacia abajo).</td>
+                </tr>
+                <tr>
+                  <td><b>Mana máximo +25%</b></td>
+                  <td>Tu mana máximo se multiplica por <b>1.25</b> (se redondea hacia abajo).</td>
+                </tr>
+                <tr>
+                  <td><b>Vida/Mana actuales ajustadas</b></td>
+                  <td>Tu vida y mana actuales se ajustan para no quedar por debajo del nuevo máximo.</td>
+                </tr>
+                <tr>
+                  <td><b>Efecto visual</b></td>
+                  <td>Se muestra un efecto <b>Holy Area</b> al ascender.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Skills que aumentan con Ascension</h2>
+            <p>
+              A diferencia del reset normal (que suma poco), ascension otorga incrementos grandes.
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:36%;">Skill</th>
+                  <th style="width:24%;">Aumento</th>
+                  <th>Notas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Club</b></td><td><b>+25</b></td><td>Incremento fijo.</td></tr>
+                <tr><td><b>Sword</b></td><td><b>+25</b></td><td>Incremento fijo.</td></tr>
+                <tr><td><b>Axe</b></td><td><b>+25</b></td><td>Incremento fijo.</td></tr>
+                <tr><td><b>Distance</b></td><td><b>+25</b></td><td>Incremento fijo.</td></tr>
+                <tr><td><b>Shielding</b></td><td><b>+25</b></td><td>Incremento fijo.</td></tr>
+                <tr><td><b>Fishing</b></td><td><b>+25</b></td><td>Incremento fijo.</td></tr>
+          
+                <tr><td><b>Critical Damage</b></td><td><b>+500</b></td><td>Incremento alto.</td></tr>
+                <tr><td><b>Life Leech Amount</b></td><td><b>+500</b></td><td>Incremento alto.</td></tr>
+                <tr><td><b>Mana Leech Amount</b></td><td><b>+500</b></td><td>Incremento alto.</td></tr>
+                <tr><td><b>Critical Chance</b></td><td><b>+100</b></td><td>Incremento medio.</td></tr>
+              </tbody>
+            </table>
+
+            <h2 style="margin-top:14px;">Proteccion que recibes con ascension</h2>
+            <p>
+              A diferencia del reset normal (que no suma nada), ascension otorga resistencia contra todos los elementos.
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:36%;">Elemento</th>
+                  <th style="width:24%;">Proteccion</th>
+                  <th>Max</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Fire</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Ice</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Earth</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Energy</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Holy</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Death</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Physical</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Lifedrain</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Manadrain</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Drown</b></td><td><b>+5</b></td><td>30</td></tr>
+                <tr><td><b>Agony</b></td><td><b>+5</b></td><td>30</td></tr>
+              </tbody>
+            </table>
+			
+            <h2 style="margin-top:14px;">Recompensas de Ascension</h2>
+            <p>
+              Al ascender recibes items + cosméticos (outfits/addons) y mount.
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:40%;">Recompensa</th>
+                  <th style="width:18%;">Cantidad</th>
+                  <th>Vista</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Legendary Box</b></td>
+                  <td><b>x1</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61877.gif" alt="Legendary box">
+                    </div>
+                  </td>
+                </tr>
+          
+                <tr>
+                  <td><b>Tier Upgrade 100%</b></td>
+                  <td><b>x5</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61922.gif" alt="Tier Upgrade 100%">
+                    </div>
+                  </td>
+                </tr>
+          
+                <tr>
+                  <td><b>Reset Coins</b></td>
+                  <td><b>x100</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/37317.gif" alt="Reset Coin">
+                    </div>
+                  </td>
+                </tr>
+          
+                <tr>
+                  <td><b>Red Diamond Coins</b></td>
+                  <td><b>x100</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/44782.gif" alt="Red Diamond Coin">
+                    </div>
+                  </td>
+                </tr>
+          
+                <tr>
+                  <td><b>crimson ascension</b></td>
+                  <td><b>unico</b></td>
+                  <td>
+                    <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2450&addons=0&head=0&body=0&legs=0&feet=0">
+                    <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2451&addons=0&head=0&body=0&legs=0&feet=0">
+                  </td>
+                </tr>
+          
+                <tr>
+                  <td><b>crimson ascension</b></td>
+                  <td><b>unica</b></td>
+                  <td>
+                    <div style="color:rgba(255,255,255,.75); font-size:13px;">
+                    <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2451&addons=0&head=0&body=0&legs=0&feet=0">
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Notas y consejos</h2>
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:30%;">Tema</th>
+                  <th>Explicación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>¿Por qué vuelve a nivel 8?</b></td>
+                  <td>Ascension funciona como reborn: reinicia el nivel para repetir progresión pero con mejores stats.</td>
+                </tr>
+                <tr>
+                  <td><b>¿Pierdo todo?</b></td>
+                  <td>No. Lo que se reinicia es <b>nivel</b> y <b>resets</b>, pero te quedas con los buffs de vida/mana y skills extra.</td>
+                </tr>
+                <tr>
+                  <td><b>¿Cuándo conviene hacerlo?</b></td>
+                  <td>Cuando ya alcanzaste los <b>100 resets</b> y quieres un salto fuerte de poder para el endgame.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <div class="hero" style="margin-top:12px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>Tip:</b> Si no te deja ascender, revisa: PZ, battle, red skull, y que tengas <b>100 resets</b>.
+              </p>
+            </div>
+          `
+        },
+		{
+          id: "sistemas-buffs",
+          title: "Buffs Outfits",
+          summary: "Funcionamiento",
+          content: `
+            <h2 style="margin-top:14px;">Outfits que contienen buffs</h2>
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:32%;">Outfit</th>
+                  <th>Obtencion</th>
+                  <th>Buffs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+				  <td>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2434&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Infernal Outfit</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Solamente mediante <b>promociones</b> o en <b>Goal</b></td>
+                  <td>+20% Dmg<br>+50 Critical Dmg<br>+10% Fire Dmg<br>+5% Fire Protection</td>
+                </tr>
+				<tr>
+				  <td>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2453&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">variocolor 2 Outfit</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Solamente mediante <b>promociones</b> o en <b>Goal</b></td>
+                  <td>+20% Dmg<br>+50 Critical Dmg<br>+10% Fire Dmg<br>+5% Fire Protection</td>
+                </tr>
+				<tr>
+				  <td>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2452&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">variocolor Outfit</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Solamente mediante <b>promociones</b> o en <b>Goal</b></td>
+                  <td>+20% Dmg<br>+50 Critical Dmg<br>+10% Energy Dmg<br>+5% Energy Protection</td>
+                </tr>
+              </tbody>
+            </table>
+          `
+        },
+	    {
+          id: "sistemas-capture",
+          title: "Capture",
+          summary: "Funcionamiento",
+          content: `
+            <div class="hero">
+              <h2>Sistema de Pokéballs (Captura + Summon + Progresión)</h2>
+              <p>
+                Este sistema convierte las pokéballs en un sistema completo de <b>captura de criaturas</b>, <b>invocación</b>,
+                <b>leveleo</b> y <b>mejoras</b>. Cada criatura capturada queda guardada dentro de la pokéball con su
+                <b>vida actual</b>, <b>vida máxima</b>, <b>nivel</b>, <b>experiencia</b> y <b>upgrades</b>.
+              </p>
+              <div class="mini">
+                <div class="chip">Bestiary Stars afecta chance</div>
+                <div class="chip">Boss tiene límite de captura</div>
+                <div class="chip">La ball se consume al lanzar</div>
+                <div class="chip">1 summon máximo</div>
+                <div class="chip">Cooldown si muere (30 min)</div>
+                <div class="chip">Upgrades HP / ATK</div>
+              </div>
+            </div>
+          
+            <h2 style="margin-top:14px;">Tipos de Pokéballs</h2>
+            <p>
+              Cada pokéball tiene su <b>chance base</b>, un <b>efecto visual</b> al lanzar y un <b>ID “filled”</b> (la ball ya con criatura adentro).
+              Si usas Master, la captura es <b>100%</b>.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:44%;">Pokéball</th>
+                  <th style="width:26%;">Chance base</th>
+                  <th>Detalles</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61587.gif" alt="Basic Pokeball">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Basic Pokeball</div>
+                        <a href="#" data-open-page="items-Balls" class="chip">Donde Comprar</a>
+                      </div>
+                    </div>
+                  </td>
+                  <td><b>0.01</b> (1%)</td>
+                  <td>Efecto: Magic Blue · Se multiplica por Bestiary Stars.</td>
+                </tr>
+          
+                <tr>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61588.gif" alt="Great Pokeball">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Great Pokeball</div>
+                        <a href="#" data-open-page="items-Balls" class="chip">Donde Comprar</a>
+                      </div>
+                    </div>
+                  </td>
+                  <td><b>0.02</b> (2%)</td>
+                  <td>Efecto: Magic Green · Se multiplica por Bestiary Stars.</td>
+                </tr>
+          
+                <tr>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61589.gif" alt="Ultra Pokeball">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Ultra Pokeball</div>
+                        <a href="#" data-open-page="items-Balls" class="chip">Donde Comprar</a>
+                      </div>
+                    </div>
+                  </td>
+                  <td><b>0.04</b> (4%)</td>
+                  <td>Efecto: Magic Red · Se multiplica por Bestiary Stars.</td>
+                </tr>
+          
+                <tr>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61590.gif" alt="Master Pokeball">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Master Pokeball</div>
+                        <a href="#" data-open-page="items-Balls" class="chip">Donde Comprar</a>
+                      </div>
+                    </div>
+                  </td>
+                  <td><b>1.00</b> (100%)</td>
+                  <td>Efecto: Teleport · Ignora Bestiary y Boss cap (siempre captura).</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Bestiary Stars: multiplicador de dificultad</h2>
+            <p>
+              Las criaturas tienen un valor de <b>Bestiary Stars (1–5)</b>. Ese valor modifica la chance final.
+              Entre más estrellas, <b>más difícil capturar</b>.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:22%;">Stars</th>
+                  <th style="width:28%;">Multiplicador</th>
+                  <th>Ejemplo (Ultra 4%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1★</b></td><td><b>1.0</b></td><td>0.04 × 1.0 = <b>0.04</b> (4%)</td></tr>
+                <tr><td><b>2★</b></td><td><b>0.7</b></td><td>0.04 × 0.7 = <b>0.028</b> (2.8%)</td></tr>
+                <tr><td><b>3★</b></td><td><b>0.5</b></td><td>0.04 × 0.5 = <b>0.02</b> (2%)</td></tr>
+                <tr><td><b>4★</b></td><td><b>0.3</b></td><td>0.04 × 0.3 = <b>0.012</b> (1.2%)</td></tr>
+                <tr><td><b>5★</b></td><td><b>0.1</b></td><td>0.04 × 0.1 = <b>0.004</b> (0.4%)</td></tr>
+              </tbody>
+            </table>
+          
+            <div class="hero" style="margin-top:12px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>Fórmula:</b> Chance Final = (Chance Base de la ball) × (Multiplicador de estrellas).  
+                <b>Master Pokeball</b> siempre es 100%.
+              </p>
+            </div>
+          
+            <h2 style="margin-top:14px;">Boss: límite de captura</h2>
+            <p>
+              Si la criatura es Boss, la chance final queda limitada a un máximo de <b>5%</b>.
+              (Esto evita capturar bosses “fácil” con balls normales.)
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:34%;">Regla</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Boss Capture Cap</b></td>
+                  <td>La chance final no puede pasar de <b>0.05 (5%)</b> si el objetivo es Boss.</td>
+                </tr>
+                <tr>
+                  <td><b>Master</b></td>
+                  <td>Master Pokeball se mantiene en <b>100%</b>.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Proceso de captura (qué pasa cuando lanzas)</h2>
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:12%;">Paso</th>
+                  <th>Qué sucede</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1</b></td><td>El target debe ser <b>monstruo válido</b> (no player, no summon, no inválido).</td></tr>
+                <tr><td><b>2</b></td><td>Se registra un contador: <b>“Has lanzado X pokeballs a esta criatura”</b> (por raceId).</td></tr>
+                <tr><td><b>3</b></td><td>Se calcula la <b>chance final</b> con Bestiary y boss cap.</td></tr>
+                <tr><td><b>4</b></td><td>La pokeball se <b>consume</b> (éxito o fallo).</td></tr>
+                <tr><td><b>5</b></td><td>Si capturas: recibes la <b>filled pokeball</b> con la criatura dentro y la criatura se remueve del mapa.</td></tr>
+                <tr><td><b>6</b></td><td>Si fallas: la criatura puede <b>huir</b> (50% chance) y desaparecer.</td></tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Qué guarda una Pokéball “filled”</h2>
+            <p>
+              Al capturar, la ball guarda toda la info del monstruo para que sea persistente:
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:34%;">Dato guardado</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Criatura</b></td><td>Nombre de la criatura capturada.</td></tr>
+                <tr><td><b>Vida</b></td><td>Vida actual en el momento de captura (se mantiene al guardar/guardar).</td></tr>
+                <tr><td><b>Vida maxima base</b></td><td>Vida base original del monstruo (sin escalado).</td></tr>
+                <tr><td><b>Vida maxima</b></td><td>Vida máxima escalada por nivel + upgrades.</td></tr>
+                <tr><td><b>Level</b></td><td>Nivel de la criatura (inicia en 1).</td></tr>
+                <tr><td><b>Experiencia</b></td><td>Experiencia actual dentro del nivel.</td></tr>
+                <tr><td><b>hpUpgrade / atkUpgrade</b></td><td>Mejoras acumuladas (+1 por item usado).</td></tr>
+                <tr><td><b>Disponible</b></td><td>Si está lista para invocar (true/false).</td></tr>
+                <tr><td><b>Coldown</b></td><td>Si murió, guarda el tiempo hasta que se recupere (30 min).</td></tr>
+                <tr><td><b>summonedId</b></td><td>ID de la criatura si está invocada actualmente.</td></tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Invocar y guardar (Summon / Store)</h2>
+            <p>
+              Una pokeball con criatura capturada funciona como “toggle”:
+              si está guardada → la invoca, si está invocada → la guarda.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:34%;">Acción</th>
+                  <th>Regla</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Máximo 1 summon</b></td>
+                  <td>No puedes tener más de una criatura invocada al mismo tiempo.</td>
+                </tr>
+                <tr>
+                  <td><b>Spawn cerca del player</b></td>
+                  <td>Invoca en una casilla cercana libre (8 posiciones alrededor). Si no hay espacio, falla.</td>
+                </tr>
+                <tr>
+                  <td><b>Se mantiene vida</b></td>
+                  <td>Al guardar, se guarda la vida actual. Al volver a invocar, sale con esa vida.</td>
+                </tr>
+                <tr>
+                  <td><b>Nombre con nivel</b></td>
+                  <td>El nombre se muestra como <b>“Nombre [Lv X]”</b>.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Cooldown si tu summon muere</h2>
+            <p>
+              Si tu criatura invocada muere, la pokeball entra en recuperación por <b>30 minutos</b>.
+              Durante ese tiempo no puedes invocarla.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:34%;">Regla</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Duración</b></td>
+                  <td><b>30 minutos</b>.</td>
+                </tr>
+                <tr>
+                  <td><b>Estado</b></td>
+                  <td>Pasa a <b>Recovering</b> y la vida se pone en <b>0</b>.</td>
+                </tr>
+                <tr>
+                  <td><b>Al terminar</b></td>
+                  <td>Se restaura a <b>Available</b> y la vida vuelve al <b>100%</b>.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Leveleo: experiencia y escalado</h2>
+            <p>
+              Tu criatura gana experiencia cuando tú (o tu summon) matan monstruos.
+              La EXP ganada es igual a la <b>experiencia del monstruo muerto</b>.
+            </p>
+          
+            <div class="hero" style="margin-top:10px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>EXP requerida por nivel:</b> 100 × nivel actual.  
+                <b>Ejemplo:</b> de Lv 10 a Lv 11 necesitas 1000 exp.
+              </p>
+            </div>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:34%;">Stat</th>
+                  <th>Cómo escala</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Vida máxima</b></td>
+                  <td>+5% por nivel. Se aplica sobre la vida base.</td>
+                </tr>
+                <tr>
+                  <td><b>Daño</b></td>
+                  <td>+1% por nivel. Se aplica como multiplicador al daño.</td>
+                </tr>
+                <tr>
+                  <td><b>Nivel máximo</b></td>
+                  <td>MAX_LEVEL = <b>100000</b>.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Upgrades (HP / ATK) con items</h2>
+            <p>
+              Puedes mejorar tu criatura usando items de upgrade. Cada uso aumenta +1 el upgrade correspondiente.
+              Los upgrades aplican un +1% por stack.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:44%;">Item</th>
+                  <th style="width:22%;">ID</th>
+                  <th>Qué hace</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61916.gif" alt="HP Upgrade">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">HP Upgrade</div>
+                        <div style="color:rgba(255,255,255,.65); font-size:13px;">Consume 1 por uso</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><b>61916</b></td>
+                  <td>Aumenta <b>hpUpgrade +1</b> → incrementa la vida máxima final (+1% por stack).</td>
+                </tr>
+          
+                <tr>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61917.gif" alt="ATK Upgrade">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">ATK Upgrade</div>
+                        <div style="color:rgba(255,255,255,.65); font-size:13px;">Consume 1 por uso</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><b>61917</b></td>
+                  <td>Aumenta <b>atkUpgrade +1</b> → incrementa el daño final (+1% por stack).</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Estados de la Pokéball</h2>
+            <p>
+              Una pokeball tiene un estado visible en su descripción:
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:30%;">Estado</th>
+                  <th>Qué significa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Available</b></td><td>Lista para invocar.</td></tr>
+                <tr><td><b>Currently summoned</b></td><td>La criatura está afuera (invocada).</td></tr>
+                <tr><td><b>Recovering</b></td><td>La criatura murió y está en cooldown (muestra minutos restantes).</td></tr>
+              </tbody>
+            </table>
+          
+            <div class="hero" style="margin-top:12px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>Tip pro:</b> Tu ball muestra descripción con: criatura, vida, nivel, exp, upgrades y estado.
+                Eso hace fácil comparar progresión entre criaturas.
+              </p>
+            </div>
+			<div style="display: flex; justify-content: center;">
+              <img src="https://mortera-world.com/images/captura.jpg">
+            </div>
+          `
+        },
+        {
+          id: "sistemas-Fist",
+          title: "Fist",
+          summary: "Funcionamiento",
+          content: `
+		    <h2 style='text-align: center;'>El sistema de fist es simple, mientras mas skill fist tengas, mas rapido atacara tu personaje</h2>
+		    <h2 style='text-align: center;'>Puedes subirlo skileando en trainers o con exercise dummy</h2>
+            <table class="separation">
+              <tr>
+                <td class="name">exercise fist</td>
+                <td class="img">
+                  <img src="https://mortera-world.com/images/items/44905.gif">
+                </td>
+                <td class="desc">La mejor manera de subir fist. con 8k de cargas y solamente mediante store</td>
+              </tr>
+			  <tr>
+                <td colspan="3" style="text-align:center;">
+                  <a href="#" data-open-page="items-Dummys" class="chip">
+                    aqui puedes ver los exercise dummys
+                  </a>
+                </td>
+              </tr>
+            </table>
+          `
+        },
+        {
+          id: "sistemas-resets",
+          title: "Resets",
+          summary: "Requerimientos",
+          content: `
+            <div class="hero">
+              <h2>Sistema de Resets (!reset)</h2>
+              <p>
+                El comando <b>!reset</b> te permite reiniciar tu nivel a un nivel base y ganar mejoras permanentes.
+                Cada reset incrementa tus estadísticas, habilidades y te entrega recompensas.
+              </p>
+              <div class="mini">
+                <div class="chip">Requiere nivel mínimo</div>
+                <div class="chip">Requiere estar en PZ</div>
+                <div class="chip">No estar en battle</div>
+                <div class="chip">Sin red skull</div>
+                <div class="chip">Aumenta HP / Mana / Cap</div>
+                <div class="chip">Sube skills</div>
+              </div>
+            </div>
+          
+            <h2 style="margin-top:14px;">Requisitos para usar !reset</h2>
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:32%;">Condición</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Sin Red Skull</b></td>
+                  <td>Si tienes red skull, el comando no te deja resetear.</td>
+                </tr>
+                <tr>
+                  <td><b>En Protection Zone (PZ)</b></td>
+                  <td>Debes estar parado dentro de una zona protegida para ejecutar el reset.</td>
+                </tr>
+                <tr>
+                  <td><b>Sin Battle (Infight)</b></td>
+                  <td>No puedes resetear si estás en combate o con condición de batalla activa.</td>
+                </tr>
+                <tr>
+                  <td><b>Nivel mínimo</b></td>
+                  <td>Necesitas alcanzar un nivel mínimo según tus resets actuales (ver tabla de stages).</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Stages de nivel requerido</h2>
+            <p>
+              El nivel requerido para resetear depende de cuántos resets tienes actualmente.
+              (Aquí se muestra <b>solo el nivel</b>, sin información extra.)
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:22%;">Resets (hasta)</th>
+                  <th style="width:28%;">Nivel requerido</th>
+                  <th>Notas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>40</b></td><td><b>3000</b></td><td>Si tienes ≤ 40 resets, necesitas 3000+ para el siguiente reset.</td></tr>
+                <tr><td><b>50</b></td><td><b>5000</b></td><td>El requisito sube conforme avanzas.</td></tr>
+                <tr><td><b>60</b></td><td><b>8000</b></td><td>Recomendado preparar set y supplies.</td></tr>
+                <tr><td><b>70</b></td><td><b>10000</b></td><td>Progresión media.</td></tr>
+                <tr><td><b>80</b></td><td><b>12000</b></td><td>Progresión alta.</td></tr>
+                <tr><td><b>90</b></td><td><b>15000</b></td><td>Ritmo de farmeo más pesado.</td></tr>
+                <tr><td><b>100</b></td><td><b>20000</b></td><td>Fase de endgame.</td></tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Qué pasa al hacer reset</h2>
+            <p>
+              Cuando haces reset, el sistema:
+              <b>te suma +1 reset</b>, te baja de nivel al nivel base (8) y te da mejoras permanentes.
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:30%;">Efecto</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Resets +1</b></td>
+                  <td>Tu contador de resets aumenta en 1.</td>
+                </tr>
+                <tr>
+                  <td><b>Vuelves a nivel base</b></td>
+                  <td>Te regresa a <b>nivel 8</b>.</td>
+                </tr>
+                <tr>
+                  <td><b>Max Health +500</b></td>
+                  <td>Tu vida máxima aumenta permanentemente en +500 por reset.</td>
+                </tr>
+                <tr>
+                  <td><b>Max Mana +500</b></td>
+                  <td>Tu mana máxima aumenta permanentemente en +500 por reset.</td>
+                </tr>
+                <tr>
+                  <td><b>Capacidad +5%</b></td>
+                  <td>Tu cap sube un <b>5%</b> de tu capacidad actual en ese momento.</td>
+                </tr>
+                <tr>
+                  <td><b>Efecto visual</b></td>
+                  <td>Se muestra un <b>firework red</b> al completar el reset.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Skills que aumentan por reset</h2>
+            <p>
+              Cada reset incrementa tus habilidades.
+              (Fist solo sube si está por debajo de 150.)
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:36%;">Skill</th>
+                  <th style="width:24%;">Aumento</th>
+                  <th>Regla</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Fist</b></td><td><b>+1</b></td><td>Solo si Fist &lt; 150.</td></tr>
+                <tr><td><b>Club</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Sword</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Axe</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Distance</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Shielding</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Fishing</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+          
+                <tr><td><b>Critical Damage</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Life Leech Amount</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Mana Leech Amount</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+                <tr><td><b>Critical Chance</b></td><td><b>+1</b></td><td>Siempre.</td></tr>
+              </tbody>
+            </table>
+          
+            <h2 style="margin-top:14px;">Recompensas por reset</h2>
+            <p>
+              Al completar el reset recibes items automáticamente:
+            </p>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:44%;">Item</th>
+                  <th style="width:20%;">Cantidad</th>
+                  <th>Vista</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Reset Coin</b></td>
+                  <td><b>x1</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/37317.gif" alt="Reset Coin">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Red Diamond Coin</b></td>
+                  <td><b>x10</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61761.gif" alt="Red Diamond Coin">
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <div class="hero" style="margin-top:12px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>Tip:</b> Si no te deja resetear, revisa primero: PZ, battle y red skull.
+                Luego confirma tu <b>nivel mínimo</b> en la tabla de stages.
+              </p>
+            </div>
+          `
+        },
+        {
+          id: "sistemas-fishing",
+          title: "Fishing",
+          summary: "Funcionamiento",
+          content: `
+            <div class="hero">
+              <h2>(Mob Fishing Rod)</h2>
+              <p>
+                Este sistema permite “pescar” criaturas desde tiles de agua usando una <b>Fishing Rod especial</b>.
+                En vez de obtener peces, el jugador <b>spawnea monstruos</b> alrededor de su posición. El tipo de monstruo depende
+                del <b>Fishing Skill</b>, y la cantidad de spawns puede aumentar con <b>items consumibles</b>.
+              </p>
+            </div>
+          
+            <h2 style="margin-top:14px;">Requisitos y activación</h2>
+            <p>
+              Para usar este sistema necesitas cumplir condiciones obligatorias. Si no cumples el requisito de reset, el uso se cancela.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:42%;">Condición</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Reset mínimo</b></td>
+                  <td>Necesitas <b>Reset 20 o más</b>. Si no, no puedes pescar.</td>
+                </tr>
+                <tr>
+                  <td><b>Zona válida</b></td>
+                  <td>Solo funciona en el agua de la Ciudad Vip.</td>
+                </tr>
+                <tr>
+                  <td><b>Herramienta</b></td>
+                  <td>Se usa con la mechanical fishing rod.<img src='https://mortera-world.com/images/items/9306.gif'></td>
+                </tr>
+                <tr>
+                  <td><b>Efecto visual</b></td>
+                  <td>Al finalizar un uso correcto, se muestra <img src="https://mortera-world.com/images/effects/54.gif"> en el agua.</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2 style="margin-top:14px;">Progresión por Fishing Skill (pool de monstruos)</h2>
+            <p>
+              El sistema arma una lista de monstruos disponibles según tu <b>nivel de Fishing</b>.
+              Mientras más Fishing tengas, <b>más monstruos se agregan</b> al pool (no reemplaza: se acumula).
+            </p>
+          
+            <div class="hero" style="margin-top:10px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>Cómo funciona:</b> Si tu skill alcanza un requisito (10 / 50 / 110), se agregan todos los monstruos de ese rango a tu pool.
+                Luego el spawn elige <b>uno al azar</b> dentro de tu pool total.
+              </p>
+            </div>
+          
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:18%;">Req. Fishing</th>
+                  <th style="width:32%;">Monstruos (pool)</th>
+                  <th>Vista</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>10+</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1763&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Rootthing Bug Tracker</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1760&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Rootthing Nutshell</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1762&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Rootthing Amber Shaper</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1759&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Quara Raider</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1794&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Quara Looter</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1758&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Quara Plunderer</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="itemRow">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Pool inicial</div>
+                        <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                          Ideal para empezar a farmear spawns. Pool base del sistema.
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>50+</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1294&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Angler Fish</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=275&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>The Deep</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2331&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>mega charizard x</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1750&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Infernal Toxicroak</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="itemRow">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Pool avanzado</div>
+                        <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                          Se agrega al pool 10+. Más variedad y mejores spawns.
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>110+</b></td>
+                  <td>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2439&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Tentacruel</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2441&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Golduck</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=2440&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Bloody Tentacruel</div>
+                    </div>
+                    <div class="itemRow">
+                      <img loading="lazy" src="https://mortera-world.com/images/animated-outfits/animoutfit.php?id=1739&addons=0&head=0&body=0&legs=0&feet=0">
+                      <div>Dark Kingdra</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="itemRow">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Pool top</div>
+                        <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                          Se suma a todos los pools anteriores. Máxima variedad y RNG.
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 style="margin-top:14px;">Cantidad de spawns por uso</h2>
+            <p>
+              Cada vez que usas la rod, el sistema intenta crear monstruos alrededor de ti.
+              La cantidad depende de consumibles (se consumen al usar).
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:30%;">Caso</th>
+                  <th style="width:20%;">Spawns</th>
+                  <th>Cómo se activa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Base</b></td>
+                  <td><b>1</b></td>
+                  <td>Si no consumes items que aumenten el conteo.</td>
+                </tr>
+                <tr>
+                  <td><b>Boost x2</b></td>
+                  <td><b>2</b></td>
+                  <td>Si el jugador tiene y consume el item <b>tiny special bass</b> <img src='https://mortera-world.com/images/items/61738.gif'> (se remueve 1).</td>
+                </tr>
+                <tr>
+                  <td><b>Boost x4</b></td>
+                  <td><b>4</b></td>
+                  <td>Si el jugador tiene y consume el item <b>small special bass</b> <img src='https://mortera-world.com/images/items/61737.gif'> (se remueve 1). Este tiene prioridad solo si no se consumió <b>tiny special bass</b>.</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <div class="hero" style="margin-top:12px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>Importante:</b> el sistema primero intenta consumir <b>tiny special bass</b> para darte 2 spawns.  
+                Si no tienes <b>tiny special bass</b>, intenta con <b>small special bass</b> para darte 4 spawns.
+              </p>
+            </div>
+          
+            <h2 style="margin-top:14px;">Influenced: cómo sale y qué significa</h2>
+            <p>
+              Algunos monstruos pueden salir en estado <b>Influenced</b> (si el monstruo permite forge).
+              Esto aplica un nivel aleatorio del <b>1 al 5</b>.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:32%;">Forma</th>
+                  <th style="width:18%;">Chance</th>
+                  <th>Condición</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Influenced garantizado</b></td>
+                  <td><b>100%</b></td>
+                  <td>
+                    Si consumes el item <b>special bass</b> <img src='https://mortera-world.com/images/items/61736.gif'> (se remueve 1).  
+                    En este caso, todos los spawns de ese uso intentan salir influenced.
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Influenced aleatorio</b></td>
+                  <td><b>2%</b></td>
+                  <td>
+                    Si NO consumiste <b>special bass</b>, cada spawn tiene una probabilidad de volverse influenced.
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Restricción</b></td>
+                  <td>—</td>
+                  <td>
+                    Solo aplica si el monstruo es <b>forgeable</b> (si no lo es, no se le aplica influenced).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <div class="itemRow" style="margin-top:12px;">
+              <img src="https://mortera-world.com/images/Fiendish_Creature_Icon.png" alt="influenced">
+              <div>
+                <div style="font-weight:750; margin-bottom:6px;">Nivel Influenced (1–5)</div>
+                <div style="color:rgba(255,255,255,.65); font-size:13px;">
+                  Cuando se activa, el sistema asigna aleatoriamente un nivel de 1 a 5 y lo aplica con SetInfluenced().
+                </div>
+              </div>
+            </div>
+          
+            <h2 style="margin-top:14px;">Dónde spawnean los monstruos</h2>
+            <p>
+              Cada spawn intenta crearse en una de las <b>8 casillas</b> alrededor del jugador (incluye diagonales).
+              Para que una casilla sea válida debe estar libre: <b>walkable</b> y sin criatura encima.
+            </p>
+          
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:35%;">Regla</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Radio</b></td>
+                  <td>1 tile alrededor del jugador (N, S, E, O + diagonales).</td>
+                </tr>
+                <tr>
+                  <td><b>Casilla libre</b></td>
+                  <td>Solo spawnea si la tile es walkable y no hay criatura (sin top creature).</td>
+                </tr>
+                <tr>
+                  <td><b>Si no hay espacio</b></td>
+                  <td>Si en ese intento no hay posiciones libres, ese spawn <b>se pierde</b> (no se reintenta lejos).</td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <div class="hero" style="margin-top:12px;">
+              <p style="margin:0; color:rgba(255,255,255,.72);">
+                <b>Consejo:</b> si vas por 4 spawns, procura estar en un área abierta (sin mobs encima y sin obstáculos), o perderás spawns.
+              </p>
+            </div>
+          
+            <h2 style="margin-top:14px;">Guía rápida (paso a paso)</h2>
+            <table class="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:12%;">Paso</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>1</b></td>
+                  <td>Asegúrate de tener <b>Reset 20+</b>.</td>
+                </tr>
+                <tr>
+                  <td><b>2</b></td>
+                  <td>Ve a un tile de agua permitido (VIP CITY).</td>
+                </tr>
+                <tr>
+                  <td><b>3</b></td>
+                  <td>Sube Fishing para desbloquear pools (10 / 50 / 110).</td>
+                </tr>
+                <tr>
+                  <td><b>4</b></td>
+                  <td>Opcional: usa consumibles para 2 o 4 spawns (<img src='https://mortera-world.com/images/items/61737.gif' title='small special bass'>/<img src='https://mortera-world.com/images/items/61738.gif' title='tiny special bass'>).</td>
+                </tr>
+                <tr>
+                  <td><b>5</b></td>
+                  <td>Opcional: usa <img src='https://mortera-world.com/images/items/61736.gif' title='special bass'> si quieres <b>Influenced 100%</b>.</td>
+                </tr>
+                <tr>
+                  <td><b>6</b></td>
+                  <td>Usa la rod en el agua y farmea lo que salga.</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="display: flex; justify-content: center;">
+              <img src="https://mortera-world.com/images/fs.jpg">
+            </div>
+
+          `
+        },
+		{
+          id: "sistemas-Upgrades",
+          title: "Upgrades",
+          summary: "Funcionamiento",
+          content: `
+            <h2 style="margin-top:14px;">Sistema de Upgrades</h2>
+            <table class="itemTable" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th style="width:32%;">Item</th>
+                  <th>Obtencion</th>
+                  <th>Upgrades</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+				  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61916.gif">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">HP Upgrade</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Se consigue mediante <b>store</b> o eliminando criaturas <b>influenciadas</b> y <b>fiendish</b></td>
+                  <td>+1% Hp a tu criatura Capturada</td>
+                </tr>
+				<tr>
+				  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/61917.gif">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">HP Upgrade</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Se consigue mediante <b>store</b> o criaturas <b>influenciadas</b> y <b>fiendish</b></td>
+                  <td>+1% Atk a tu criatura Capturada</td>
+                </tr>
+				<tr>
+				  <td>
+                    <div class="itemRow">
+                      <img src="https://mortera-world.com/images/items/62209.gif">
+                      <div>
+                        <div style="font-weight:750; margin-bottom:6px;">Upgrade W</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Se consigue mediante <b>store</b>, <b>Mind Eater</b> o  <b>Bosses</b></td>
+                  <td>Mele: +1 atk, +1 def, +1 skill<br>Dist: +1 atk, +1 dist, +1 perfectshot<br>Wand: +1 ML, +5 Critical, +1% Dmg</td>
+                </tr>
+              </tbody>
+            </table>
+          `
+        },
+      ]
+    },
+    {
+      id: "Quests",
+      icon: "⚔️",
+      title: "Quests",
+      description: "quest y rewards",
+      pages: [
+      ]
+    },
+	{
+      id: "Spells",
+      icon: "✨",
+      title: "Spells",
+      description: "spells",
+      pages: [
+      ]
+    },
+    {
+      id: "npcs",
+      icon: "🧑‍💼",
+      title: "NPCs",
+      description: "Comerciantes",
+      pages: [
+      ]
+    }
+  ]
+};
+const norm = (s) => (s || "")
+  .toLowerCase()
+  .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+  .replace(/[^\p{L}\p{N}\s-]/gu," ")
+  .replace(/\s+/g," ")
+  .trim();
+
+function tokenize(s){
+  return norm(s).split(" ").filter(Boolean);
+}
+
+function uniq(arr){
+  return [...new Set(arr)];
+}
+const pageIndex = [];
+WIKI.categories.forEach(cat=>{
+  cat.pages.forEach(p=>{
+    pageIndex.push({
+      catId: cat.id,
+      catTitle: cat.title,
+      pageId: p.id,
+      title: p.title,
+      summary: p.summary,
+      contentRaw: p.content,
+      contentNorm: norm(`${p.title} ${p.summary} ${p.content}`)
+    });
+  });
+});
+
+function buildKeywords(){
+  const words = [];
+  for (const p of pageIndex){
+    const tokens = tokenize(p.contentNorm);
+    for (const t of tokens){
+      if (t.length < 3) continue;
+      words.push(t);
+    }
+  }
+  const top = uniq(words).slice(0, 450).sort((a,b)=>a.localeCompare(b));
+  return top;
+}
+const catsEl = document.getElementById("cats");
+const totalPagesEl = document.getElementById("totalPages");
+
+function renderSidebar(){
+  const total = pageIndex.length;
+  totalPagesEl.textContent = `${total} páginas`;
+
+  catsEl.innerHTML = "";
+  WIKI.categories.forEach(cat=>{
+    const wrap = document.createElement("div");
+    wrap.className = "cat";
+    wrap.dataset.cat = cat.id;
+
+    const btn = document.createElement("button");
+    btn.className = "catBtn";
+    btn.type = "button";
+
+    const left = document.createElement("div");
+    left.className = "left";
+
+    const ico = document.createElement("div");
+    ico.className = "ico";
+    ico.textContent = cat.icon;
+
+    const titleWrap = document.createElement("div");
+    titleWrap.className = "catTitle";
+    titleWrap.innerHTML = `<strong>${cat.title}</strong><span>${cat.description}</span>`;
+
+    left.appendChild(ico);
+    left.appendChild(titleWrap);
+
+    const right = document.createElement("div");
+    right.style.display = "flex";
+    right.style.alignItems = "center";
+
+    const badge = document.createElement("div");
+    badge.className = "badge";
+    badge.textContent = String(cat.pages.length);
+
+    const chev = document.createElement("div");
+    chev.className = "chev";
+    chev.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+
+    right.appendChild(badge);
+    right.appendChild(chev);
+
+    btn.appendChild(left);
+    btn.appendChild(right);
+
+    const submenu = document.createElement("div");
+    submenu.className = "submenu";
+
+    cat.pages.forEach(p=>{
+      const pb = document.createElement("button");
+      pb.className = "pageBtn";
+      pb.type = "button";
+      pb.innerHTML = `<span>${p.title}</span><small>${p.summary || ""}</small>`;
+      pb.addEventListener("click", ()=>{
+        document.querySelectorAll(".cat").forEach(el => el.classList.remove("open"));
+        wrap.classList.add("open");
+      
+        openPage(cat, p);
+        closeResults();
+      });
+      submenu.appendChild(pb);
+    });
+
+    btn.addEventListener("click", ()=>{
+      const isOpen = wrap.classList.contains("open");
+      document.querySelectorAll(".cat").forEach(el => el.classList.remove("open"));
+      if (!isOpen) wrap.classList.add("open");
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(submenu);
+    catsEl.appendChild(wrap);
+  });
+}
+const contentEl = document.getElementById("content");
+const crumbsEl = document.getElementById("crumbs");
+const contentTagEl = document.getElementById("contentTag");
+
+function showHome(){
+  crumbsEl.innerHTML = `<span>Home</span> <span class="dot"></span> <span>Bienvenida</span>`;
+  contentTagEl.textContent = "Inicio";
+  contentEl.innerHTML = `
+    <div class="hero">
+      <h2>Bienvenido a Mortera Wikia</h2>
+      <p>
+        Selecciona una categoría a la izquierda para ver sus páginas.
+        También puedes buscar arriba: la barra sugiere <b>solo palabras clave</b> que existen dentro de esta wiki.
+      </p>
+    </div>
+    <p>
+    </p>
+  `;
+}
+
+function openPage(cat, page){
+  crumbsEl.innerHTML = `<span>Home</span> <span class="dot"></span> <span>${cat.title}</span> <span class="dot"></span> <span>${page.title}</span>`;
+  contentTagEl.textContent = "Página";
+
+  contentEl.innerHTML = `
+    <h2>${page.title}</h2>
+    <p style="color: rgba(255,255,255,.62); margin-top:-4px;">${page.summary || ""}</p>
+    <div class="hero">
+      ${page.content}
+    </div>
+  `;
+  initTabs(contentEl);
+}
+
+function initTabs(root){
+  const tabs = root.querySelectorAll("[data-tabs]");
+  tabs.forEach(widget=>{
+    const buttons = widget.querySelectorAll("[data-tab]");
+    const panels  = widget.querySelectorAll("[data-panel]");
+
+    function activate(name){
+      buttons.forEach(b => b.classList.toggle("active", b.dataset.tab === name));
+      panels.forEach(p => p.classList.toggle("active", p.dataset.panel === name));
+    }
+    buttons.forEach(b => b.addEventListener("click", ()=> activate(b.dataset.tab)));
+    const first = buttons[0]?.dataset.tab;
+    if (first) activate(first);
+  });
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+const q = document.getElementById("q");
+const results = document.getElementById("results");
+const resultsTitle = document.getElementById("resultsTitle");
+const resultsCount = document.getElementById("resultsCount");
+const resultsList = document.getElementById("resultsList");
+
+function matchPages(query){
+  const tokens = tokenize(query);
+  if (!tokens.length) return [];
+
+  const scored = [];
+
+  for (const p of pageIndex){
+    const hasAll = tokens.every(t => p.contentNorm.includes(t));
+    if (!hasAll) continue;
+
+    let score = 0;
+    const tTitle = norm(p.title);
+    const tSum = norm(p.summary);
+
+    for (const t of tokens){
+      if (tTitle.includes(t)) score += 5;
+      if (tSum.includes(t)) score += 2;
+      if (p.contentNorm.includes(t)) score += 1;
+    }
+
+    scored.push({ ...p, score });
+  }
+
+  scored.sort((a,b)=> (b.score - a.score) || a.title.localeCompare(b.title));
+  return scored;
+}
+
+
+function openMatchingCategories(matches){
+  document.querySelectorAll(".cat").forEach(el => el.classList.remove("open"));
+
+  const cats = new Set(matches.map(m => m.catId));
+  cats.forEach(catId => {
+    const el = document.querySelector(`.cat[data-cat="${catId}"]`);
+    if (el) el.classList.add("open");
+  });
+}
+
+
+
+function showResults(query, matches){
+  if (!query.trim()){
+    closeResults();
+    document.querySelectorAll(".cat").forEach(el => el.classList.remove("open"));
+    return;
+  }
+
+  resultsTitle.textContent = "Resultados";
+  resultsCount.textContent = `${matches.length}`;
+  resultsList.innerHTML = "";
+
+  if (!matches.length){
+    const empty = document.createElement("div");
+    empty.style.padding = "14px 12px";
+    empty.style.color = "rgba(255,255,255,.62)";
+    empty.style.fontSize = "13px";
+    empty.textContent = "No se encontraron páginas con esa búsqueda.";
+    resultsList.appendChild(empty);
+    results.style.display = "block";
+    return;
+  }
+  openMatchingCategories(matches);
+
+  matches.slice(0, 50).forEach(m=>{
+    const item = document.createElement("div");
+    item.className = "resultItem";
+    item.innerHTML = `
+      <div class="pill">${m.catTitle}</div>
+      <div style="min-width:0;">
+        <div class="resultTitle">${m.title}</div>
+        <div class="resultMeta">${m.summary || ""}</div>
+      </div>
+    `;
+    item.addEventListener("click", ()=>{
+      document.querySelectorAll(".cat").forEach(el => el.classList.remove("open"));
+      const catEl = document.querySelector(`.cat[data-cat="${m.catId}"]`);
+      if (catEl) catEl.classList.add("open");
+    
+      const cat = WIKI.categories.find(c=>c.id===m.catId);
+      const page = cat.pages.find(p=>p.id===m.pageId);
+      openPage(cat, page);
+      closeResults();
+    });
+    resultsList.appendChild(item);
+  });
+
+  results.style.display = "block";
+}
+
+function closeResults(){
+  results.style.display = "none";
+}
+
+function runSearch(){
+  const query = q.value;
+  const matches = matchPages(query);
+  showResults(query, matches);
+}
+
+q.addEventListener("input", runSearch);
+q.addEventListener("focus", ()=>{ if (q.value.trim()) runSearch(); });
+
+document.addEventListener("click", (e)=>{
+  const inside = e.target.closest(".searchWrap");
+  if (!inside) closeResults();
+});
+
+document.addEventListener("keydown", (e)=>{
+  if (e.key === "Escape") closeResults();
+});
+
+document.addEventListener("click", (e)=>{
+  const link = e.target.closest("[data-open-page]");
+  if (!link) return;
+
+  e.preventDefault();
+  openWikiPageById(link.dataset.openPage);
+});
+
+function openWikiPageById(pageId){
+  const cat = WIKI.categories.find(c => c.pages.some(p => p.id === pageId));
+  if (!cat) return;
+
+  const page = cat.pages.find(p => p.id === pageId);
+  if (!page) return;
+
+  document.querySelectorAll(".cat").forEach(el => el.classList.remove("open"));
+  const catEl = document.querySelector(`.cat[data-cat="${cat.id}"]`);
+  if (catEl) catEl.classList.add("open");
+
+  openPage(cat, page);
+  closeResults();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+renderSidebar();
+showHome();
+
+</script>
+</body>
+</html>

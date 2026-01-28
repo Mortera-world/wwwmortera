@@ -1,0 +1,1 @@
+a:3:{i:0;a:3:{s:4:"name";s:19:"create-account-hint";s:4:"type";i:21;s:4:"file";s:36:"plugins/account-create-hint/hint.php";}i:1;a:3:{s:4:"name";s:21:"mail-confirmed-reward";s:4:"type";i:40;s:4:"file";s:41:"plugins/email-confirmed-reward/reward.php";}i:2;a:3:{s:4:"name";s:15:"Powerful guilds";s:4:"type";i:2;s:4:"file";s:43:"plugins/powerful-guilds/powerful-guilds.php";}}

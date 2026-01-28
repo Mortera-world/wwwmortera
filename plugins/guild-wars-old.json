@@ -1,0 +1,24 @@
+{
+	"name": "Guild Wars Old",
+	"description": "Support for Guild Wars for MyAAC 0.8.",
+	"version": "2.0.8",
+	"type": "plugin",
+	"license": "GPLv3",
+	"author": "Gesior, slawkens",
+	"contact": "www.my-aac.org",
+	"require": {
+		"myaac": "0.8.13"
+	},
+	"hooks": {
+		"guild-wars-guilds-after-invited-characters": {
+			"type": "GUILDS_AFTER_INVITED_CHARACTERS",
+			"file": "plugins/guild-wars-old/hooks/guilds-after-invited-characters.php"
+		}
+	},
+	"uninstall": [
+		"plugins/guild-wars-old.json",
+		"plugins/guild-wars-old",
+		"system/pages/wars",
+		"system/pages/wars.php"
+	]
+}

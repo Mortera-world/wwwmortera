@@ -1,0 +1,295 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-row {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.static-card {
+    display: inline-block;
+    background-color: #f1e0c5;
+    width: 131; /* Ajusta el tamaño de la tarjeta estática */
+    padding: 7px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.static-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.static-card-image {
+    width: 30%; /* Ajusta el tamaño de la imagen dentro de la tarjeta estática */
+    height: auto;
+    border-radius: 10px;
+}
+
+.static-card-content {
+    margin-top: 2px;
+}
+
+.floating-card {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px; /* Ajusta el tamaño de la tarjeta flotante */
+    background-color: #fff2db;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.floating-card-content {
+    padding: 20px;
+}
+
+.floating-card h2 {
+    margin-top: 0;
+}
+
+.floating-card-image {
+    width: 50%; /* Ajusta el tamaño de la imagen dentro de la tarjeta flotante */
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+        nav {
+            margin-bottom: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li button {
+            background: none;
+            border: none;
+            font: inherit;
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+		ul {
+			padding-left: 0;
+			text-aling: left;
+			list-style-type: none;
+		}	
+        section {
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        .sub-section {
+            display: none;
+        }
+        .sub-section.active {
+            display: block;
+        }
+.cardmodal {
+    border: 1px solid #ccc;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    width: 147; 
+    margin: -4px auto;
+	display: inline-block;
+	background-color: #f1e0c5;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cardmodal img {
+    max-width: 100%;
+    height: auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 11% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 35%;
+    max-height: 80%;
+    overflow-y: auto;
+	z-index: 1001; 
+}
+
+.closemodall {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closemodall:hover,
+.closemodall:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilo para que el texto envuelva las imágenes */
+.image-container {
+    max-width: 100%;
+    overflow: hidden; /* Asegura que el contenido no sobresalga del contenedor */
+}
+
+.wrap-image {
+    width: 30%; /* Ajusta este valor para cambiar el tamaño de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-right: 1px;
+    margin-bottom: 1px;
+    float: right;
+    box-sizing: border-box; /* Asegura que padding y border estén incluidos en el ancho */
+}
+
+/* Efecto de sombra en hover */
+.wrap-image:hover {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Estilo del modal */
+.modal22 {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijado a la pantalla completa */
+    z-index: 1002; /* Coloca encima de otros elementos */
+    padding-top: 100px; /* Espacio desde el top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro con opacidad */
+}
+
+.modal22-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6); /* Sombra en la imagen grande */
+}
+
+.modal22-content, .close {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Botón de cerrar (X) */
+.close22 {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close22:hover,
+.close22:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+.menu-sidebar {
+    width: 200px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    overflow-y: auto; /* Añade barra de desplazamiento vertical */
+    max-height: 100vh; /* Fija la altura máxima */
+}
+
+.menu-sidebar ul {
+    list-style: none;
+}
+
+.menu-sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menu-sidebar ul li:hover {
+    background-color: #444;
+}
+
+.menu-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto; /* Añade barra de desplazamiento vertical */
+    max-height: 100vh; /* Fija la altura máxima */
+}
+
+.info-section {
+    display: none;
+}
+
+.info-section.active {
+    display: block;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+}

@@ -1,0 +1,59 @@
+<div style="width: 100%;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+        <tr>
+            <td>
+                <div class="TableContainer">
+                    <div class="CaptionContainer">
+                        <div class="CaptionInnerContainer">
+                            <span class="CaptionEdgeLeftTop"
+                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
+                            <span class="CaptionEdgeRightTop"
+                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
+                            <span class="CaptionBorderTop"
+                                  style="background-image:url(templates/tibiacom/images/global/content/table-headline-border.gif);"></span>
+                            <span class="CaptionVerticalLeft"
+                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-vertical.gif);"></span>
+                            <div class="Text">
+                                <div style="height: 16px;">Roulette Winners</div>
+                            </div>
+                            <span class="CaptionVerticalRight"
+                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-vertical.gif);"></span>
+                            <span class="CaptionBorderBottom"
+                                  style="background-image:url(templates/tibiacom/images/global/content/table-headline-border.gif);"></span>
+                            <span class="CaptionEdgeLeftBottom"
+                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
+                            <span class="CaptionEdgeRightBottom"
+                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
+                        </div>
+                    </div>
+                    <table class="Table3" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="InnerTableContainer">
+                                    <table width="100%">
+                                        <tr>
+                                            <th>Player Name</th>
+                                            <th>Reward Count</th>
+                                            <th>Reward ID</th>
+                                        </tr>
+                                         {% for winner in winners %}
+                                        <tr>
+                            <td style="background-color: #D4C0A1;"><a href="{{ winner.player_link }}">{{ winner.player_name }}</a></td>
+                            <td style="background-color: #D4C0A1;">{{ winner.reward_count }}</td>
+                            <td style="background-color: #D4C0A1;"><img src="/images/items/{{ winner.reward_id }}.gif" alt="Reward Image" width="32" height="32"></td>
+                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

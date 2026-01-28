@@ -1,0 +1,473 @@
+<style>
+.top-items-page {
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), transparent 25%),
+                radial-gradient(circle at 80% 0%, rgba(255, 233, 134, 0.08), transparent 20%),
+                linear-gradient(145deg, #1a0f1f, #0e121c 45%, #0c1f2e);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    padding: 24px;
+    color: #f6f1ff;
+    overflow: hidden;
+}
+
+.top-items-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 20px;
+    background: linear-gradient(90deg, rgba(142, 45, 226, 0.35), rgba(74, 0, 224, 0.15));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.top-items-hero::after {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 55%);
+    animation: spinGlow 12s linear infinite;
+}
+
+.top-items-hero h2 {
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+
+.top-items-hero p {
+    margin: 6px 0 0;
+    max-width: 680px;
+    color: #d9d9e0;
+    z-index: 1;
+}
+
+.rare-items {
+    margin-top: 22px;
+}
+
+.rare-items__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.rare-item-card {
+    position: relative;
+    padding: 18px 12px 12px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 10px 20px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    overflow: hidden;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.rare-item-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.1), transparent 55%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+}
+
+.rare-item-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.45), 0 0 22px rgba(141, 76, 255, 0.45);
+}
+
+.rare-item-card:hover::before {
+    opacity: 1;
+}
+
+.rare-item-card img {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+    transform: scale(1);
+    transition: transform 220ms ease;
+    z-index: 1;
+}
+
+.rare-item-card:hover img {
+    transform: scale(1.08);
+}
+
+.rare-item-card__id {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    color: #ffd782;
+    letter-spacing: 0.3px;
+    z-index: 1;
+}
+
+.rare-item-card__name {
+    position: absolute;
+    inset: auto 10px 10px;
+    padding: 8px 10px;
+    background: rgba(12, 15, 25, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.rare-item-card:hover .rare-item-card__name {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.players-section {
+    margin-top: 30px;
+}
+
+.players-section h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+}
+
+.players-section p {
+    color: #cfd2da;
+    margin: 0 0 12px;
+}
+
+.players-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.player-row {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+    transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.player-row:hover {
+    transform: translateY(-4px);
+    border-color: rgba(118, 193, 255, 0.35);
+}
+
+.player-row__header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+}
+
+.player-row__avatar {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 60%);
+    border-radius: 12px;
+}
+
+.player-row__avatar img {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+}
+
+.player-row__name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.player-row__meta {
+    color: #c4ccdd;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.player-row__badge {
+    text-align: center;
+    min-width: 80px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 8px 10px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.player-row__count {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffdf7f;
+    display: block;
+    line-height: 1.1;
+}
+
+.player-row__badge small {
+    color: #c4ccdd;
+}
+
+.player-row__items {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.player-row__item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.player-row__item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.player-row__item-image img {
+    width: 38px;
+    height: 38px;
+    image-rendering: pixelated;
+}
+
+.player-row__item-count {
+    font-weight: 700;
+    color: #8fe1ff;
+}
+
+.player-row__item-name {
+    color: #e6e8ef;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.player-row__item:hover .player-row__item-name {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes spinGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 720px) {
+    .player-row__header {
+        grid-template-columns: auto 1fr;
+        grid-template-areas: "avatar name" "avatar badge";
+    }
+
+    .player-row__badge {
+        grid-area: badge;
+        justify-self: end;
+    }
+}
+.rare-items-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-top: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffd782;
+    user-select: none;
+    transition: opacity .2s ease;
+}
+
+.rare-items-toggle:hover {
+    opacity: 0.8;
+}
+
+.rare-items-toggle .arrow {
+    transition: transform .25s ease;
+}
+
+/* Oculto por defecto */
+.rare-items__grid {
+    display: none;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+/* Visible */
+.rare-items__grid.visible {
+    display: grid;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.arrow.rotated {
+    transform: rotate(90deg);
+}
+.pagination {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pagination__page,
+.pagination__btn {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: radial-gradient(circle at 30% 0, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.6));
+    font-size: 13px;
+    color: #f6f1ff;
+    text-decoration: none;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+    transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.pagination__page:hover,
+.pagination__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.55);
+    border-color: rgba(118, 193, 255, 0.7);
+}
+
+.pagination__page--active {
+    background: linear-gradient(135deg, #ffdf7f, #ff9b4a);
+    color: #26110c;
+    font-weight: 700;
+    border-color: rgba(255, 215, 128, 0.9);
+}
+
+</style>
+
+<div class="top-items-page">
+    <div class="top-items-hero">
+        <div>
+            <h2>Top de ítems raros</h2>
+            <p>Un vistazo rápido a los objetos más raros del servidor. solo apareceran los items que esten en el personaje, inbox, stash o depot</p>
+        </div>
+    </div>
+
+<div class="rare-items">
+
+    <div id="toggleRareItems" class="rare-items-toggle">
+        <span>Ítems raros (ocultos)</span>
+        <span id="rareArrow" class="arrow">▶</span>
+    </div>
+
+    <div id="rareItemsGrid" class="rare-items__grid">
+        {% for item in rare_items %}
+            <div class="rare-item-card">
+                <img src="{{ item.image }}" alt="{{ item.name }}">
+                <div class="rare-item-card__name">{{ item.name }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+    <div class="players-section">
+        <h3>Ranking de coleccionistas</h3>
+        <p>Se muestran únicamente los jugadores que ya poseen alguno de los ítems rastreados. El listado se ordena de mayor a menor cantidad total.</p>
+
+        {% if players is empty %}
+            <p>No hay jugadores con estos ítems todavía.</p>
+        {% else %}
+            <div class="players-list">
+                {% for player in players %}
+                    <div class="player-row">
+                        <div class="player-row__header">
+                            <div class="player-row__avatar">
+                                <img src="{{ player.outfit }}" alt="Outfit de {{ player.name }}">
+                            </div>
+                            <div>
+                                <div class="player-row__name">{{ player.name }}</div>
+                                <div class="player-row__meta">Nivel {{ player.level }} • {{ player.vocation }}</div>
+                            </div>
+                            <div class="player-row__badge">
+                                <span class="player-row__count">{{ player.total_items }}</span>
+                                <small>ítems raros</small>
+                            </div>
+                        </div>
+                        <div class="player-row__items">
+                            {% for item in player.items %}
+                                <div class="player-row__item" title="{{ item.name }} x{{ item.count }}">
+                                    <div class="player-row__item-image">
+                                        <img src="{{ item.image }}" alt="{{ item.name }}">
+                                    </div>
+                                    <span class="player-row__item-count">x{{ item.count }}</span>
+                                    <span class="player-row__item-name">{{ item.name }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+{% if total_pages > 1 %}
+    <div class="pagination">
+        {# Botón "Anterior" #}
+        {% if current_page > 1 %}
+            <a href="?subtopic=topitems&page={{ current_page - 1 }}" class="pagination__btn">
+                ‹ Anterior
+            </a>
+        {% endif %}
+
+        {# Números de página #}
+        {% for p in 1..total_pages %}
+            {% if p == current_page %}
+                <span class="pagination__page pagination__page--active">{{ p }}</span>
+            {% else %}
+                <a href="?subtopic=topitems&page={{ p }}" class="pagination__page">
+                    {{ p }}
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {# Botón "Siguiente" #}
+        {% if current_page < total_pages %}
+            <a href="?subtopic=topitems&page={{ current_page + 1 }}" class="pagination__btn">
+                Siguiente ›
+            </a>
+        {% endif %}
+    </div>
+{% endif %}
+
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("toggleRareItems");
+    const grid = document.getElementById("rareItemsGrid");
+    const arrow = document.getElementById("rareArrow");
+
+    toggle.addEventListener("click", () => {
+        grid.classList.toggle("visible");
+        arrow.classList.toggle("rotated");
+    });
+});
+</script>

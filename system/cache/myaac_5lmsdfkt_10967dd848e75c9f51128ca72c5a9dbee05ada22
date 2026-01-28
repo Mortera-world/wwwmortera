@@ -1,0 +1,334 @@
+<div class="NewsHeadline">
+	<div class="NewsHeadlineBackground" style="background-image:url(templates/tibiacom/images/news/newsheadline_background.gif)">
+		<img src="templates/tibiacom/images/news/icon_0.gif" class="NewsHeadlineIcon" />
+		<div class="NewsHeadlineDate">31.8.2025 - </div>
+		<div class="NewsHeadlineText">PROXIMA ACTUALIZACION</div>
+			</div>
+</div>
+<table style="clear:both" border=0 cellpadding=0 cellspacing=0 width="100%" >
+	<tr>
+		<td style="padding-left:10px;padding-right:10px;" ><h2 style="text-align: center;" data-start="185" data-end="244"><strong>&iexcl;Llega la Tower Boss a mortera!</strong></h2>
+<p style="text-align: center;" data-start="246" data-end="421">&iquest;Tienes lo que se necesita para llegar a la cima?<br data-start="295" data-end="298" />Dentro de la&nbsp;<strong data-start="311" data-end="325">Tower Boss</strong>&nbsp;cada criatura derrotada te dar&aacute;&nbsp;<span style="color: #ff0000;"><strong data-start="358" data-end="369">1 punto</strong></span>, pero cuidado&hellip; este desaf&iacute;o no ser&aacute; tan sencillo.</p>
+<p style="text-align: center;" data-start="423" data-end="463"><strong data-start="426" data-end="461">Sistema de Puntos y Recompensas</strong></p>
+<ul style="list-style-type: square;" data-start="464" data-end="721">
+<li data-start="464" data-end="517">
+<p data-start="466" data-end="517">Los puntos se&nbsp;<strong data-start="492" data-end="514">reinician el lunes</strong>.</p>
+</li>
+<li data-start="518" data-end="599">
+<p data-start="520" data-end="599">Los&nbsp;<strong data-start="524" data-end="554">5 jugadores con m&aacute;s puntos</strong>&nbsp;recibir&aacute;n&nbsp;<span style="color: #ff0000;"><strong data-start="565" data-end="580">Tibia Coins</strong></span>&nbsp;como recompensa.</p>
+</li>
+<li data-start="600" data-end="721">
+<p data-start="602" data-end="721">Solo puedes&nbsp;<strong data-start="614" data-end="639">entrar una vez al d&iacute;a</strong>&nbsp;y podr&aacute;s alcanzar hasta&nbsp;<strong data-start="664" data-end="687">120+ puntos diarios</strong>, &iexcl;si la suerte est&aacute; de tu lado!<br /><br /></p>
+</li>
+</ul>
+<p style="text-align: center;" data-start="723" data-end="809"><strong data-start="726" data-end="754">La Maldici&oacute;n de la Tower</strong><br data-start="754" data-end="757" />Mientras avanzas, la&nbsp;<span style="color: #ff0000;"><strong data-start="778" data-end="791">maldici&oacute;n</strong></span>&nbsp;caer&aacute; sobre ti&hellip;</p>
+<ul style="list-style-type: square;" data-start="810" data-end="1009">
+<li data-start="810" data-end="871">
+<p data-start="812" data-end="871">Cada&nbsp;<strong data-start="817" data-end="841">1 punto de&nbsp;<span style="color: #ff0000;">maldici&oacute;n</span></strong>&nbsp;reduce&nbsp;<strong data-start="849" data-end="868">1 skill en todo</strong>.</p>
+</li>
+<li data-start="872" data-end="939">
+<p data-start="874" data-end="939">Las criaturas te har&aacute;n mucho m&aacute;s da&ntilde;o cuanto m&aacute;s maldito est&eacute;s.</p>
+</li>
+<li data-start="940" data-end="1009">
+<p data-start="942" data-end="1009">La clave es resistir, sobrevivir y acumular puntos antes de caer.</p>
+</li>
+</ul>
+<p style="text-align: center;" data-start="1011" data-end="1167"><strong data-start="1014" data-end="1085">Demuestra tu fuerza, supera la&nbsp;<span style="color: #ff0000;">maldici&oacute;n</span>&nbsp;y conquista la Tower Boss!</strong><br data-start="1085" data-end="1088" />&iquest;Ser&aacute;s uno de los 5 campeones semanales que se lleve la gloria y los&nbsp;<strong><span style="color: #ff0000;">Tibia Coins</span></strong>?</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1169" data-end="1226"><img style="display: block; margin-left: auto; margin-right: auto;" src="../images/TWB.jpg" alt="" width="480" height="352" /></p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1169" data-end="1226">&nbsp;</p>
+<hr style="font-size: 14px; font-weight: 400; text-align: start;" />
+<h2 style="text-align: center;" data-start="199" data-end="263"><strong data-start="203" data-end="257">&iexcl;Sistema de Tier en Botas y Amplificaci&oacute;n!</strong></h2>
+<p style="text-align: center;" data-start="199" data-end="263">Con el nuevo sistema de&nbsp;<strong data-start="364" data-end="381">Tier en Botas</strong>, podr&aacute;s obtener un&nbsp;<strong data-start="401" data-end="427">bonus de&nbsp;<span style="color: #33cccc;">Amplificaci&oacute;n</span></strong>&nbsp;que mejora directamente tus dem&aacute;s equipos:</p>
+<p style="text-align: left;" data-start="474" data-end="515"><strong data-start="477" data-end="513">&iquest;C&oacute;mo funciona la&nbsp;<span style="color: #33cccc;">Amplificaci&oacute;n</span>?</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="516" data-end="780">
+<li data-start="516" data-end="652">
+<p data-start="518" data-end="589">El bonus de amplificaci&oacute;n de las botas&nbsp;<strong data-start="557" data-end="579">incrementa el&nbsp;<span style="color: #ff0000;">Tier</span></strong>&nbsp;de tus:</p>
+<ul style="list-style-type: square;" data-start="592" data-end="652">
+<li data-start="592" data-end="603">
+<p data-start="594" data-end="603">Legs</p>
+</li>
+<li data-start="606" data-end="621">
+<p data-start="608" data-end="621">Armaduras</p>
+</li>
+<li data-start="624" data-end="637">
+<p data-start="626" data-end="637">Helmets</p>
+</li>
+<li data-start="640" data-end="652">
+<p data-start="642" data-end="652">Armas</p>
+</li>
+</ul>
+</li>
+<li data-start="653" data-end="712">
+<p data-start="655" data-end="712">El m&aacute;ximo Tier es&nbsp;<span style="color: #ff0000;"><strong data-start="673" data-end="679">30</strong></span>, igual que en los dem&aacute;s &iacute;tems.</p>
+</li>
+<li data-start="713" data-end="780">
+<p data-start="715" data-end="780">&iexcl;La amplificaci&oacute;n puede llegar hasta un&nbsp;<strong data-start="755" data-end="768"><span style="color: #ff0000;">70%</span>&nbsp;extra</strong>!</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1169" data-end="1226">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="782" data-end="922"><strong data-start="785" data-end="797">Ejemplo:</strong><br data-start="797" data-end="800" />Si tu armadura tiene Tier 1 osea 0.50% de dodge y tus botas tienen tier 30, tu armadura actuar&aacute; como si tubiera 3.5 osea un tier 6 mas o menos.</p>
+<p style="padding-left: 40px;" data-start="782" data-end="922"><br /><img style="display: block; margin-left: auto; margin-right: auto;" src="../images/tbs.png" alt="" width="500" height="438" /></p>
+<hr style="font-size: 14px; font-weight: 400; text-align: start;" />
+<h2 style="text-align: center;" data-start="153" data-end="196"><strong data-start="158" data-end="189">&iexcl;<span style="color: #0000ff;">Soulpit</span>!</strong></h2>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="198" data-end="394">Los jugadores ahora pueden obtener&nbsp;<span style="color: #0000ff;"><strong data-start="233" data-end="247">Soul Cores</strong></span>&nbsp;y sacrificarlos en el&nbsp;<strong data-start="270" data-end="304">obelisco en el teleport de DP</strong>&nbsp;para abrir el portal del&nbsp;<span style="color: #0000ff;"><strong data-start="330" data-end="341">Soulpit</strong></span>, llevando hasta&nbsp;<strong data-start="358" data-end="373">5 jugadores</strong>&nbsp;a este nuevo reto.</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="396" data-end="419"><strong data-start="399" data-end="417">C&oacute;mo funciona:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="420" data-end="919">
+<li data-start="420" data-end="562">
+<p data-start="422" data-end="562">Cada&nbsp;<span style="color: #0000ff;"><strong data-start="427" data-end="440">Soul Core</strong></span>&nbsp;est&aacute; ligado a una criatura espec&iacute;fica, y al sacrificarlo definir&aacute; contra qu&eacute; oleadas se enfrentar&aacute;n dentro del Soulpit.</p>
+</li>
+<li data-start="563" data-end="696">
+<p data-start="565" data-end="696">Las criaturas aparecen en&nbsp;<strong data-start="591" data-end="625">oleadas cada vez m&aacute;s dif&iacute;ciles</strong>, hasta culminar en una&nbsp;<strong data-start="649" data-end="693">batalla final contra un enemigo poderoso</strong>.</p>
+</li>
+<li data-start="697" data-end="919">
+<p data-start="699" data-end="734">Los monstruos dentro del Soulpit:</p>
+<ul data-start="737" data-end="919">
+<li data-start="737" data-end="779">
+<p data-start="739" data-end="779">No dan loot ni cuentan para bestiario.</p>
+</li>
+<li data-start="782" data-end="853">
+<p data-start="784" data-end="853">Poseen&nbsp;<strong data-start="791" data-end="822">resistencia inicial elevada</strong>&nbsp;que disminuye con el tiempo.</p>
+</li>
+<li data-start="856" data-end="919">
+<p data-start="858" data-end="919">Est&aacute;n potenciados con&nbsp;<strong data-start="880" data-end="900">Sinister Embrace</strong>&nbsp;seg&uacute;n la oleada.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="921" data-end="957"><strong data-start="924" data-end="955">Recompensas del Jefe Final:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="958" data-end="1266">
+<li data-start="958" data-end="1020">
+<p data-start="960" data-end="1020">Otorga&nbsp;<strong data-start="967" data-end="992">+10000% de experiencia</strong>.</p>
+</li>
+<li data-start="1021" data-end="1266">
+<p data-start="1023" data-end="1069">Puede tener una de estas habilidades &uacute;nicas:</p>
+<ul data-start="1072" data-end="1266">
+<li data-start="1072" data-end="1126">
+<p data-start="1074" data-end="1126"><span style="color: #0000ff;"><strong data-start="1074" data-end="1084">Enrage</strong></span>: m&aacute;s da&ntilde;o y resistencia al perder vida.</p>
+</li>
+<li data-start="1129" data-end="1204">
+<p data-start="1131" data-end="1204"><span style="color: #0000ff;"><strong data-start="1131" data-end="1144">Oppressor</strong></span>: inflige estados negativos como&nbsp;<em data-start="1177" data-end="1201">Fear, Root o Powerless</em>.</p>
+</li>
+<li data-start="1207" data-end="1266">
+<p data-start="1209" data-end="1266"><span style="color: #0000ff;"><strong data-start="1209" data-end="1222">Overpower</strong></span>: m&aacute;s probabilidad de&nbsp;<strong data-start="1244" data-end="1263">golpes cr&iacute;ticos</strong>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1268" data-end="1290"><strong data-start="1270" data-end="1288">Exalted Cores:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1291" data-end="1519">
+<li data-start="1291" data-end="1390">
+<p data-start="1293" data-end="1390">Pueden usarse junto a un Soul Core para transformarlo en otro de menor dificultad de bestiario.</p>
+</li>
+<li data-start="1391" data-end="1519">
+<p data-start="1393" data-end="1519">Ejemplo: un&nbsp;<strong data-start="1405" data-end="1432">Bloated Man-Maggot Core</strong>&nbsp;puede terminar convirti&eacute;ndose en un&nbsp;<strong data-start="1469" data-end="1487">Butterfly Core</strong>&nbsp;tras varias transformaciones.</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1521" data-end="1548"><strong data-start="1523" data-end="1546">Normas del Soulpit:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1549" data-end="1771">
+<li data-start="1549" data-end="1624">
+<p data-start="1551" data-end="1624">Solo se necesita&nbsp;<strong data-start="1568" data-end="1583">1&nbsp;<span style="color: #0000ff;">Soul Core</span></strong>&nbsp;para que hasta&nbsp;<strong data-start="1599" data-end="1614">5 jugadores</strong>&nbsp;entren.</p>
+</li>
+<li data-start="1625" data-end="1682">
+<p data-start="1627" data-end="1682">Tienen&nbsp;<strong data-start="1634" data-end="1648">10 minutos</strong>&nbsp;para superar todas las oleadas.</p>
+</li>
+<li data-start="1683" data-end="1771">
+<p data-start="1685" data-end="1771">Cada oleada comienza con un conteo y deben vencer a todos los enemigos para avanzar.</p>
+</li>
+</ul>
+<p style="padding-left: 40px;" data-start="782" data-end="922">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1773" data-end="1842"><strong data-start="1523" data-end="1546">Recompensas en general:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1549" data-end="1771">
+<li data-start="1549" data-end="1624">
+<p data-start="1551" data-end="1624">Al completrar el&nbsp;<span style="color: #0000ff;"><strong>soulpit</strong>&nbsp;</span>de alguna criatura recibir&aacute;n % mas de&nbsp;<span style="color: #0000ff;"><strong>Experiencia</strong>&nbsp;</span>de esa criatura.</p>
+</li>
+<li data-start="1549" data-end="1624">Al completrar&nbsp;<span style="color: #0000ff;"><strong>200&nbsp;</strong></span>Criaturas de&nbsp;<span style="color: #0000ff;"><strong>Soulpit&nbsp;</strong></span>recibir&aacute;n un aumento considerable de&nbsp;<span style="color: #0000ff;"><strong>experiencia&nbsp;</strong></span>en general!<br /><br /><br /></li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;"><strong data-start="1523" data-end="1546">Como conseguir Soulcores?:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1549" data-end="1771">
+<li data-start="1549" data-end="1624">
+<p data-start="1551" data-end="1624">Los&nbsp;<strong><span style="color: #0000ff;">Soulcores</span>&nbsp;</strong>se daran de&nbsp;<span style="color: #0000ff;"><strong>loot</strong>&nbsp;</span>de cualquier&nbsp;<strong><span style="color: #0000ff;">boss</span>&nbsp;</strong>o de las criaturas&nbsp;<strong><span style="color: #0000ff;">influenciadas</span>&nbsp;</strong>o extremadamente&nbsp;<strong><span style="color: #0000ff;">raro</span>&nbsp;</strong>de algunas criaturas normales.</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1551" data-end="1624"><img style="text-align: center; display: block; margin-left: auto; margin-right: auto;" src="../images/soulpit.jpg" alt="" /></p>
+<p style="text-align: center;">&nbsp;</p>
+<h2 style="text-align: center;" data-start="128" data-end="190">&iexcl;Nuevo Sistema de captura de criaturas!</h2>
+<p style="text-align: center;" data-start="192" data-end="389">Nuestro&nbsp;<strong data-start="297" data-end="327">nuevo sistema de&nbsp;<span style="color: #ff00ff;">Pok&eacute;balls</span></strong>&nbsp;est&aacute; completamente funcional y listo para que lo disfrutes.</p>
+<h3 data-start="391" data-end="416">Tipos de Pok&eacute;balls</h3>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="417" data-end="670">
+<li data-start="417" data-end="483">
+<p data-start="419" data-end="483"><strong data-start="419" data-end="437">Basic Pok&eacute;ball</strong>&nbsp;&ndash; Perfecta para capturar criaturas comunes.</p>
+</li>
+<li data-start="484" data-end="542">
+<p data-start="486" data-end="542"><strong data-start="486" data-end="504">Great Pok&eacute;ball</strong>&nbsp;&ndash; Ideal para criaturas intermedias.</p>
+</li>
+<li data-start="543" data-end="600">
+<p data-start="545" data-end="600"><strong data-start="545" data-end="563">Ultra Pok&eacute;ball</strong>&nbsp;&ndash; Para los desaf&iacute;os m&aacute;s dif&iacute;ciles.</p>
+</li>
+<li data-start="601" data-end="670">
+<p data-start="603" data-end="670"><strong data-start="603" data-end="622">Master Pok&eacute;ball</strong>&nbsp;&ndash; &iexcl;Captura garantizada de cualquier criatura!</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="672" data-end="833">Cada&nbsp;<strong><span style="color: #ff00ff;">Pok&eacute;ball</span>&nbsp;</strong>tiene su&nbsp;<strong data-start="695" data-end="722">probabilidad de captura</strong>&nbsp;seg&uacute;n la rareza de la criatura: mientras m&aacute;s dif&iacute;cil sea, m&aacute;s complicado ser&aacute; atraparla&hellip; &iexcl;pero no imposible!</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="672" data-end="833">&nbsp;</p>
+<h3 data-start="835" data-end="855">C&oacute;mo funciona</h3>
+<ol style="font-size: 14px; font-weight: 400; text-align: start;" data-start="856" data-end="1324">
+<li data-start="856" data-end="961">
+<p data-start="859" data-end="961"><strong data-start="859" data-end="870">Captura</strong>: Selecciona a tu objetivo y lanza la Pok&eacute;ball (1sqm de distancia). &iexcl;Si tienes suerte, tu criatura ser&aacute; tuya!</p>
+</li>
+<li data-start="962" data-end="1062">
+<p data-start="965" data-end="1062"><strong data-start="965" data-end="986">Sumonea y combate</strong>: Una vez capturada, puedes invocar tu criatura para pelear o para presumir.</p>
+</li>
+<li data-start="1063" data-end="1174">
+<p data-start="1066" data-end="1174"><strong data-start="1066" data-end="1089">Guardar la criatura</strong>: Puedes guardar tu criatura en cualquier momento, preservando su&nbsp;<strong data-start="1155" data-end="1171">salud actual</strong>.</p>
+</li>
+<li data-start="1175" data-end="1324">
+<p data-start="1178" data-end="1324"><strong data-start="1178" data-end="1201">Cooldown por muerte</strong>: Si tu criatura muere en combate, la Pok&eacute;ball entra en&nbsp;<strong data-start="1257" data-end="1287">recuperaci&oacute;n de 30 minutos</strong>&nbsp;antes de poder invocarla de nuevo.</p>
+</li>
+</ol>
+<p style="font-size: 14px; font-weight: 400; text-align: start;">&nbsp;</p>
+<h3 data-start="1326" data-end="1359">Caracter&iacute;sticas destacadas</h3>
+<ul style="list-style-type: square;" data-start="1360" data-end="1788">
+<li data-start="1360" data-end="1480">
+<p data-start="1362" data-end="1480">Sistema de captura basado en&nbsp;<strong data-start="1391" data-end="1415">rareza del bestiario</strong>: de 1 estrella (comunes) a 5 estrellas (extremadamente raras).</p>
+</li>
+<li data-start="1481" data-end="1572">
+<p data-start="1483" data-end="1572">Cada Pok&eacute;ball tiene su&nbsp;<strong data-start="1506" data-end="1525">rate de captura</strong>&nbsp;ajustado seg&uacute;n la dificultad de la criatura.</p>
+</li>
+<li data-start="1573" data-end="1665">
+<p data-start="1575" data-end="1665">Salud de la criatura se mantiene al guardar y se restaura despu&eacute;s del cooldown si muri&oacute;.</p>
+</li>
+<li data-start="1666" data-end="1788">
+<p data-start="1668" data-end="1788">Descripci&oacute;n en la Pok&eacute;ball siempre actualizada: muestra criatura, salud y estado (Disponible, Sumoneada, Recuperando).</p>
+</li>
+<li data-start="1666" data-end="1788">
+<p data-start="1668" data-end="1788">ejemplo: You see master pokeball. Contains: Juggernaut Health: 0/60000 Status: Recovering (30 minutes)</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;">Solo es posible&nbsp;<strong>sumonear</strong>&nbsp;1 criatura de&nbsp;<strong>pokeball</strong>, si tienes sumoneado alguna criatura con la magia "<strong>utevo res</strong>" o si tienes a tu&nbsp;<strong>familiar</strong>&nbsp;no sera posible que sumonees a tu criatura de la&nbsp;<strong>pokeball.</strong></p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;"><img style="display: block; margin-left: auto; margin-right: auto;" src="../images/captura.jpg" alt="" /></p>
+<hr style="font-size: 14px; font-weight: 400; text-align: start;" />
+<h2 style="text-align: center;"><strong>Evento de bosses random</strong></h2>
+<p style="text-align: center;" data-start="163" data-end="548">Un&nbsp;<strong data-start="169" data-end="192">teleport misterioso</strong>&nbsp;aparecer&aacute; en&nbsp;<strong data-start="206" data-end="212">DP</strong>&nbsp;cada 1 hora! pero solo permanecer&aacute;&nbsp;<strong data-start="261" data-end="282">5 minutos activo</strong>.<br data-start="283" data-end="286" />&iexcl;El reto es simple!&nbsp;<strong data-start="308" data-end="357">Solo 1 jugador puede entrar a la zona</strong>&nbsp;para enfrentarse a un&nbsp;<strong data-start="380" data-end="398">boss aleatorio</strong></p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="550" data-end="585"><strong data-start="553" data-end="583">Funcionamiento del Evento:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="586" data-end="924">
+<li data-start="586" data-end="651">
+<p data-start="588" data-end="651">El teleport aparece en DP y se anuncia con un mensaje global.</p>
+</li>
+<li data-start="652" data-end="713">
+<p data-start="654" data-end="713">El primer jugador en entrar quedar&aacute; encerrado en la zona.</p>
+</li>
+<li data-start="714" data-end="783">
+<p data-start="716" data-end="783">Se enfrentar&aacute; a un boss al azar de entre m&aacute;s de 70 posibilidades.</p>
+</li>
+<li data-start="784" data-end="845">
+<p data-start="786" data-end="845">Si logra vencerlo, saldra automaticamente de la zona y se cerrara el teleport.</p>
+</li>
+<li data-start="846" data-end="924">
+<p data-start="848" data-end="924">Si falla o el tiempo se agota, el teleport desaparece y la zona se limpia (no hay penalizaci&oacute;n al morir).</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;">&nbsp;</p>
+<p style="text-align: center;" data-start="926" data-end="1058">El teleport reaparecer&aacute;&nbsp;<strong data-start="952" data-end="970">1 hora despu&eacute;s</strong>&nbsp;de ser eliminado.<br data-start="988" data-end="991" />s&eacute; r&aacute;pido y enfr&eacute;ntate al boss antes que los dem&aacute;s!</p>
+<p style="text-align: center;" data-start="926" data-end="1058"><img src="../images/rb.jpg" alt="" width="480" height="352" /></p>
+<hr style="font-size: 14px; font-weight: 400; text-align: start;" />
+<p style="text-align: center;" data-start="135" data-end="188"><strong data-start="138" data-end="179">&iexcl;SISTEMA DE PESCA REFINADO!</strong></p>
+<p style="text-align: center;" data-start="190" data-end="281">&iquest;Tienes&nbsp;<strong data-start="198" data-end="216">reset 20 o m&aacute;s</strong>? Entonces ya puedes usar la&nbsp;<strong data-start="247" data-end="278">Ca&ntilde;a de Pescar de Monstruos</strong>.</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="283" data-end="349">Pesca en aguas de zona vip unicamente y atrapa&nbsp;<strong data-start="321" data-end="341">criaturas &uacute;nicas</strong>&nbsp;como:</p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="350" data-end="498">
+<li data-start="456" data-end="498">
+<p data-start="458" data-end="498">Tentacruel, Golduck, Dark Kingdra, &iexcl;hasta Mega Charizard X!</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="500" data-end="755">Puedes usar items especiales para aumentar la cantidad de monstruos que aparecer&aacute;n.<br data-start="660" data-end="663" />hay un chance de salir&nbsp;<strong data-start="703" data-end="730">monstruos influenciados</strong>&nbsp;mucho m&aacute;s poderosos al igual que puedes usar un item especial para siempre pescar influenciados</p>
+<p style="text-align: center;" data-start="926" data-end="1058">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="757" data-end="856">Cada vez que pesques, los monstruos aparecer&aacute;n alrededor tuyo.</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="757" data-end="856"><img style="display: block; margin-left: auto; margin-right: auto;" src="../images/fs.jpg" alt="" /></p>
+<hr style="font-size: 14px; font-weight: 400; text-align: start;" />
+<p style="text-align: center;" data-start="757" data-end="856"><strong data-start="138" data-end="179"><strong data-start="138" data-end="179">&iexcl;</strong>SISTEMA DE&nbsp;<strong data-start="703" data-end="730">INFLUENCIADOS!</strong></strong></p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="161" data-end="258">Hemos realizado un peque&ntilde;o pero importante cambio en el sistema de&nbsp;<strong data-start="228" data-end="255">criaturas influenciadas</strong>:</p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="260" data-end="555">
+<li data-start="260" data-end="455">
+<p data-start="262" data-end="455">Ahora,&nbsp;<strong data-start="269" data-end="355">cada nivel de influencia multiplica la vida de la criatura hasta un 450% adicional</strong>.<br data-start="356" data-end="359" />Ejemplo: Nivel 1 = +450% de vida, Nivel 2 = +900%, Nivel 3 = +1350%, y as&iacute; sucesivamente.</p>
+</li>
+<li data-start="456" data-end="555">
+<p data-start="458" data-end="555">Con este ajuste, podr&aacute;s encontrarte criaturas influenciadas con hasta&nbsp;<strong data-start="528" data-end="552">150 millones de vida</strong>.</p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="557" data-end="674"><strong data-start="560" data-end="592">Recompensas por derrotarlas:</strong><br data-start="592" data-end="595" />Adem&aacute;s del reto, ahora recibir&aacute;s&nbsp;<strong data-start="628" data-end="635">TCs</strong>&nbsp;dependiendo del nivel de influencia:</p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="675" data-end="819">
+<li data-start="675" data-end="703">
+<p data-start="677" data-end="703">Nivel 1 &rarr;&nbsp;<strong data-start="687" data-end="701">1 a 10 TCs</strong></p>
+</li>
+<li data-start="704" data-end="732">
+<p data-start="706" data-end="732">Nivel 2 &rarr;&nbsp;<strong data-start="716" data-end="730">1 a 15 TCs</strong></p>
+</li>
+<li data-start="733" data-end="761">
+<p data-start="735" data-end="761">Nivel 3 &rarr;&nbsp;<strong data-start="745" data-end="759">1 a 20 TCs</strong></p>
+</li>
+<li data-start="762" data-end="790">
+<p data-start="764" data-end="790">Nivel 4 &rarr;&nbsp;<strong data-start="774" data-end="788">1 a 30 TCs</strong></p>
+</li>
+<li data-start="791" data-end="819">
+<p data-start="793" data-end="819">Nivel 5 &rarr;&nbsp;<strong data-start="803" data-end="817">1 a 50 TCs</strong></p>
+</li>
+</ul>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="821" data-end="856"><strong data-start="824" data-end="854">Limitaci&oacute;n:</strong></p>
+<ul style="font-size: 14px; font-weight: 400; text-align: start;" data-start="857" data-end="1056">
+<li data-start="857" data-end="938">
+<p data-start="859" data-end="938">Solo podr&aacute;n aparecer&nbsp;<strong data-start="880" data-end="935">hasta 30 criaturas Fiendish cada 5 horas en el mapa</strong>.</p>
+</li>
+<li data-start="939" data-end="1056">
+<p data-start="941" data-end="1056">Cada una puede otorgar entre&nbsp;<strong data-start="970" data-end="984">1 y 80 TCs</strong>, por lo que su aparici&oacute;n est&aacute; controlada para mantener el equilibrio.</p>
+</li>
+<li data-start="939" data-end="1056">Las criaturas solo podran otorgar tibia coins si tienen mas de 3m de vida, esto para que no se pueda abusar solamente ir a eliminar bichos simples como lo son trolls, amazon, bugs etc&nbsp;</li>
+</ul>
+<p style="text-align: center;" data-start="757" data-end="856">&nbsp;</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1058" data-end="1201">Prep&aacute;rate para cazar, porque las criaturas&nbsp;<strong data-start="1103" data-end="1129">Fiendish Influenciadas</strong>&nbsp;ahora son m&aacute;s desafiantes, pero tambi&eacute;n mucho m&aacute;s&nbsp;<strong data-start="1180" data-end="1198">recompensantes</strong>.</p>
+<p style="font-size: 14px; font-weight: 400; text-align: start;" data-start="1058" data-end="1201"><img style="display: block; margin-left: auto; margin-right: auto;" src="../images/fiendish.jpg" alt="" /></p>
+<p style="text-align: center;" data-start="757" data-end="856">&nbsp;</p></td>
+	</tr>
+		<tr>
+		<td>
+			<div style="text-align: right; margin-right: 10px;"><a href="http://187.153.49.191/?forum/thread/14">» Comment on this news</a></div>
+		</td>
+	</tr>
+	</table>
+<br/><div class="NewsHeadline">
+	<div class="NewsHeadlineBackground" style="background-image:url(templates/tibiacom/images/news/newsheadline_background.gif)">
+		<img src="templates/tibiacom/images/news/icon_4.gif" class="NewsHeadlineIcon" />
+		<div class="NewsHeadlineDate">3.7.2025 - </div>
+		<div class="NewsHeadlineText">Customs Houses</div>
+			</div>
+</div>
+<table style="clear:both" border=0 cellpadding=0 cellspacing=0 width="100%" >
+	<tr>
+		<td style="padding-left:10px;padding-right:10px;" ><h2 dir="ltr" style="line-height: 1.38; margin-top: 18pt; margin-bottom: 4pt; text-align: center;"><span style="font-size: 17pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">&iexcl;Mortera Country Club abre sus puertas!</span></h2>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">&iquest;Est&aacute;s cansado de vivir en el mismo lugar aburrido y gen&eacute;rico? &iquest;Vecinos que no recogen los desechos de sus mascotas ni levantan su basura? &iexcl;Tenemos la soluci&oacute;n perfecta para ti!</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Nos complace presentar </span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Mortera Country Club</span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">, un exclusivo desarrollo residencial dise&ntilde;ado para jugadores que desean vivir en un entorno &uacute;nico, limpio y completamente personalizado.</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: center;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;"><span style="border: none; display: inline-block; overflow: hidden; width: 602px; height: 401px;"><img style="margin-top: 0px;" src="../images/housesd.jpg" width="602" height="401" /></span></span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">En Mortera Country Club, tendr&aacute;s la oportunidad de adquirir un </span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">lote residencial</span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;"> y construir la </span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">casa de tus sue&ntilde;os</span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">, hecha totalmente a tu gusto. Cada propiedad ser&aacute; dise&ntilde;ada de manera individual, con atenci&oacute;n a los detalles y acabados que reflejan tu estilo.</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Todas las residencias contar&aacute;n con </span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">amenidades exclusivas</span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;"> para que tu estancia en Mortera sea c&oacute;moda y memorable:</span></p>
+<ul>
+<li dir="ltr" style="line-height: 1.38; text-align: left;" role="presentation"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">TP directo a la puerta de tu casa</span></li>
+<li dir="ltr" style="line-height: 1.38;" role="presentation"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Depot personalizado con dise&ntilde;o exclusivo</span></li>
+<li dir="ltr" style="line-height: 1.38;" role="presentation"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Golden Dummy Trainers para entrenamiento</span></li>
+<li dir="ltr" style="line-height: 1.38;" role="presentation"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Terrenos amplios y bien distribuidos</span></li>
+<li dir="ltr" style="line-height: 1.38;" role="presentation"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Paisajismo profesional</span></li>
+<li dir="ltr" style="line-height: 1.38;" role="presentation"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Hermoso parque central con juegos y &aacute;reas verdes</span></li>
+</ul>
+<p>&nbsp;</p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">&iquest;Quieres formar parte de esta comunidad premium?<br /></span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Podr&aacute;s adquirir tu casa con un </span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">donativo de $150 USD o $2800 MXN</span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">.<br /></span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">(incluye Celestial exercise dummy, 3 addons y 3 mounts unicas, 3 tier 100%, 3 bronze box, 3 silver box y 10k TCs)</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Haz de Mortera Country Club tu nuevo hogar. Vive con estilo. Vive con comodidad. Vive en Mortera.</span></p></td>
+	</tr>
+		<tr>
+		<td>
+			<div style="text-align: right; margin-right: 10px;"><a href="http://187.153.49.191/?forum/thread/9">» Comment on this news</a></div>
+		</td>
+	</tr>
+	</table>
+<br/>
