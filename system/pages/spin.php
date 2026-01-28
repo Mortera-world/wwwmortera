@@ -12,9 +12,10 @@ if (!$logged || $_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 $bet = isset($input['bet']) ? (int)$input['bet'] : 0;
+$minBet = 10;
 
-if ($bet < 1) {
-    echo json_encode(['success' => false, 'message' => 'Apuesta inválida.']);
+if ($bet < $minBet) {
+    echo json_encode(['success' => false, 'message' => "La apuesta mínima es de {$minBet} coins."]);
     exit;
 }
 
@@ -27,16 +28,15 @@ if ($bet > $currentCoins) {
 }
 
 $symbols = [
-    1 => ['type' => 'low',  'multipliers' => [0, 1, 3]],    // 3 iguales=3x apuesta
-    2 => ['type' => 'low',  'multipliers' => [0, 1, 3]],
-    3 => ['type' => 'low',  'multipliers' => [0, 2, 4]],
-    4 => ['type' => 'low',  'multipliers' => [0, 2, 5]],
-    5 => ['type' => 'high', 'multipliers' => [0, 5, 10]],
-    6 => ['type' => 'high', 'multipliers' => [0, 6, 12]],
-    7 => ['type' => 'high', 'multipliers' => [0, 8, 16]],
-    8 => ['type' => 'high', 'multipliers' => [0, 10, 20]],
-    9 => ['type' => 'high', 'multipliers' => [0, 15, 30]],
-    10 => ['type' => 'free', 'multipliers' => [0, 0, 0]]
+    1 => ['type' => 'low',  'multipliers' => [3 => 2, 4 => 4, 5 => 8]],
+    2 => ['type' => 'low',  'multipliers' => [3 => 2, 4 => 5, 5 => 9]],
+    3 => ['type' => 'low',  'multipliers' => [3 => 3, 4 => 6, 5 => 12]],
+    4 => ['type' => 'low',  'multipliers' => [3 => 4, 4 => 8, 5 => 15]],
+    5 => ['type' => 'high', 'multipliers' => [3 => 5, 4 => 10, 5 => 18]],
+    6 => ['type' => 'high', 'multipliers' => [3 => 6, 4 => 12, 5 => 20]],
+    7 => ['type' => 'high', 'multipliers' => [3 => 10, 4 => 20, 5 => 40]],
+    8 => ['type' => 'high', 'multipliers' => [3 => 8, 4 => 16, 5 => 30]],
+    9 => ['type' => 'high', 'multipliers' => [3 => 12, 4 => 24, 5 => 50]],
 ];
 
 // Probabilidades para generar símbolos
@@ -49,8 +49,7 @@ $symbolPool = array_merge(
     array_fill(0, 12, 6),
     array_fill(0, 8, 7),
     array_fill(0, 6, 8),
-    array_fill(0, 4, 9),
-    array_fill(0, 3, 10)
+    array_fill(0, 4, 9)
 );
 
 shuffle($symbolPool);
@@ -91,7 +90,6 @@ function checkLineWin($grid, $linePositions, $symbols, $bet) {
     }
 
     $firstSymbol = $symbolIds[0];
-    if ($firstSymbol == 10) return [0, []]; // No paga si el primero es free spin
 
     // Contar cuántos símbolos iguales consecutivos desde la izquierda
     $count = 1;
@@ -104,10 +102,8 @@ function checkLineWin($grid, $linePositions, $symbols, $bet) {
     }
 
     if ($count >= 3) {
-        // Obtener multiplicador según cantidad
-        // Usamos el índice count-1, max 2 para 3 o más símbolos iguales
-        $multIndex = min($count - 1, 2);
-        $multiplier = $symbols[$firstSymbol]['multipliers'][$multIndex];
+        $count = min($count, 5);
+        $multiplier = $symbols[$firstSymbol]['multipliers'][$count] ?? 0;
         $winAmount = $bet * $multiplier;
 
         // Solo retornamos las posiciones ganadoras (las primeras 'count' en la línea)
@@ -122,13 +118,6 @@ function checkLineWin($grid, $linePositions, $symbols, $bet) {
 // Calcular ganancias y detectar líneas ganadoras
 $totalWin = 0;
 $winningLines = [];
-$freeCount = 0;
-
-foreach ($grid as $row) {
-    foreach ($row as $sym) {
-        if ($sym == 10) $freeCount++;
-    }
-}
 
 foreach ($lines as $linePositions) {
     list($lineWin, $winPositions) = checkLineWin($grid, $linePositions, $symbols, $bet);
@@ -142,7 +131,6 @@ foreach ($lines as $linePositions) {
     }
 }
 
-$freeSpins = ($freeCount >= 3) ? 7 : 0;
 $newCoins = $currentCoins - $bet + $totalWin;
 
 // Actualizar saldo en base de datos
@@ -152,7 +140,7 @@ echo json_encode([
     'success' => true,
     'grid' => $grid,
     'balance' => $newCoins,
-    'message' => $totalWin > 0 ? "¡Ganaste {$totalWin} monedas!" : ($freeSpins > 0 ? "¡{$freeSpins} tiros gratis!" : "Sin premio esta vez."),
+    'message' => $totalWin > 0 ? "¡Ganaste {$totalWin} monedas!" : "Sin premio esta vez.",
     'winningLines' => $winningLines
 ]);
 exit;
