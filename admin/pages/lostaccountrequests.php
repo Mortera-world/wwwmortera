@@ -23,71 +23,100 @@ if (isset($_POST['request_id'], $_POST['decision'])) {
     if (!hash_equals($csrfToken, (string)$submittedToken)) {
         echo '<p class="error">Invalid CSRF token. Please refresh the page and try again.</p>';
     } else {
-    $requestId = (int)$_POST['request_id'];
-    $decision = $_POST['decision'];
-    $adminComment = trim($_POST['admin_comment'] ?? '');
+        $requestId = (int)$_POST['request_id'];
+        $decision = $_POST['decision'];
+        $adminComment = trim($_POST['admin_comment'] ?? '');
 
-    $statement = $db->prepare('SELECT * FROM `lost_account_requests` WHERE `id` = :id');
-    $statement->execute([':id' => $requestId]);
-    $request = $statement->fetch();
+        try {
+            $db->beginTransaction();
 
-    if (!$request) {
-        echo '<p class="error">Request not found.</p>';
-    } elseif ($request['status'] !== 'pending') {
-        echo '<p class="error">This request is already resolved.</p>';
-    } else {
-        if ($decision === 'approve') {
-            $account = new OTS_Account();
-            $account->load((int)$request['account_id']);
-            if (!$account->isLoaded()) {
-                echo '<p class="error">Target account was not found.</p>';
-            } else {
-                $newPassword = generateRandomString(12, true, true, false);
-                $tmpPassword = $newPassword;
-                if ($config_salt_enabled) {
-                    $salt = generateRandomString(10, false, true, true);
-                    $tmpPassword = $salt . $newPassword;
-                    $account->setCustomField('salt', $salt);
-                }
+            $statement = $db->prepare('SELECT * FROM `lost_account_requests` WHERE `id` = :id FOR UPDATE');
+            $statement->execute([':id' => $requestId]);
+            $request = $statement->fetch();
 
-                $account->setPassword(encrypt($tmpPassword));
-                $account->save();
+            if (!$request) {
+                $db->rollBack();
+                echo '<p class="error">Request not found.</p>';
+            } elseif ($request['status'] !== 'pending') {
+                $db->rollBack();
+                echo '<p class="error">This request is already resolved.</p>';
+            } elseif ($decision === 'approve') {
+                $account = new OTS_Account();
+                $account->load((int)$request['account_id']);
+                if (!$account->isLoaded()) {
+                    $db->rollBack();
+                    echo '<p class="error">Target account was not found.</p>';
+                } else {
+                    $newPassword = generateRandomString(12, true, true, false);
+                    $tmpPassword = $newPassword;
+                    if ($config_salt_enabled) {
+                        $salt = generateRandomString(10, false, true, true);
+                        $tmpPassword = $salt . $newPassword;
+                        $account->setCustomField('salt', $salt);
+                    }
 
-                $mailInfo = 'Mail not sent (mailer disabled).';
-                if (!empty($config['mail_enabled'])) {
-                    $mailBody = '<p>Your lost account request was approved.</p>' .
-                        '<p>Account name: <b>' . htmlspecialchars($account->getName()) . '</b></p>' .
-                        '<p>New password: <b>' . htmlspecialchars($newPassword) . '</b></p>';
-                    if (_mail($account->getEMail(), $config['lua']['serverName'] . ' - Lost account request approved', $mailBody)) {
-                        $mailInfo = 'Mail sent to account email.';
+                    $account->setPassword(encrypt($tmpPassword));
+                    $account->save();
+
+                    $mailInfo = 'Mail not sent (mailer disabled).';
+                    if (!empty($config['mail_enabled'])) {
+                        $mailBody = '<p>Your lost account request was approved.</p>' .
+                            '<p>Account name: <b>' . htmlspecialchars($account->getName()) . '</b></p>' .
+                            '<p>New password: <b>' . htmlspecialchars($newPassword) . '</b></p>';
+                        if (_mail($account->getEMail(), $config['lua']['serverName'] . ' - Lost account request approved', $mailBody)) {
+                            $mailInfo = 'Mail sent to account email.';
+                        } else {
+                            $mailInfo = 'Could not send e-mail, check mailer logs.';
+                        }
+                    }
+
+                    $update = $db->prepare('UPDATE `lost_account_requests` SET `status` = :status, `admin_comment` = :admin_comment, `generated_password` = NULL, `resolved_by` = :resolved_by, `resolved_at` = :resolved_at WHERE `id` = :id AND `status` = :pending_status');
+                    $update->execute([
+                        ':status' => 'approved',
+                        ':admin_comment' => trim($adminComment . ' ' . $mailInfo),
+                        ':resolved_by' => $account_logged->getId(),
+                        ':resolved_at' => time(),
+                        ':id' => $requestId,
+                        ':pending_status' => 'pending',
+                    ]);
+
+                    if ($update->rowCount() !== 1) {
+                        $db->rollBack();
+                        echo '<p class="error">This request was already handled by another admin.</p>';
                     } else {
-                        $mailInfo = 'Could not send e-mail, check mailer logs.';
+                        $db->commit();
+                        echo '<p class="success">Request approved. New password generated: <b>' . htmlspecialchars($newPassword) . '</b>. This password is shown only once. ' . $mailInfo . '</p>';
                     }
                 }
-
-                $update = $db->prepare('UPDATE `lost_account_requests` SET `status` = :status, `admin_comment` = :admin_comment, `generated_password` = NULL, `resolved_by` = :resolved_by, `resolved_at` = :resolved_at WHERE `id` = :id');
+            } elseif ($decision === 'reject') {
+                $update = $db->prepare('UPDATE `lost_account_requests` SET `status` = :status, `admin_comment` = :admin_comment, `resolved_by` = :resolved_by, `resolved_at` = :resolved_at WHERE `id` = :id AND `status` = :pending_status');
                 $update->execute([
-                    ':status' => 'approved',
-                    ':admin_comment' => trim($adminComment . ' ' . $mailInfo),
+                    ':status' => 'rejected',
+                    ':admin_comment' => $adminComment,
                     ':resolved_by' => $account_logged->getId(),
                     ':resolved_at' => time(),
                     ':id' => $requestId,
+                    ':pending_status' => 'pending',
                 ]);
 
-                echo '<p class="success">Request approved. New password generated: <b>' . htmlspecialchars($newPassword) . '</b>. This password is shown only once. ' . $mailInfo . '</p>';
+                if ($update->rowCount() !== 1) {
+                    $db->rollBack();
+                    echo '<p class="error">This request was already handled by another admin.</p>';
+                } else {
+                    $db->commit();
+                    echo '<p class="success">Request rejected.</p>';
+                }
+            } else {
+                $db->rollBack();
+                echo '<p class="error">Invalid decision.</p>';
             }
-        } elseif ($decision === 'reject') {
-            $update = $db->prepare('UPDATE `lost_account_requests` SET `status` = :status, `admin_comment` = :admin_comment, `resolved_by` = :resolved_by, `resolved_at` = :resolved_at WHERE `id` = :id');
-            $update->execute([
-                ':status' => 'rejected',
-                ':admin_comment' => $adminComment,
-                ':resolved_by' => $account_logged->getId(),
-                ':resolved_at' => time(),
-                ':id' => $requestId,
-            ]);
-            echo '<p class="success">Request rejected.</p>';
+        } catch (Throwable $e) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+
+            echo '<p class="error">Could not process request. Please try again.</p>';
         }
-    }
     }
 }
 
