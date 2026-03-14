@@ -53,10 +53,10 @@
 		</tr>
 		<tr>
 			<td bgcolor="{{ config.darkborder }}">
-				<input type="radio" name="action_type" id="action_type_email" value="email">
-				<label for="action_type_email"> Send me new password and my account name to account e-mail adress.</label><br/>
-				<input type=radio name="action_type" id="action_type_key" value="reckey">
-				<label for="action_type_key"> I got <b>recovery key</b> and want set new password and e-mail adress to my account.</label><br/>
+				<input type="radio" name="action_type" id="action_type_key" value="reckey" checked>
+				<label for="action_type_key"> I got <b>recovery key</b> and I want to recover access now.</label><br/>
+				<input type="radio" name="action_type" id="action_type_manual" value="manual">
+				<label for="action_type_manual"> I don't have recovery key. I will provide account name, e-mail and real name for manual admin verification.</label><br/>
 			</td>
 		</tr>
 	</table>
@@ -77,6 +77,5 @@
 </td>
 </tr>
 </tbody></table></div>
-
 
 
