@@ -8,8 +8,21 @@ if (!$db->hasTable('lost_account_requests')) {
 }
 
 $config_salt_enabled = $db->hasColumn('accounts', 'salt');
+$csrfSessionKey = 'lost_account_requests_csrf_token';
+if (empty($_SESSION[$csrfSessionKey])) {
+    try {
+        $_SESSION[$csrfSessionKey] = bin2hex(random_bytes(32));
+    } catch (Exception $e) {
+        $_SESSION[$csrfSessionKey] = md5(uniqid((string)mt_rand(), true));
+    }
+}
+$csrfToken = $_SESSION[$csrfSessionKey];
 
 if (isset($_POST['request_id'], $_POST['decision'])) {
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($csrfToken, (string)$submittedToken)) {
+        echo '<p class="error">Invalid CSRF token. Please refresh the page and try again.</p>';
+    } else {
     $requestId = (int)$_POST['request_id'];
     $decision = $_POST['decision'];
     $adminComment = trim($_POST['admin_comment'] ?? '');
@@ -52,17 +65,16 @@ if (isset($_POST['request_id'], $_POST['decision'])) {
                     }
                 }
 
-                $update = $db->prepare('UPDATE `lost_account_requests` SET `status` = :status, `admin_comment` = :admin_comment, `generated_password` = :generated_password, `resolved_by` = :resolved_by, `resolved_at` = :resolved_at WHERE `id` = :id');
+                $update = $db->prepare('UPDATE `lost_account_requests` SET `status` = :status, `admin_comment` = :admin_comment, `generated_password` = NULL, `resolved_by` = :resolved_by, `resolved_at` = :resolved_at WHERE `id` = :id');
                 $update->execute([
                     ':status' => 'approved',
                     ':admin_comment' => trim($adminComment . ' ' . $mailInfo),
-                    ':generated_password' => $newPassword,
                     ':resolved_by' => $account_logged->getId(),
                     ':resolved_at' => time(),
                     ':id' => $requestId,
                 ]);
 
-                echo '<p class="success">Request approved. New password generated: <b>' . $newPassword . '</b>. ' . $mailInfo . '</p>';
+                echo '<p class="success">Request approved. New password generated: <b>' . htmlspecialchars($newPassword) . '</b>. This password is shown only once. ' . $mailInfo . '</p>';
             }
         } elseif ($decision === 'reject') {
             $update = $db->prepare('UPDATE `lost_account_requests` SET `status` = :status, `admin_comment` = :admin_comment, `resolved_by` = :resolved_by, `resolved_at` = :resolved_at WHERE `id` = :id');
@@ -75,6 +87,7 @@ if (isset($_POST['request_id'], $_POST['decision'])) {
             ]);
             echo '<p class="success">Request rejected.</p>';
         }
+    }
     }
 }
 
@@ -108,15 +121,13 @@ $requests = $db->query('SELECT * FROM `lost_account_requests` ORDER BY `status` 
                 <?php if ($request['status'] === 'pending'): ?>
                     <form method="post" style="margin-bottom: 6px;">
                         <input type="hidden" name="request_id" value="<?= (int)$request['id']; ?>">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken); ?>">
                         <textarea name="admin_comment" class="form-control" placeholder="Admin comment" rows="2"></textarea>
                         <button class="btn btn-success btn-sm" name="decision" value="approve" style="margin-top: 4px;">Approve + generate/send password</button>
                         <button class="btn btn-danger btn-sm" name="decision" value="reject" style="margin-top: 4px;">Reject</button>
                     </form>
                 <?php else: ?>
                     <?= htmlspecialchars((string)$request['admin_comment']); ?><br/>
-                    <?php if (!empty($request['generated_password'])): ?>
-                        Generated password: <b><?= htmlspecialchars($request['generated_password']); ?></b>
-                    <?php endif; ?>
                 <?php endif; ?>
             </td>
         </tr>
