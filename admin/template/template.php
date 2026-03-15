@@ -92,6 +92,7 @@ defined('MYAAC') or die('Direct access not allowed!'); ?>
                     'Logs' => array(
                         'Logs' => 'logs',
                         'Reports' => 'reports',
+                        'Lost Account Requests' => 'lostaccountrequests',
                     ),
                 );
 
