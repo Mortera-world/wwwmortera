@@ -2356,27 +2356,24 @@ img {
 }
 .ActiveSubmenuItemIcon { display: none !important; }
 
-/* Refined white minimalist menu with centered names */
-#Menu .menuitem .Label {
-  display: block !important;
-  flex: 1;
-  text-align: center;
-  padding: 0 !important;
-  line-height: 42px;
-}
+/* Icon-only minimalist menu refresh */
+#Menu .menuitem .Label { display: none !important; }
 #Menu .MenuButtonInner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: 42px;
   padding: 0 12px;
-  gap: 10px;
 }
 #Menu .modernIcon {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  width: 22px !important;
-  height: 22px !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #111827;
   position: static !important;
 }
 #Menu .MenuButton {
@@ -2389,11 +2386,6 @@ img {
 }
 #Menu .MenuButton:hover .modernIcon {
   transform: scale(1.08);
-}
-#Menu .Extend {
-  width: 16px !important;
-  min-width: 16px;
-  text-align: center;
-  color: #9ca3af;
+  background: #ffffff;
 }
 #Menu .Submenuitem { background: #fff !important; border: 1px solid #f3f4f6; }
