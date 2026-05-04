@@ -2277,3 +2277,81 @@ img {
   color: #fff;
   cursor: default;
 }
+/* Minimal white redesign for login box and main menu */
+#Loginbox, #Menu {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+#LoginTop, #LoginBottom, #MenuTop, #MenuBottom, .LeftChain, .RightChain, .Lights, .Icon {
+  display: none !important;
+  background-image: none !important;
+}
+#BorderLeft, #BorderRight, .SmallMenuBox, .SmallMenuBoxWiki { display: none !important; }
+#LoginButtonContainer, .Loginstatus, .MenuButton, .Submenuitem {
+  background: transparent !important;
+}
+#LoginButton {
+  width: auto;
+  margin: 12px;
+  background: #fff !important;
+}
+#LoginButton > div {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  transition: all .2s ease;
+}
+#LoginButton > div:hover { border-color: #111827; transform: translateY(-1px); }
+#ButtonText, .LoginstatusText {
+  background: none !important;
+  color: #111827;
+  font: 600 13px/34px Arial, sans-serif;
+  text-align: center;
+  width: 100%;
+}
+.Loginstatus { padding: 0 12px 12px; }
+#LoginstatusText_2 {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+#LoginstatusText_2_2 { display: none; }
+#Menu { margin-top: 14px; padding: 8px; }
+.MenuButton {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  background: #fff !important;
+}
+.Label {
+  background: none !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  color: #111827;
+  font: 700 13px/40px Arial, sans-serif;
+  letter-spacing: .2px;
+  padding-left: 14px;
+}
+.Extend {
+  background: none !important;
+  color: #6b7280;
+  font: 700 18px/40px Arial, sans-serif;
+  text-align: center;
+}
+.Submenu {
+  border-left: 2px solid #f3f4f6;
+  margin: 0 0 8px 14px;
+}
+.Submenuitem {
+  border-radius: 8px;
+  margin: 4px 8px;
+  transition: background-color .2s ease, transform .2s ease;
+}
+.Submenuitem:hover { background-color: #f8fafc !important; transform: translateX(2px); }
+.SubmenuitemLabel {
+  color: #374151 !important;
+  font: 500 12px/28px Arial, sans-serif;
+}
+.ActiveSubmenuItemIcon { display: none !important; }

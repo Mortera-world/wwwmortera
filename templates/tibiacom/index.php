@@ -95,15 +95,13 @@ if (isset($config['boxes']))
         // initialisation of the loginbox status by the value of the variable 'loginStatus' which is provided to the HTML-document by PHP in the file 'header.inc'
         function LoadLoginBox() {
             if (loginStatus == "false") {
-                document.getElementById('ButtonText').style.backgroundImage = "url('" + IMAGES + "/global/buttons/mediumbutton_login.png')";
-                document.getElementById('LoginstatusText_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-create-account.gif')";
-                document.getElementById('LoginstatusText_2_1').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-create-account.gif')";
-                document.getElementById('LoginstatusText_2_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-create-account-over.gif')";
+                document.getElementById('ButtonText').textContent = "Login";
+                document.getElementById('LoginstatusText_2_1').textContent = "Create account";
+                document.getElementById('LoginstatusText_2_2').textContent = "Create account";
             } else {
-                document.getElementById('ButtonText').style.backgroundImage = "url('" + IMAGES + "/global/buttons/mediumbutton_myaccount.png')";
-                document.getElementById('LoginstatusText_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-logout.gif')";
-                document.getElementById('LoginstatusText_2_1').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-logout.gif')";
-                document.getElementById('LoginstatusText_2_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-logout-over.gif')";
+                document.getElementById('ButtonText').textContent = "My account";
+                document.getElementById('LoginstatusText_2_1').textContent = "Logout";
+                document.getElementById('LoginstatusText_2_2').textContent = "Logout";
             }
         }
 
@@ -160,12 +158,12 @@ if (isset($config['boxes']))
                     document.getElementById(menuItemName + "_Submenu").style.visibility = "hidden";
                     document.getElementById(menuItemName + "_Submenu").style.display = "none";
                     document.getElementById(menuItemName + "_Lights").style.visibility = "visible";
-                    document.getElementById(menuItemName + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/plus.gif)";
+                    document.getElementById(menuItemName + "_Extend").textContent = "+";
                 } else {
                     document.getElementById(menuItemName + "_Submenu").style.visibility = "visible";
                     document.getElementById(menuItemName + "_Submenu").style.display = "block";
                     document.getElementById(menuItemName + "_Lights").style.visibility = "hidden";
-                    document.getElementById(menuItemName + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/minus.gif)";
+                    document.getElementById(menuItemName + "_Extend").textContent = "−";
                 }
             }
         }
@@ -200,26 +198,26 @@ if (isset($config['boxes']))
         function OpenMenuItem(sourceId) {
             menu[0][sourceId] = 1;
             document.getElementById(sourceId + "_Submenu").style.visibility = "visible";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/global/general/minus.gif)";
+            document.getElementById(sourceId + "_Extend").textContent = "−";
             document.getElementById(sourceId + "_Lights").style.visibility = "hidden";
             $('#' + sourceId + '_Submenu').slideDown('slow');
             //document.getElementById(sourceId+"_Submenu").style.visibility = "visible";
             //document.getElementById(sourceId+"_Submenu").style.display = "block";
             //document.getElementById(sourceId+"_Lights").style.visibility = "hidden";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/minus.gif)";
+            document.getElementById(sourceId + "_Extend").textContent = "−";
         }
 
         function CloseMenuItem(sourceId) {
             menu[0][sourceId] = 0;
             document.getElementById(sourceId + "_Lights").style.visibility = "visible";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/global/general/plus.gif)";
+            document.getElementById(sourceId + "_Extend").textContent = "+";
             $('#' + sourceId + '_Submenu').slideUp('fast', function () {
                 document.getElementById(sourceId + "_Submenu").style.visibility = "hidden";
             });
             //document.getElementById(sourceId+"_Submenu").style.visibility = "hidden";
             //document.getElementById(sourceId+"_Submenu").style.display = "none";
             //document.getElementById(sourceId+"_Lights").style.visibility = "visible";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/plus.gif)";
+            document.getElementById(sourceId + "_Extend").textContent = "+";
         }
 
         // mouse-over effects of menubuttons and submenuitems
@@ -435,10 +433,8 @@ if (isset($config['boxes']))
                                             <div class='light_ru'
                                                  style='background-image:url(<?= $template_path; ?>/images/menu/green-light.gif);'></div>
                                         </span>
-                                        <div id='<?= $cat['id']; ?>_Icon' class='Icon'
-                                             style='background-image:url(<?= $template_path ?><?= getImageMenuRandom($cat['id']) ?>);'></div>
-                                        <div id='<?= $cat['id']; ?>_Label' class='Label'
-                                             style='background-image:url(<?= $template_path; ?>/images/menu/label-<?= $cat['id']; ?>.png);'></div>
+                                        <div id='<?= $cat['id']; ?>_Icon' class='Icon'></div>
+                                        <div id='<?= $cat['id']; ?>_Label' class='Label'><?= $cat['name']; ?></div>
                                         <div id='<?= $cat['id']; ?>_Extend' class='Extend'
                                              style='background-image:url(<?= $template_path; ?>/images/general/plus.gif);'></div>
                                     </div>
