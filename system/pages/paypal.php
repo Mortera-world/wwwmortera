@@ -30,7 +30,7 @@
                         <table border="0" style="width: 99%; border-radius:5px; border:1px dashed #A7D7F9; background-color:#EEF6FA; padding:2px">
                             <tbody>
             			        <tr>
-                                <td><b>Ad:</b>  <br>Al hacer una <u>donacion</u> estas aceptando nuestros <a href="?terminostransferencia" target="new">terminos y condiciones</a></td>
+                                <td><b>Ad:</b>  <br>By making a <u>donation</u> you are accepting our <a href="?donateagreement" target="new">terms and conditions</a></td>
                                 </tr>
                             </tbody>
             			</table>
@@ -111,99 +111,48 @@
                     <tbody>
                     <tr>
                         <td>
-                        <h2>Metodos de Donacion</h2>
-                        <p>click en la imagen para mas informacion</p>
+                        <h2>Click on the image for more information</h2>
                         <p><b>WhatsApp:</b> +52 833 258 8698</p>
-                        <p><b>El envio de tibia coins es inmediato despues de enviar tu comprobante pero no siempre sera inmediato, el tiempo de envio es de 1 minuto a 1 hora</b></p>
+                        <p><b>Tibia coins are shipped immediately after you send your receipt, but it will not always be immediate. Shipping time is 1 minute to 1 hour.</b></p>
 	                        <div class="cardmodal" onclick="openModal('modal1')">
-                                <h3>OXXO</h3>
-                                <img src="images/donacion/oxxo.png" alt="Imagen 1">
-                            </div>
-                            <div class="cardmodal" onclick="openModal('modal2')">
-                                <h3>MERCADO PAGO</h3>
-                                <img src="images/donacion/mp.png" alt="Imagen 2">
-                            </div>
-							<div class="cardmodal" onclick="openModal('modal3')">
-                                <h3>FELIX PAGO</h3>
-                                <img src="images/donacion/felix.png" alt="Imagen 3">
+                                <h3>PAYPAL</h3>
+                                <img src="images/donacion/paypal.png" alt="Imagen 1">
                             </div>
                             <!-- metodos de pago -->
                             <div id="modal1" class="modal">
                                 <div class="modal-content">
                                     <span class="closemodall" onclick="closeModal('modal1')">&times;</span>
-									<center><img src="images/donacion/oxxo.png" width="150" height="76"></center>
+									<center><img src="images/donacion/paypal.png" width="250" height="76"></center>
 									<br>
 									<div style="background: #313743; border: 1px solid #313743; padding: 15px; border-radius: 8px; margin-bottom: 8px;">
-									<h1 style="color: #cbe957; font-size: 22px; margin: 0;">Donacion mediante deposito en OXXO</h1>
+									<h1 style="color: #cbe957; font-size: 22px; margin: 0;">Donation via paypal</h1>
 									</div>
 									<br>
                                     <div style="background: #313743; border: 1px solid #313743; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                                    <strong style="color: #cbe957;">Pasos para realizar el deposito:</strong>
+                                    <strong style="color: #cbe957;">Steps to make the shipment:</strong>
                                         <ol style="margin: 10px 0 0 20px; padding: 0; font-size: 14px; color: #cbe957; line-height: 1.6;">
-                                            <li>Acude a la sucursal de OXXO mas cercana.</li>
-                                            <li>Solicita realizar un deposito a la siguiente tarjeta:</li>
-                                            <p style="margin: 5px 0 15px; font-weight: bold;">Coppel - 4169 1608 1552 7859</p>
-                                            <li>Indica el monto que deseas depositar.</li>
+                                            <li>Simply click on Donate and enter the amount you want to donate.</li>
+											<li>
+											Note: Make it clear that you are making a donation and you are not purchasing anything at all and by making your donation you are accepting our
+											<a href="?donateagreement" target="_blank" style="color: #cbe957; text-decoration: none;">Terms and conditions</a>
+											</li>
+											<br>
+                                            <form action="https://www.paypal.com/donate" method="post" target="_top">
+                                                <input type="hidden" name="hosted_button_id" value="XEA5F5S7A8P2A" />
+                                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                                                <img alt="" border="0" src="https://www.paypal.com/en_MX/i/scr/pixel.gif" width="10" height="10" />
+                                            </form>
                                             <li>
-                                                Despues de realizar el deposito, envia un
+                                                After making the donation, send a
                                                 <a href="https://wa.link/ptpv2i" target="_blank" style="color: #cbe957; text-decoration: none;">WhatsApp</a>,
-                                                o abre un ticket en nuestro 
-                                                <a href="https://discord.gg/JczYp5PvCn" target="_blank" style="color: #cbe957; text-decoration: none;">Discord</a>
-                                                con tu nombre de jugador y el comprobante de donacion.
+                                                or open a ticket in our
+                                                <a href="https://discord.com/invite/xgMVtyq268" target="_blank" style="color: #cbe957; text-decoration: none;">Discord</a>
+                                                with your player name and proof of donation.
                                             </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="modal2" class="modal">
-                                <div class="modal-content">
-                                    <span class="closemodall" onclick="closeModal('modal2')">&times;</span>
-									<center><img src="images/donacion/mp.png" width="150" height="76"></center>
-									<br>
-									<div style="background: #313743; border: 1px solid #313743; padding: 15px; border-radius: 8px; margin-bottom: 8px;">
-									<h1 style="color: #cbe957; font-size: 22px; margin: 0;">Donacion mediante transferencia SPEI/MP</h1>
-									</div>
-									<br>
-                                    <div style="background: #313743; border: 1px solid #313743; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                                    <strong style="color: #cbe957;">Pasos para realizar la transferencia:</strong>
-                                        <ol style="margin: 10px 0 0 20px; padding: 0; font-size: 14px; color: #cbe957; line-height: 1.6;">
-                                            <li>Iniciar sesion en la app o sitio web de tu banco</li>
-                                            <li>Buscar la seccion "Transferir"</li>
-                                            <li>Colocar los datos de pago</li>
-                                            <p style="margin: 5px 0 15px; font-weight: bold;">CLABE: 722969010822421470</p>
-                                            <p style="margin: 5px 0 15px; font-weight: bold;">Beneficiario: Adrian Alvarez Ovalle</p>
-                                            <p style="margin: 5px 0 15px; font-weight: bold;">Institucion/banco: Mercado pago W</p>
-                                            <li>digita el monto que deseas transferir.</li>
-                                            <li>
-                                                Despues de realizar la transferencia, envia un
-                                                <a href="https://wa.link/ptpv2i" target="_blank" style="color: #cbe957; text-decoration: underline;">WhatsApp</a>
-                                                o abre un ticket en nuestro 
-                                                <a href="https://discord.gg/JczYp5PvCn" target="_blank" style="color: #cbe957; text-decoration: underline;">Discord</a>
-                                                con tu nombre de jugador y la captura de la donacion.
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-							<div id="modal3" class="modal">
-                                <div class="modal-content">
-                                    <span class="closemodall" onclick="closeModal('modal3')">&times;</span>
-									<center><img src="images/donacion/felix.png" width="150" height="76"></center>
-									<br>
-									<div style="background: #313743; border: 1px solid #313743; padding: 15px; border-radius: 8px; margin-bottom: 8px;">
-									<h1 style="color: #cbe957; font-size: 22px; margin: 0;">Donacion mediante felix pago(solo USA)</h1>
-									</div>
-									<br>
-                                    <div style="background: #313743; border: 1px solid #313743; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                                    <strong style="color: #cbe957;">Este metodo es solo para personas de USA:</strong>
-                                        <ol style="margin: 10px 0 0 20px; padding: 0; font-size: 14px; color: #cbe957; line-height: 1.6;">
-                                            <li>
-											    Envia un
-                                                <a href="https://wa.link/ptpv2i" target="_blank" style="color: #cbe957; text-decoration: underline;">WhatsApp</a>
-                                                o abre un ticket en nuestro 
-                                                <a href="https://discord.gg/JczYp5PvCn" target="_blank" style="color: #cbe957; text-decoration: underline;">Discord</a>
-                                                para mayor informacion a cerca de este metodo.
-                                            </li>
+											<br>
+											<br>
+											<h1 style="color: #cbe957; font-size: 12px; margin: 0;">Note: The donation amount is subject to change due to currency instability. </h1>
+											<h1 style="color: #cbe957; font-size: 12px; margin: 0;">Note: The amount of the donations includes commission. </h1>
                                         </ol>
                                     </div>
                                 </div>

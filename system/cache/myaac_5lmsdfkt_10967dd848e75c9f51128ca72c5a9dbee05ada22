@@ -1,5 +1,49 @@
 <div class="NewsHeadline">
 	<div class="NewsHeadlineBackground" style="background-image:url(templates/tibiacom/images/news/newsheadline_background.gif)">
+		<img src="templates/tibiacom/images/news/icon_3.gif" class="NewsHeadlineIcon" />
+		<div class="NewsHeadlineDate">23.2.2026 - </div>
+		<div class="NewsHeadlineText">Fixes &amp; Changes 230226</div>
+			</div>
+</div>
+<table style="clear:both" border=0 cellpadding=0 cellspacing=0 width="100%" >
+	<tr>
+		<td style="padding-left:10px;padding-right:10px;" ><p>&bull;Se les redujo el chance de <strong>FEAR</strong> a las siguientes criaturas; <strong>DrakFahar</strong>, <strong>Morvydrak</strong>, <strong>Voidrakar</strong> <strong>Boneforged,</strong>&nbsp;<strong>Voidrakar,&nbsp;</strong><strong>Playful Demon y&nbsp;Vortem </strong>y se les aumento el da&ntilde;o en un 10%.<br /><br />&bull;Ahora es posible optener la montura <strong>Singeing Steed&nbsp;</strong>Con los 4 items necesarios<strong> fiery horseshoe&nbsp;</strong>(Quest de Bloka)<br /><br /></p>
+<p>&bull;Se corrigio el area de Rampage, ahora puedes estar en cualquier parte de la arena.</p></td>
+	</tr>
+		<tr>
+		<td>
+			<div style="text-align: right; margin-right: 10px;"><a href="http://maderoserv.ddns.net/?forum/thread/18">» Comment on this news</a></div>
+		</td>
+	</tr>
+	</table>
+<br/><div class="NewsHeadline">
+	<div class="NewsHeadlineBackground" style="background-image:url(templates/tibiacom/images/news/newsheadline_background.gif)">
+		<img src="templates/tibiacom/images/news/icon_3.gif" class="NewsHeadlineIcon" />
+		<div class="NewsHeadlineDate">12.2.2026 - </div>
+		<div class="NewsHeadlineText">fixes 12/02/26</div>
+			</div>
+</div>
+<table style="clear:both" border=0 cellpadding=0 cellspacing=0 width="100%" >
+	<tr>
+		<td style="padding-left:10px;padding-right:10px;" ><h4>&nbsp;</h4>
+<h4><span style="color: #000000;">Cambios y Mejoras, y Rebalanceos Generales</span></h4>
+<h4>&nbsp;</h4>
+<h4><span style="color: #000000;">&bull;Se corrigio un problema que impedia lanzar magic walls.</span></h4>
+<h4><span style="color: #000000;">&bull;Se corrigio un problema con las criaturas capturadas que hacian da&ntilde;o en area aunque no estubieras en combate contra jugadores.</span></h4>
+<h4><span style="color: #000000;">&bull;Se agrego area al boss Mind Eater para que los knight pudieran ahcerle da&ntilde;o.</span></h4>
+<h4><span style="color: #000000;">&bull;Se modifico rampage para hacerla mas dinamica y facil su funcionamiento.</span></h4>
+<h4><span style="color: #000000;">&bull;Se corrigio un problema que hacia que en algunas ocaciones no se guardaran los resets.(muy rara ves).<br /></span></h4>
+<h4><span style="color: #000000;">&bull;Ahora ya no es necesario comprar los 5 boost de experiencia para que se reseteen a los 2 server save.</span></h4>
+<h4><span style="color: #000000;">&nbsp;</span></h4></td>
+	</tr>
+		<tr>
+		<td>
+			<div style="text-align: right; margin-right: 10px;"><a href="http://maderoserv.ddns.net/?forum/thread/17">» Comment on this news</a></div>
+		</td>
+	</tr>
+	</table>
+<br/><div class="NewsHeadline">
+	<div class="NewsHeadlineBackground" style="background-image:url(templates/tibiacom/images/news/newsheadline_background.gif)">
 		<img src="templates/tibiacom/images/news/icon_0.gif" class="NewsHeadlineIcon" />
 		<div class="NewsHeadlineDate">31.8.2025 - </div>
 		<div class="NewsHeadlineText">PROXIMA ACTUALIZACION</div>
@@ -293,7 +337,7 @@
 	</tr>
 		<tr>
 		<td>
-			<div style="text-align: right; margin-right: 10px;"><a href="http://187.153.49.191/?forum/thread/14">» Comment on this news</a></div>
+			<div style="text-align: right; margin-right: 10px;"><a href="http://maderoserv.ddns.net/?forum/thread/14">» Comment on this news</a></div>
 		</td>
 	</tr>
 	</table>
@@ -322,12 +366,12 @@
 </ul>
 <p>&nbsp;</p>
 <p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">&iquest;Quieres formar parte de esta comunidad premium?<br /></span></p>
-<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Podr&aacute;s adquirir tu casa con un </span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">donativo de $150 USD o $2800 MXN</span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">.<br /></span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">(incluye Celestial exercise dummy, 3 addons y 3 mounts unicas, 3 tier 100%, 3 bronze box, 3 silver box y 10k TCs)</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Podr&aacute;s adquirir tu casa con un </span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">donativo de $163 USD o $2800 MXN</span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">.<br /></span><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">(incluye Celestial exercise dummy, 3 addons y 3 mounts unicas, 3 tier 100%, 3 bronze box, 3 silver box y 10k TCs)</span></p>
 <p dir="ltr" style="line-height: 1.38; margin-top: 12pt; margin-bottom: 12pt; text-align: justify;"><span style="font-size: 11pt; font-family: Arial,sans-serif; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Haz de Mortera Country Club tu nuevo hogar. Vive con estilo. Vive con comodidad. Vive en Mortera.</span></p></td>
 	</tr>
 		<tr>
 		<td>
-			<div style="text-align: right; margin-right: 10px;"><a href="http://187.153.49.191/?forum/thread/9">» Comment on this news</a></div>
+			<div style="text-align: right; margin-right: 10px;"><a href="http://maderoserv.ddns.net/?forum/thread/9">» Comment on this news</a></div>
 		</td>
 	</tr>
 	</table>

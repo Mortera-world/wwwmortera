@@ -8,15 +8,15 @@ if (!$logged) {
 
 $minBet = 10;
 $symbols = [
-    1 => ['name' => 'Cereza', 'payouts' => [3 => 2, 4 => 4, 5 => 8]],
-    2 => ['name' => 'Limón', 'payouts' => [3 => 2, 4 => 5, 5 => 9]],
-    3 => ['name' => 'Campana', 'payouts' => [3 => 3, 4 => 6, 5 => 12]],
-    4 => ['name' => 'Bar', 'payouts' => [3 => 4, 4 => 8, 5 => 15]],
-    5 => ['name' => 'Uvas', 'payouts' => [3 => 5, 4 => 10, 5 => 18]],
-    6 => ['name' => 'Herradura', 'payouts' => [3 => 6, 4 => 12, 5 => 20]],
-    7 => ['name' => '777', 'payouts' => [3 => 10, 4 => 20, 5 => 40]],
-    8 => ['name' => 'Diamante', 'payouts' => [3 => 8, 4 => 16, 5 => 30]],
-    9 => ['name' => 'Corona', 'payouts' => [3 => 12, 4 => 24, 5 => 50]],
+    1 => ['name' => 'Leather Hat', 'payouts' => [3 => 2, 4 => 4, 5 => 8]],
+    2 => ['name' => 'Mage Hat', 'payouts' => [3 => 2, 4 => 5, 5 => 9]],
+    3 => ['name' => 'Viking Helmet', 'payouts' => [3 => 3, 4 => 6, 5 => 12]],
+    4 => ['name' => 'Hat of the mad', 'payouts' => [3 => 4, 4 => 8, 5 => 15]],
+    5 => ['name' => 'Warrior helmet', 'payouts' => [3 => 5, 4 => 10, 5 => 18]],
+    6 => ['name' => 'Zaoan Helmet', 'payouts' => [3 => 6, 4 => 12, 5 => 20]],
+    7 => ['name' => 'Skull Helmet', 'payouts' => [3 => 10, 4 => 20, 5 => 40]],
+    8 => ['name' => 'Demon Helmet', 'payouts' => [3 => 8, 4 => 16, 5 => 30]],
+    9 => ['name' => 'Golden Helmet', 'payouts' => [3 => 12, 4 => 24, 5 => 50]],
 ];
 
 $winningLines = [
@@ -309,7 +309,7 @@ spinBtn.addEventListener("click", async () => {
     return;
   }
 
-  spinBtn.disabled = true;   // Bloquea el botón al empezar
+  spinBtn.disabled = true;
   resultText.textContent = "Girando...";
 
   try {
@@ -329,12 +329,11 @@ spinBtn.addEventListener("click", async () => {
 
     winningLinesData = data.winningLines || [];
 
-    // Ejecutar animación de giro, y luego mostrar resultado y líneas ganadoras
     animateSpin(data.grid, () => {
       balanceDisplay.textContent = data.balance;
       resultText.textContent = data.message;
       markWinningLines(winningLinesData);
-      spinBtn.disabled = false;  // Desbloquear cuando termine todo
+      spinBtn.disabled = false;
     });
 
   } catch (err) {
@@ -345,8 +344,8 @@ spinBtn.addEventListener("click", async () => {
 
 function animateSpin(grid, callback) {
   const flatGrid = grid.flat();
-  const spinDuration = 3500; // ms total de animación
-  const spinInterval = 100; // ms cambio rápido imágenes
+  const spinDuration = 3500;
+  const spinInterval = 100;
 
   const intervalId = setInterval(() => {
     cells.forEach(cell => {
@@ -354,7 +353,7 @@ function animateSpin(grid, callback) {
       const randomSymbol = Math.floor(Math.random() * 9) + 1;
       img.src = `/assets/images/slots/${randomSymbol}.png`;
       img.classList.add("spin");
-      clearHighlight(cell); // Quitar cualquier línea previa
+      clearHighlight(cell);
     });
   }, spinInterval);
 
@@ -366,18 +365,17 @@ function animateSpin(grid, callback) {
       img.classList.remove("spin");
     });
 
-    callback(); // Llamar después de terminar la animación
+    callback();
   }, spinDuration);
 }
 
 function clearHighlight(cell) {
   cell.style.boxShadow = "";
   cell.style.borderColor = "#555";
-  cell.classList.remove("winning");  // quitar clase animada
+  cell.classList.remove("winning");
 }
 
 function markWinningLines(winningLines) {
-  // Limpiar todas las marcas
   cells.forEach(cell => clearHighlight(cell));
 
   winningLines.forEach(line => {
@@ -385,7 +383,7 @@ function markWinningLines(winningLines) {
       const [row, col] = pos;
       const index = row * 5 + col;
       const cell = cells[index];
-      cell.classList.add("winning");  // agregar clase animada
+      cell.classList.add("winning");
     });
   });
 }

@@ -1,5 +1,4 @@
 <?php
-// system/pages/spin.php
 
 defined('MYAAC') or die('Direct access not allowed!');
 
@@ -39,7 +38,6 @@ $symbols = [
     9 => ['type' => 'high', 'multipliers' => [3 => 12, 4 => 24, 5 => 50]],
 ];
 
-// Probabilidades para generar símbolos
 $symbolPool = array_merge(
     array_fill(0, 25, 1),
     array_fill(0, 25, 2),
@@ -54,7 +52,6 @@ $symbolPool = array_merge(
 
 shuffle($symbolPool);
 
-// Crear grilla 3x5 con símbolos aleatorios
 $grid = [];
 for ($row = 0; $row < 3; $row++) {
     $line = [];
@@ -65,23 +62,16 @@ for ($row = 0; $row < 3; $row++) {
     $grid[] = $line;
 }
 
-// Definir líneas ganadoras (izquierda a derecha, horizontales y zigzag)
-// Cada línea es un array de posiciones [fila, columna]
 $lines = [
-    // Horizontales simples
     [[0,0],[0,1],[0,2],[0,3],[0,4]],
     [[1,0],[1,1],[1,2],[1,3],[1,4]],
     [[2,0],[2,1],[2,2],[2,3],[2,4]],
-    // Zigzag (ejemplos)
-    [[0,0],[1,1],[2,2],[1,3],[0,4]], // V invertida
-    [[2,0],[1,1],[0,2],[1,3],[2,4]], // V normal
-    [[0,0],[1,1],[0,2],[1,3],[0,4]], // zigzag arriba-abajo-arriba-arriba
-    [[2,0],[1,1],[2,2],[1,3],[2,4]], // zigzag abajo-arriba-abajo-arriba
+    [[0,0],[1,1],[2,2],[1,3],[0,4]],
+    [[2,0],[1,1],[0,2],[1,3],[2,4]],
+    [[0,0],[1,1],[0,2],[1,3],[0,4]],
+    [[2,0],[1,1],[2,2],[1,3],[2,4]],
 ];
 
-// Función para verificar líneas ganadoras
-// Se gana si hay al menos 3 símbolos iguales consecutivos empezando desde columna 0 hacia derecha,
-// siguiendo la línea de posiciones y la condición es que los primeros N símbolos son iguales (N>=3)
 function checkLineWin($grid, $linePositions, $symbols, $bet) {
     $symbolIds = [];
     foreach ($linePositions as $pos) {
@@ -91,7 +81,6 @@ function checkLineWin($grid, $linePositions, $symbols, $bet) {
 
     $firstSymbol = $symbolIds[0];
 
-    // Contar cuántos símbolos iguales consecutivos desde la izquierda
     $count = 1;
     for ($i = 1; $i < count($symbolIds); $i++) {
         if ($symbolIds[$i] === $firstSymbol) {
@@ -106,7 +95,6 @@ function checkLineWin($grid, $linePositions, $symbols, $bet) {
         $multiplier = $symbols[$firstSymbol]['multipliers'][$count] ?? 0;
         $winAmount = $bet * $multiplier;
 
-        // Solo retornamos las posiciones ganadoras (las primeras 'count' en la línea)
         $winPositions = array_slice($linePositions, 0, $count);
 
         return [$winAmount, $winPositions];
@@ -115,7 +103,6 @@ function checkLineWin($grid, $linePositions, $symbols, $bet) {
     return [0, []];
 }
 
-// Calcular ganancias y detectar líneas ganadoras
 $totalWin = 0;
 $winningLines = [];
 
@@ -133,7 +120,6 @@ foreach ($lines as $linePositions) {
 
 $newCoins = $currentCoins - $bet + $totalWin;
 
-// Actualizar saldo en base de datos
 $db->query("UPDATE accounts SET coins_transferable = {$newCoins} WHERE id = {$accountId}");
 
 echo json_encode([
