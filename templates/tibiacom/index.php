@@ -221,9 +221,17 @@ if (isset($config['boxes']))
         }
 
         // mouse-over effects of menubuttons and submenuitems
-        function MouseOverMenuItem(source) { return; }
+        function MouseOverMenuItem(source) {
+            if (source.firstChild.style) {
+                source.firstChild.style.visibility = "visible";
+            }
+        }
 
-        function MouseOutMenuItem(source) { return; }
+        function MouseOutMenuItem(source) {
+            if (source.firstChild.style) {
+                source.firstChild.style.visibility = "hidden";
+            }
+        }
 
         function MouseOverSubmenuItem(source) {
             if (source.style) {
@@ -306,15 +314,20 @@ if (isset($config['boxes']))
         <div id="ContentRow">
             <div id="MenuColumn">
                 <div id="Loginbox">
-                    <div id="LoginTop"></div>
-                    <div id="BorderLeft" class="LoginBorder"></div>
+                    <div id="LoginTop"
+                         style="background-image:url(<?= $template_path; ?>/images/general/box-top.gif)"></div>
+                    <div id="BorderLeft" class="LoginBorder"
+                         style="background-image:url(<?= $template_path; ?>/images/general/chain.gif)"></div>
 
 
-                    <div id="LoginButtonContainer">
-                        <div id="LoginButton">
+                    <div id="LoginButtonContainer"
+                         style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-textfield-background.gif)">
+                        <div id="LoginButton"
+                             style="background-image:url(<?= $template_path; ?>/images/global/buttons/mediumbutton.gif)">
                             <div onClick="LoginButtonAction();" onMouseOver="MouseOverBigButton('LoginButtonOver');"
                                  onMouseOut="MouseOutBigButton('LoginButtonOver');">
-                                
+                                <div id="LoginButtonOver" class="Button"
+                                     style="background-image:url(<?= $template_path; ?>/images/global/buttons/mediumbutton-over.gif); visibility: hidden;"></div>
                                 <div id="ButtonText" <?= !$logged ? "style='background-image:url(\"$template_path/images/global/buttons/mediumbutton_login.png\")'" : '' ?>></div>
                             </div>
                         </div>
@@ -323,16 +336,21 @@ if (isset($config['boxes']))
 
                     <div style="clear:both"></div>
 
-                    <div class="Loginstatus">
+                    <div class="Loginstatus"
+                         style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-textfield-background.gif)">
                         <div id="LoginstatusText_2" onClick="LoginstatusTextAction(this);"
                              onMouseOver="MouseOverLoginBoxText(this);" onMouseOut="MouseOutLoginBoxText(this);">
-                            <div id="LoginstatusText_2_1" class="LoginstatusText"></div>
-                            <div id="LoginstatusText_2_2" class="LoginstatusText"></div>
+                            <div id="LoginstatusText_2_1" class="LoginstatusText"
+                                 style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-font-create-account.gif)"></div>
+                            <div id="LoginstatusText_2_2" class="LoginstatusText"
+                                 style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-font-create-account-over.gif)"></div>
                         </div>
                     </div>
 
-                    <div id="BorderRight" class="LoginBorder"></div>
-                    <div id="LoginBottom" class="Loginstatus"></div>
+                    <div id="BorderRight" class="LoginBorder"
+                         style="background-image:url(<?= $template_path; ?>/images/general/chain.gif)"></div>
+                    <div id="LoginBottom" class="Loginstatus"
+                         style="background-image:url(<?= $template_path; ?>/images/general/box-bottom.gif)"></div>
                 </div>
 
                 <div class="SmallMenuBox" id="DownloadBox">
@@ -389,7 +407,8 @@ if (isset($config['boxes']))
                 </div>
 
                 <div id='Menu'>
-                    <div id='MenuTop'></div>
+                    <div id='MenuTop'
+                         style='background-image:url(<?= $template_path; ?>/images/general/box-top.gif);'></div>
 
                     <?php
                     $menus = get_template_menus();
@@ -401,12 +420,23 @@ if (isset($config['boxes']))
                         ?>
                         <div id='<?= $cat['id']; ?>' class='menuitem'>
                             <span onClick="MenuItemAction('<?= $cat['id']; ?>')">
-                                <div class='MenuButton'>
-                                    <div class='MenuButtonInner' onMouseOver='MouseOverMenuItem(this);' onMouseOut='MouseOutMenuItem(this);'>
-                                        <span id='<?= $cat['id']; ?>_Lights' class='Lights'></span>
-                                        <div id='<?= $cat['id']; ?>_Icon' class='Icon modernIcon'><i class="fas fa-circle"></i></div>
+                                <div class='MenuButton'
+                                     style='background-image:url(<?= $template_path ?>/images/menu/button-background.gif);'>
+                                    <div onMouseOver='MouseOverMenuItem(this);' onMouseOut='MouseOutMenuItem(this);'><div
+                                                class='Button'
+                                                style='background-image:url(<?= $template_path; ?>/images/menu/button-background-over.gif);'></div>
+                                        <span id='<?= $cat['id']; ?>_Lights' class='Lights'>
+                                            <div class='light_lu'
+                                                 style='background-image:url(<?= $template_path; ?>/images/menu/green-light.gif);'></div>
+                                            <div class='light_ld'
+                                                 style='background-image:url(<?= $template_path; ?>/images/menu/green-light.gif);'></div>
+                                            <div class='light_ru'
+                                                 style='background-image:url(<?= $template_path; ?>/images/menu/green-light.gif);'></div>
+                                        </span>
+                                        <div id='<?= $cat['id']; ?>_Icon' class='Icon'></div>
                                         <div id='<?= $cat['id']; ?>_Label' class='Label'><?= $cat['name']; ?></div>
-                                        <div id='<?= $cat['id']; ?>_Extend' class='Extend'>+</div>
+                                        <div id='<?= $cat['id']; ?>_Extend' class='Extend'
+                                             style='background-image:url(<?= $template_path; ?>/images/general/plus.gif);'></div>
                                     </div>
                                 </div>
                             </span>
@@ -421,11 +451,15 @@ if (isset($config['boxes']))
                                         <div id='submenu_<?= str_replace('/', '', $menu['link']); ?>'
                                              class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
                                              onMouseOut='MouseOutSubmenuItem(this)' style="color: <?= $link_color; ?>;">
-                                            <div class='LeftChain'></div>
-                                            <div id='ActiveSubmenuItemIcon_<?= str_replace('/', '', $menu['link']); ?>' class='ActiveSubmenuItemIcon'></div>
+                                            <div class='LeftChain'
+                                                 style='background-image:url(<?= $template_path; ?>/images/general/chain.gif);'></div>
+                                            <div id='ActiveSubmenuItemIcon_<?= str_replace('/', '', $menu['link']); ?>'
+                                                 class='ActiveSubmenuItemIcon'
+                                                 style='background-image:url(<?= $template_path; ?>/images/menu/icon-activesubmenu.gif);'></div>
                                             <div class='SubmenuitemLabel'
                                                  style="color: <?= $link_color; ?>;"><?= $menu['name']; ?></div>
-                                            <div class='RightChain'></div>
+                                            <div class='RightChain'
+                                                 style='background-image:url(<?= $template_path; ?>/images/general/chain.gif);'></div>
                                         </div>
                                     </a>
                                     <?php
@@ -435,7 +469,8 @@ if (isset($config['boxes']))
                             <?php
                             if ($id == MENU_CATEGORY_SHOP || (!$config['gifts_system'] && $id == MENU_CATEGORY_SHOP - 1)) {
                                 ?>
-                                <div id='MenuBottom'></div>
+                                <div id='MenuBottom'
+                                     style='background-image:url(<?= $template_path; ?>/images/general/box-bottom.gif);'></div>
                                 <?php
                             }
                             ?>

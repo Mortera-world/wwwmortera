@@ -2355,37 +2355,3 @@ img {
   font: 500 12px/28px Arial, sans-serif;
 }
 .ActiveSubmenuItemIcon { display: none !important; }
-
-/* Icon-only minimalist menu refresh */
-#Menu .menuitem .Label { display: none !important; }
-#Menu .MenuButtonInner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 42px;
-  padding: 0 12px;
-}
-#Menu .modernIcon {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 26px !important;
-  height: 26px !important;
-  border-radius: 50%;
-  background: #f3f4f6;
-  color: #111827;
-  position: static !important;
-}
-#Menu .MenuButton {
-  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
-}
-#Menu .MenuButton:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
-  background: #fcfcfd !important;
-}
-#Menu .MenuButton:hover .modernIcon {
-  transform: scale(1.08);
-  background: #ffffff;
-}
-#Menu .Submenuitem { background: #fff !important; border: 1px solid #f3f4f6; }
