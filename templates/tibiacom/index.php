@@ -491,6 +491,17 @@ if (isset($config['boxes']))
                 <div class="Content">
 
                     <div id="ContentHelper">
+                        <div id="TopbarModule">
+                            <div class="TopbarModuleLinks">
+                                <a href="<?= $config['whatsapp_link'] ?: "#"; ?>" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                                <a href="<?= $config['discord_link'] ?: "#"; ?>" target="_blank" rel="noopener noreferrer">Discord</a>
+                                <a href="<?= $config['client_link'] ?: "?subtopic=downloadclient&step=downloadagreement"; ?>" target="_blank" rel="noopener noreferrer">Download</a>
+                            </div>
+                            <div class="TopbarModuleStatus">
+                                <span class="TopbarModuleOnlineCount"><?= (int)($status['players'] ?? 0); ?></span>
+                                <span class="TopbarModuleOnlineText">online</span>
+                            </div>
+                        </div>
                         <?= tickers(); ?>
                         <div id="<?= PAGE; ?>" class="Box">
                             <div class="Corner-tl"
