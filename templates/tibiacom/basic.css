@@ -1911,6 +1911,51 @@ img {
   background-repeat: no-repeat;
 }
 
+
+#TopbarModule {
+    background: url('images/global/content/topbar.png') center center no-repeat;
+    min-height: 46px;
+    margin: 0 auto 8px auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+#TopbarModule .TopbarModuleLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+#TopbarModule .TopbarModuleLinks a {
+    color: #f1f1f1;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    transition: text-shadow 0.2s ease, color 0.2s ease;
+}
+
+#TopbarModule .TopbarModuleLinks a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.95);
+}
+
+#TopbarModule .TopbarModuleStatus {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#TopbarModule .TopbarModuleOnlineCount {
+    color: #2dff55;
+}
+
 /* News Ticker */
 
 .Content #NewsTicker .BoxContent {
