@@ -6,33 +6,36 @@ defined('MYAAC') or die('Direct access not allowed!');
 //templates\tibiacom\config.ini
 if (isset($config['boxes']))
     $config['boxes'] = explode(",", $config['boxes']);
+
+$template_url = rtrim(BASE_URL, '/') . '/' . trim($template_path, '/');
+$asset_version = '20260529';
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <?= template_place_holder('head_start'); ?>
-    <link rel="shortcut icon" href="<?= $template_path; ?>/images/favicon.ico" type="image/x-icon"/>
-    <link rel="icon" href="<?= $template_path; ?>/images/favicon.ico" type="image/x-icon"/>
-    <link href="<?= $template_path; ?>/basic.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="<?= $template_url; ?>/images/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="<?= $template_url; ?>/images/favicon.ico" type="image/x-icon"/>
+    <link href="<?= $template_url; ?>/basic.css?v=<?= $asset_version; ?>" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="tools/basic.js"></script>
-    <script type="text/javascript" src="<?= $template_path; ?>/ticker.js"></script>
-    <script id="twitter-wjs" src="<?= $template_path; ?>/js/twitter.js"></script>
+    <script type="text/javascript" src="<?= rtrim(BASE_URL, '/'); ?>/tools/basic.js?v=<?= $asset_version; ?>"></script>
+    <script type="text/javascript" src="<?= $template_url; ?>/ticker.js?v=<?= $asset_version; ?>"></script>
+    <script id="twitter-wjs" src="<?= $template_url; ?>/js/twitter.js?v=<?= $asset_version; ?>"></script>
     <script id="facebook-jssdk" async src="https://connect.facebook.net/en_US/all.js"></script>
 
-    <link href="<?= $template_path; ?>/css/facebook.css" rel="stylesheet" type="text/css">
+    <link href="<?= $template_url; ?>/css/facebook.css?v=<?= $asset_version; ?>" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="tools/fonts/fontawesome/all.css">
-    <script src="tools/fonts/fontawesome/all.js"></script>
+    <link rel="stylesheet" href="<?= rtrim(BASE_URL, '/'); ?>/tools/fonts/fontawesome/all.css?v=<?= $asset_version; ?>">
+    <script src="<?= rtrim(BASE_URL, '/'); ?>/tools/fonts/fontawesome/all.js?v=<?= $asset_version; ?>"></script>
 
-    <script src="admin/bootstrap/jquery-3.6.0.min.js"></script>
-    <script src="admin/bootstrap/popper.min.js"></script>
-    <script src="admin/bootstrap/js/bootstrap.min.js"></script>
-    <link href="admin/bootstrap/bootstrap-myaac.css" rel="stylesheet" type="text/css">
+    <script src="<?= rtrim(BASE_URL, '/'); ?>/admin/bootstrap/jquery-3.6.0.min.js?v=<?= $asset_version; ?>"></script>
+    <script src="<?= rtrim(BASE_URL, '/'); ?>/admin/bootstrap/popper.min.js?v=<?= $asset_version; ?>"></script>
+    <script src="<?= rtrim(BASE_URL, '/'); ?>/admin/bootstrap/js/bootstrap.min.js?v=<?= $asset_version; ?>"></script>
+    <link href="<?= rtrim(BASE_URL, '/'); ?>/admin/bootstrap/bootstrap-myaac.css?v=<?= $asset_version; ?>" rel="stylesheet" type="text/css">
 
     <?php if ($config['pace_load']) { ?>
         <script src="admin/bootstrap/pace/pace.js"></script>
         <link
-            href="admin/bootstrap/pace/themes/<?= $config['pace_color'] ?>/pace-theme-<?= $config['pace_theme'] ?>.css"
+            href="<?= rtrim(BASE_URL, '/'); ?>/admin/bootstrap/pace/themes/<?= $config['pace_color'] ?>/pace-theme-<?= $config['pace_theme'] ?>.css?v=<?= $asset_version; ?>"
             rel="stylesheet"/>
     <?php } ?>
 
@@ -76,7 +79,7 @@ if (isset($config['boxes']))
         }
         ?>
         var activeSubmenuItem = "<?= $tmp; ?>";
-        var IMAGES = "<?= $template_path; ?>/images";
+        var IMAGES = "<?= $template_url; ?>/images";
         var LINK_ACCOUNT = "<?= BASE_URL; ?>";
 
         function rowOverEffect(object) {
@@ -240,7 +243,7 @@ if (isset($config['boxes']))
     </script>
     <?= template_place_holder('head_end'); ?>
 </head>
-<body onBeforeUnLoad="SaveMenu();" onUnload="SaveMenu();" style="background-image:url(<?= $template_path ?><?= getImageMenuRandom('bgs') ?>);
+<body onBeforeUnLoad="SaveMenu();" onUnload="SaveMenu();" style="background-image:url(<?= $template_url ?><?= getImageMenuRandom('bgs') ?>?v=<?= $asset_version; ?>);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -401,13 +404,13 @@ if (isset($config['boxes']))
                         <?= tickers(); ?>
                         <div id="<?= PAGE; ?>" class="Box">
                             <div class="Corner-tl"
-                                 style="background-image:url(<?= $template_path; ?>/images/content/corner-tl.gif);"></div>
+                                 style="background-image:url(<?= $template_url; ?>/images/content/corner-tl.gif);"></div>
                             <div class="Corner-tr"
-                                 style="background-image:url(<?= $template_path; ?>/images/content/corner-tr.gif);"></div>
+                                 style="background-image:url(<?= $template_url; ?>/images/content/corner-tr.gif);"></div>
                             <div class="Border_1"
-                                 style="background-image:url(<?= $template_path; ?>/images/content/border-1.gif);"></div>
+                                 style="background-image:url(<?= $template_url; ?>/images/content/border-1.gif);"></div>
                             <div class="BorderTitleText"
-                                 style="background-image:url(<?= $template_path; ?>/images/global/content/haderfornews.png);">
+                                 style="background-image:url(<?= $template_url; ?>/images/global/content/haderfornews.png);">
                                 <span class="PageTitleText"><?= escapeHtml(ucfirst($title)); ?></span>
                             </div>
                             <div class="Border_2">
@@ -419,15 +422,15 @@ if (isset($config['boxes']))
                                 </div>
                             </div>
                             <div class="Border_1"
-                                 style="background-image:url(<?= $template_path; ?>/images/content/border-1.gif);"></div>
+                                 style="background-image:url(<?= $template_url; ?>/images/content/border-1.gif);"></div>
 
                             <div class="CornerWrapper-b">
                                 <div class="Corner-bl"
-                                     style="background-image:url(<?= $template_path; ?>/images/content/corner-bl.gif);"></div>
+                                     style="background-image:url(<?= $template_url; ?>/images/content/corner-bl.gif);"></div>
                             </div>
                             <div class="CornerWrapper-b">
                                 <div class="Corner-br"
-                                     style="background-image:url(<?= $template_path; ?>/images/content/corner-br.gif);"></div>
+                                     style="background-image:url(<?= $template_url; ?>/images/content/corner-br.gif);"></div>
                             </div>
                         </div>
                     </div>
@@ -489,7 +492,7 @@ if (isset($config['boxes']))
                         <div class="ThemeboxFrame">
                             <div class="ThemeboxPanelTop"></div>
                             <div class="ThemeboxPanelCenter">
-                                <img class="ThemeboxCoins" src="<?= $template_path; ?>/images/themeboxes/donate/coins.gif" alt="Mortera Coins">
+                                <img class="ThemeboxCoins" src="<?= $template_url; ?>/images/themeboxes/donate/coins.gif" alt="Mortera Coins">
                                 <a class="ThemeboxButton ThemeboxButtonOrange" href="<?= getLink('points'); ?>">Obtener Mortera Coins</a>
                             </div>
                             <div class="ThemeboxPanelBottom"></div>
@@ -641,17 +644,17 @@ if (isset($config['boxes']))
     });
 </script>
 <div class="scrollToTop" title="Voltar ao Topo">
-    <img alt style="border:0;" src="<?= $template_path . '/images/global/content/back-to-top.gif' ?>">
+    <img alt style="border:0;" src="<?= $template_url; ?>/images/global/content/back-to-top.gif">
 </div>
 
-<script src="<?= $template_path; ?>/js/generic.js"></script>
+<script src="<?= $template_url; ?>/js/generic.js?v=<?= $asset_version; ?>"></script>
 <div id="HelperDivContainer"
-     style="background-image: url(<?= $template_path; ?>/images/global/content/scroll.gif);">
+     style="background-image: url(<?= $template_url; ?>/images/global/content/scroll.gif);">
     <div class="HelperDivArrow"
-         style="background-image: url(<?= $template_path; ?>/images/global/content/helper-div-arrow.png);"></div>
+         style="background-image: url(<?= $template_url; ?>/images/global/content/helper-div-arrow.png);"></div>
     <div id="HelperDivHeadline"></div>
     <div id="HelperDivText"></div>
-    <center><img class="Ornament" src="<?= $template_path; ?>/images/global/content/ornament.gif"></center>
+    <center><img class="Ornament" src="<?= $template_url; ?>/images/global/content/ornament.gif"></center>
     <br>
 </div>
 
