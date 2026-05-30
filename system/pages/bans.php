@@ -91,7 +91,7 @@ foreach ($bansResult as $ban) {
 }
 ?>
 
-<link rel="stylesheet" href="tools/simple-page.css">
+<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
 
 <div class="bans-page">
     <section class="bans-hero">

@@ -34,7 +34,7 @@ class __TwigTemplate_81366be7a28349c9f044a25e02f20405 extends \Twig\Template
     {
         $macros = $this->macros;
         // line 1
-        echo "<link rel=\"stylesheet\" href=\"tools/simple-page.css\">
+        echo "<link rel=\"stylesheet\" href=\"/tools/simple-page.css?v=20260529\">
 
 <div class=\"legal-documents-page\">
     <section class=\"legal-documents-hero\">

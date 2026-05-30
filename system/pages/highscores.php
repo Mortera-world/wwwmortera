@@ -298,7 +298,7 @@ if(!function_exists('highscoresEscape')) {
 }
 ?>
 
-<link rel="stylesheet" href="tools/simple-page.css">
+<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
 
 <div class="highscores-page">
 	<section class="highscores-hero">

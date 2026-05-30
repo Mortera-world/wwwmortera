@@ -9,7 +9,7 @@ defined('MYAAC') or die('Direct access not allowed!');
 $title = 'Download Client';
 $getpage_download = $_GET['step'] ?? '';
 
-echo '<link rel="stylesheet" href="tools/simple-page.css">';
+echo '<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">';
 
 function downloadClientEscape($value): string
 {

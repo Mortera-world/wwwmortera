@@ -3,7 +3,7 @@ defined('MYAAC') or die('Direct access not allowed!');
 
 if (!defined('BAZAAR_MODERN_ASSETS_LOADED')) {
     define('BAZAAR_MODERN_ASSETS_LOADED', true);
-    echo '<link rel="stylesheet" href="tools/bazaar-modern.css">';
+    echo '<link rel="stylesheet" href="' . BASE_URL . 'tools/bazaar-modern.css?v=20260529">';
 }
 
 $bazaarSubtopic = $_GET['subtopic'] ?? '';
