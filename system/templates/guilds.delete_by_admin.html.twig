@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="guilds-page guild-edit-page">
+  <section class="guild-edit-panel">
+    <span>Admin action</span>
+    <h1>Delete Guild</h1>
+    <p>This will remove the guild as an administrator action.</p>
+
+    <div class="guild-confirm-box">
+      Are you sure you want to delete guild <b>{{ guild.getName() }}</b>?
+    </div>
+
+    <form action="?subtopic=guilds&guild={{ guild.getName()|url_encode }}&action=delete_by_admin" method="post">
+      <input type="hidden" name="todo" value="save">
+      <div class="guild-form-actions">
+        <button class="guild-button guild-button-danger" type="submit">Yes, Delete</button>
+        <a class="guild-button guild-button-danger" href="{{ getLink('guilds') }}">Back</a>
+      </div>
+    </form>
+  </section>
+</div>

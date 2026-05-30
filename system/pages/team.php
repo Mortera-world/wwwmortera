@@ -53,18 +53,70 @@ foreach ($groupList as $id => $group) {
 
         $members[] = array(
             'group_name' => $group->getName(),
+            'player_name' => $member->getName(),
             'player' => $member,
             'outfit' => $config['team_display_outfit'] ? $config['outfit_images_url'] . '?id=' . $member->getLookType() . ($outfit_addons ? '&addons=' . $member->getLookAddons() : '') . '&head=' . $member->getLookHead() . '&body=' . $member->getLookBody() . '&legs=' . $member->getLookLegs() . '&feet=' . $member->getLookFeet() : null,
             'status' => $config['team_display_status'] ? $member->isOnline() : null,
             'link' => getPlayerLink($member->getName()),
+            'character_url' => getPlayerLink($member->getName(), false),
             'flag_image' => $config['account_country'] ? getFlagImage($member->getAccount()->getCountry()) : null,
             'world_name' => ($config['multiworld'] || $config['team_display_world']) ? getWorldName($member->getWorldId()) : null,
             'last_login' => $config['team_display_lastlogin'] ? $lastLogin : null
         );
     }
 
+    $groupName = strtolower($group->getName());
+    $groupMeta = [
+        'kicker' => 'Staff Support',
+        'title' => ucwords($groupName),
+        'description' => 'Staff members available to support players and keep the community organized.',
+    ];
+
+    switch ($groupName) {
+        case 'god':
+            $groupMeta = [
+                'kicker' => 'Server Administration',
+                'title' => 'Administrador',
+                'description' => 'Technical operations, service stability, and high-level support.',
+            ];
+            break;
+
+        case 'community manager':
+            $groupMeta = [
+                'kicker' => 'Community Management',
+                'title' => 'Community Manager',
+                'description' => 'Community leads who coordinate player communication and support.',
+            ];
+            break;
+
+        case 'gamemaster':
+            $groupMeta = [
+                'kicker' => 'Game Support',
+                'title' => 'GameMaster',
+                'description' => 'Game masters who help with reports, rules, and in-game situations.',
+            ];
+            break;
+
+        case 'senior tutor':
+            $groupMeta = [
+                'kicker' => 'Player Guidance',
+                'title' => 'Senior Tutor',
+                'description' => 'Experienced helpers who guide players and support the tutor team.',
+            ];
+            break;
+
+        case 'tutor':
+            $groupMeta = [
+                'kicker' => 'Community Help',
+                'title' => 'Tutor',
+                'description' => 'Community helpers focused on questions and basic player support.',
+            ];
+            break;
+    }
+
     $groupMember[] = array(
         'group_name' => $group->getName(),
+        'meta' => $groupMeta,
         'members' => $members
     );
 }

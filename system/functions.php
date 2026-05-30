@@ -599,11 +599,11 @@ function short_text($text, $limit)
 
 function tickers()
 {
-  global $tickers_content, $featured_article;
+  global $tickers_content, $featured_article, $powerful_guilds_content;
 
   if (PAGE === 'news') {
     if (isset($tickers_content)) {
-      return $tickers_content . $featured_article;
+      return $tickers_content . ($powerful_guilds_content ?? '') . $featured_article;
     }
   }
 

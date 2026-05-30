@@ -1,13 +1,19 @@
-<div class="TableContentContainer">
-  <table class="TableContent" width="100%">
-	<tbody>
-	  <tr bgcolor="#D4C0A1">
-	  <form action="?subtopic=guilds&action=invite&guild={{ guild_name }}&todo=save" method="post">
-		<td><b>Invite player with name:</b></td>
-		<td><input type="text" name="name" size="40"></td>
-		<td>{% include('buttons.submit.html.twig') %}</td>
-	  </form>
-	  </tr>
-	</tbody>
-  </table>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="guilds-page guild-edit-page">
+  <form class="guild-edit-panel" action="?subtopic=guilds&action=invite&guild={{ guild_name|url_encode }}&todo=save" method="post">
+    <span>Guild invitation</span>
+    <h1>Invite Player</h1>
+    <p>Send an invitation to a character so they can join the guild.</p>
+
+    <label class="guild-field" style="margin-top: 12px;">
+      <span>Character name</span>
+      <input type="text" name="name" autocomplete="off">
+    </label>
+
+    <div class="guild-form-actions">
+      <button class="guild-button" type="submit">Invite Character</button>
+      <a class="guild-button guild-button-danger" href="{{ getLink('guilds') ~ '/' ~ guild_name|url_encode }}">Back</a>
+    </div>
+  </form>
 </div>

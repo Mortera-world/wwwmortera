@@ -104,12 +104,10 @@ else
 	if(isset($_REQUEST['todo']) && $_REQUEST['todo'] == 'save') {
 		$player->setRank();
 
-		$twig->display('success.html.twig', array(
+		$twig->display('guilds.notice.html.twig', array(
 			'title' => 'Kick player',
 			'description' => 'Player with name <b>'.$player->getName().'</b> has been kicked from your guild.',
-			'custom_buttons' => $twig->render('guilds.back_button.html.twig', array(
-				'action' => getLink('guilds') . '/' . $guild_name
-			))
+			'back_action' => getLink('guilds') . '/' . $guild_name
 		));
 	}
 	else {

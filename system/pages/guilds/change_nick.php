@@ -77,10 +77,10 @@ if(empty($errors)) {
 	if(empty($errors))
 	{
 		$player->setGuildNick($new_nick);
-		$twig->display('success.html.twig', array(
+		$twig->display('guilds.notice.html.twig', array(
 			'title' => 'Nick Changed',
 			'description' => 'Guild nick of player <b>'.$player->getName().'</b> changed to <b>'.htmlentities($new_nick).'</b>.',
-			'custom_buttons' => ''
+			'back_action' => getLink('guilds') . '/' . $guild->getName()
 		));
 	}
 }
@@ -89,7 +89,9 @@ if(!empty($errors)) {
 	$twig->display('error_box.html.twig', array('errors' => $errors));
 }
 
-$twig->display('guilds.back_button.html.twig', array(
-	'new_line' => true,
-	'action' => getLink('guilds') . '/' . $guild->getName()
-));
+if(!empty($errors)) {
+	$twig->display('guilds.back_button.html.twig', array(
+		'new_line' => true,
+		'action' => getLink('guilds') . '/' . $guild->getName()
+	));
+}

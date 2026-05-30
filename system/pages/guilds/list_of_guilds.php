@@ -29,7 +29,27 @@ if(count($guilds_list) > 0)
             $description = wordwrap(nl2br($description), 60, "<br />", true);
 
         $guildName = $guild->getName();
-        $guilds[] = array('name' => $guildName, 'logo' => $guild_logo, 'link' => getGuildLink($guildName, false), 'description' => $description);
+        $memberCount = 0;
+        $rankList = $guild->getGuildRanksList();
+        foreach ($rankList as $rank) {
+            if ($db->hasTable(GUILD_MEMBERS_TABLE)) {
+                $countQuery = $db->query('SELECT COUNT(*) AS total FROM `' . GUILD_MEMBERS_TABLE . '` WHERE `rank_id` = ' . $rank->getId())->fetch();
+                $memberCount += (int) $countQuery['total'];
+            } else if ($db->hasColumn('players', 'rank_id')) {
+                $countQuery = $db->query('SELECT COUNT(*) AS total FROM `players` WHERE `rank_id` = ' . $rank->getId() . ' AND `deleted` = 0')->fetch();
+                $memberCount += (int) $countQuery['total'];
+            }
+        }
+
+        $owner = $guild->getOwner();
+        $guilds[] = array(
+            'name' => $guildName,
+            'logo' => $guild_logo,
+            'link' => getGuildLink($guildName, false),
+            'description' => $description,
+            'member_count' => $memberCount,
+            'leader_name' => $owner->isLoaded() ? $owner->getName() : 'Unknown',
+        );
     }
 };
 

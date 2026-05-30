@@ -1,63 +1,81 @@
-<div class="TableContainer" >
-	<table class="Table3">
-		<div class="CaptionContainer" >
-			<div class="CaptionInnerContainer" >
-				<span class="CaptionEdgeLeftTop" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);" ></span>
-				<span class="CaptionEdgeRightTop" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);" ></span>
-				<span class="CaptionBorderTop" style="background-image:url({{ template_path }}/images/content/table-headline-border.gif);" ></span>
-				<span class="CaptionVerticalLeft" style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);" ></span>
-				<div class="Text" >Last Kills</div>
-				<span class="CaptionVerticalRight" style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);" ></span>
-				<span class="CaptionBorderBottom" style="background-image:url({{ template_path }}/images/content/table-headline-border.gif);" ></span>
-				<span class="CaptionEdgeLeftBottom" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);" ></span>
-				<span class="CaptionEdgeRightBottom" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);" ></span>
-			</div>
-		</div>
-		<tr>
-			<td>
-				<div class="InnerTableContainer" >
-					<table style="width:100%;">
-						<tbody>
-						<tr>
-							<td>
-								
-									<div class="TableContentContainer">
-										<table class="TableContent" width="100%">
-											{% if lastkills|length <= 0 %}
-												<tr>
-													<td>
-														No one died on {{ config.lua.serverName }}
-													</td>
-												</tr>
-											{% else %}
-												{% for lastkill in lastkills %}
-												<tr bgcolor="{{ getStyle(lastkill.id) }}">
-													<td class="centralizeContent" width="30">
-														{{ lastkill.id }}.
-													</td>
-													<td width="125">
-														<small>{{ lastkill.time|date("j.m.Y, G:i:s") }}</small>
-													</td>
-													<td>
-														{{ lastkill.killers_string|raw }}
-													</td>
-													{% if config.multiworld %}
-														<td>
-															{{ lastkill.world_id }}
-														</td>
-													{% endif %}
-												</tr>
-												{% endfor %}
-											{% endif %}
-										</table>
-									</div>
-									
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</td>
-		</tr>
-	</table>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="lastkills-page">
+  <section class="lastkills-hero">
+    <div>
+      <span>Recent deaths</span>
+      <h1>Last Kills</h1>
+      <p>Recent character deaths with the victim, level, date and final killer.</p>
+    </div>
+    <strong>{{ lastkills|length }} records</strong>
+  </section>
+
+  {% if lastkills|length <= 0 %}
+    <section class="lastkills-empty">
+      <h2>No one died on {{ config.lua.serverName }}</h2>
+      <p>There are no recent deaths to show right now.</p>
+    </section>
+  {% else %}
+    <div class="lastkills-list">
+      {% for lastkill in lastkills %}
+        <article class="lastkill-card">
+          <div class="lastkill-side">
+            <div class="lastkill-outfit-frame">
+              {% if lastkill.player_outfit %}
+                <img src="{{ lastkill.player_outfit }}" alt="{{ lastkill.player_name }}">
+              {% else %}
+                <b>{{ lastkill.player_name|slice(0, 1)|upper }}</b>
+              {% endif %}
+            </div>
+
+            <div class="lastkill-info">
+              <span>Victim</span>
+              {% if lastkill.player_url %}
+                <a href="{{ lastkill.player_url }}">{{ lastkill.player_name }}</a>
+              {% else %}
+                <strong>{{ lastkill.player_name }}</strong>
+              {% endif %}
+              <em>Died at level {{ lastkill.level }}</em>
+            </div>
+          </div>
+
+          <div class="lastkill-center">
+            <span>Eliminated by</span>
+            <b>{{ lastkill.killer.type }}</b>
+          </div>
+
+          <div class="lastkill-side lastkill-killer-side">
+            <div class="lastkill-outfit-frame lastkill-killer-frame">
+              {% if lastkill.killer.outfit %}
+                <img src="{{ lastkill.killer.outfit }}" alt="{{ lastkill.killer.name }}">
+              {% else %}
+                <b>{{ lastkill.killer.name|slice(0, 1)|upper }}</b>
+              {% endif %}
+            </div>
+
+            <div class="lastkill-info">
+              <span>Killer</span>
+              {% if lastkill.killer.url %}
+                <a href="{{ lastkill.killer.url }}">{{ lastkill.killer.name }}</a>
+              {% else %}
+                <strong>{{ lastkill.killer.name }}</strong>
+              {% endif %}
+              <em>{{ lastkill.killer.subtitle }}</em>
+              {% if lastkill.assist_count > 0 %}
+                <small>+{{ lastkill.assist_count }} more involved</small>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="lastkill-date">
+            <span>Date</span>
+            <strong>{{ lastkill.time|date("j.m.Y, G:i:s") }}</strong>
+            {% if config.multiworld and lastkill.world_id %}
+              <em>{{ lastkill.world_id }}</em>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>

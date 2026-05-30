@@ -102,12 +102,10 @@ if (!empty($errors)) {
 } else {
     if (isset($_REQUEST['todo']) && $_REQUEST['todo'] == 'save') {
         $guild->acceptInvite($player);
-        $twig->display('success.html.twig', array(
+        $twig->display('guilds.notice.html.twig', array(
             'title' => 'Accept invitation',
             'description' => 'Player with name <b>' . $player->getName() . '</b> has been added to guild <b>' . $guild->getName() . '</b>.',
-            'custom_buttons' => $twig->render('guilds.back_button.html.twig', array(
-                'action' => getLink('guilds') . '/' . $guild_name
-            ))
+            'back_action' => getLink('guilds') . '/' . $guild_name
         ));
     } else {
         sort($list_of_invited_players);

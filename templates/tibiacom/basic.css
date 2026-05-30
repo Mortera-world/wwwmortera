@@ -78,9 +78,8 @@ img {
 #Bodycontainer {
   text-align: left;
   min-width: 1000px;
-  max-width: 1280px;
   width: 100%;
-  max-width: 1150px;
+  max-width: 1220px;
   height: 100%;
   margin: 0px;
   margin-left: auto;
@@ -135,7 +134,7 @@ img {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 180px;
+  width: 184px;
   margin: 0px;
   margin-right: 15px;
   margin-left: 25px;
@@ -422,106 +421,264 @@ img {
 
 #Loginbox {
   position: relative;
-  left: 5px;
+  left: -2px;
   top: 8px;
-  width: 100%;
-  margin-bottom: 38px;
-  background-repeat: no-repeat;
+  width: 184px;
+  margin-bottom: 22px;
 }
 
-#Loginbox #LoginTop {
-  position: absolute;
-  left: -5px;
-  top: -12px;
-  height: 12px;
-  width: 180px;
-  background-repeat: no-repeat;
-}
-
-#Loginbox #LoginBottom {
-  position: absolute;
-  top: 52px;
-  left: -5px;
-  height: 12px;
-  width: 180px;
-  background-repeat: no-repeat;
-}
-
-#Loginbox .LoginBorder {
-  position: absolute;
-  top: 0px;
-  height: 52px;
-  width: 8px;
-  background-repeat: repeat-y;
-  z-index: 10;
-}
-
-#Loginbox #BorderRight {
-  right: 9px;
-}
-
-#Loginbox .Loginstatus {
+.LoginboxTitle {
   position: relative;
-  top: 0px;
-  left: 5px;
-  height: 13px;
-  width: 160px;
+  width: 184px;
+  height: 32px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  background: url('images/global/content/topmenu.png') 50% / 100% 100% no-repeat;
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 30px;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 0 1px 2px #000000, 0 0 5px rgba(0, 0, 0, 0.85);
 }
 
-#Loginbox .LoginstatusText {
+.LoginboxPanel {
+  width: 174px;
+  margin: -1px 0 0 5px;
+}
+
+.LoginPanelTop,
+.LoginPanelCenter,
+.LoginPanelBottom {
+  width: 174px;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.LoginPanelTop {
+  height: 10px;
+  background-image: url('images/global/content/content-top.png');
+}
+
+.LoginPanelCenter {
+  padding: 7px 12px 6px 12px;
+  background-image: url('images/global/content/content-center.png');
+  background-repeat: repeat-y;
+  box-sizing: border-box;
+}
+
+.LoginPanelBottom {
+  height: 10px;
+  background-image: url('images/global/content/content-bottom.png');
+}
+
+.LoginActionButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  min-height: 34px;
+  margin: 0 auto 7px auto;
+  padding: 5px 9px 5px 34px;
+  box-sizing: border-box;
+  border: 1px solid #081822;
+  color: #ffffff !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 16px;
+  text-align: center;
+  text-decoration: none !important;
+  text-shadow: 0 1px 2px #000000;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 2px 3px rgba(0, 0, 0, 0.35);
+  transition: background-position 180ms ease, box-shadow 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+
+.LoginActionButton span:last-child {
+  white-space: nowrap;
+}
+
+.LoginActionButton:last-child {
+  margin-bottom: 0;
+}
+
+.LoginActionButton:hover {
+  color: #fff7cf !important;
+  filter: brightness(1.18);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 0 8px rgba(255, 213, 87, 0.55), 0 3px 5px rgba(0, 0, 0, 0.42);
+}
+
+.LoginActionButtonPrimary {
+  background: linear-gradient(#1587a1, #075174 48%, #06324c 52%, #0b5d7c);
+}
+
+.LoginActionButtonCreate {
+  background: linear-gradient(#2aa86a, #116b43 48%, #0c472f 52%, #168153);
+}
+
+.LoginActionButtonLogout {
+  background: linear-gradient(#d65748, #9d251f 48%, #6d1717 52%, #b9322a);
+}
+
+.LoginButtonIcon {
   position: absolute;
+  left: 11px;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  transform: translateY(-50%);
+}
+
+.LoginButtonIconAccount {
+  width: 16px;
+  height: 16px;
+}
+
+.LoginButtonIconAccount:before,
+.LoginButtonIconAccount:after {
+  position: absolute;
+  content: "";
+}
+
+.LoginButtonIconAccount:before {
+  left: 0;
+  top: 4px;
+  width: 7px;
+  height: 7px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.LoginButtonIconAccount:after {
+  left: 7px;
+  top: 7px;
+  width: 10px;
+  height: 3px;
+  background: linear-gradient(90deg, #ffffff 0 70%, transparent 70% 100%), linear-gradient(#ffffff, #ffffff);
+  background-position: 0 0, 7px 3px;
+  background-repeat: no-repeat;
+  background-size: 10px 3px, 3px 5px;
+  transform: rotate(45deg);
+  transform-origin: 0 50%;
+}
+
+.LoginButtonIconCreate:before,
+.LoginButtonIconCreate:after {
+  position: absolute;
+  background: #ffffff;
+  content: "";
+}
+
+.LoginButtonIconCreate:before {
+  left: 0;
+  top: 6px;
+  width: 15px;
+  height: 3px;
+}
+
+.LoginButtonIconCreate:after {
+  left: 6px;
+  top: 0;
+  width: 3px;
+  height: 15px;
+}
+
+.LoginButtonIconLogout:before {
+  position: absolute;
+  left: 1px;
   top: 1px;
-  left: 18px;
-  width: 124px;
+  width: 8px;
   height: 11px;
-  cursor: pointer;
+  border: 2px solid #ffffff;
+  border-right: 0;
+  content: "";
 }
 
-#Loginbox #LoginstatusText_1 {
-  top: 2px;
-  cursor: default;
-}
-
-#Loginbox #LoginstatusText_2_1 {
-  visibility: visible;
-}
-
-#Loginbox #LoginstatusText_2_2 {
-  visibility: hidden;
-}
-
-#LoginBox #LoginButtonContainer {
-  margin-left: 5px;
-  height: 39px;
-  width: 160px;
-  background-repeat: repeat-y;
-}
-
-#Loginbox #LoginButton {
-  position: relative;
-  top: 0px;
-  left: 5px;
-  height: 37px;
-  width: 150px;
-}
-
-#Loginbox #LoginButton .Button {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  width: 150px;
-  height: 37px;
-  visibility: hidden;
-}
-
-#Loginbox #LoginButton #ButtonText {
+.LoginButtonIconLogout:after {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 37px;
-  width: 150px;
-  z-index: 15;
-  cursor: pointer;
+  right: 0;
+  top: 4px;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.SideQuickButtons {
+  position: relative;
+  left: -2px;
+  width: 184px;
+  margin: -8px 0 18px 0;
+}
+
+.SideActionButton {
+  width: 164px;
+  min-height: 36px;
+  margin-bottom: 9px;
+  padding-left: 36px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.SideActionDownload {
+  background: linear-gradient(#36bd6a, #198647 48%, #0f5d32 52%, #21a858);
+}
+
+.SideActionWiki {
+  background: linear-gradient(#f0cf55, #c79620 48%, #8b6410 52%, #d9ac32);
+  color: #fff7dc !important;
+}
+
+.SideActionIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+}
+
+.SideActionIconDownload:before {
+  position: absolute;
+  left: 6px;
+  top: 0;
+  width: 4px;
+  height: 10px;
+  background: #ffffff;
+  content: "";
+}
+
+.SideActionIconDownload:after {
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 10px;
+  height: 10px;
+  border-right: 4px solid #ffffff;
+  border-bottom: 4px solid #ffffff;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.SideActionIconWiki:before {
+  position: absolute;
+  left: 1px;
+  top: 0;
+  color: #ffffff;
+  content: "W";
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 16px;
+  text-shadow: 0 1px 1px #000000;
 }
 
 /** -------------------------------
@@ -532,161 +689,153 @@ img {
 
 #Menu {
   position: relative;
-  left: 5px;
-  background-repeat: no-repeat;
-}
-
-#MenuTop {
-  position: absolute;
-  left: -5px;
-  top: -12px;
-  height: 12px;
-  width: 180px;
-  background-repeat: no-repeat;
-}
-
-#MenuBottom {
-  position: relative;
-  left: -5px;
-  bottom: 0px;
-  height: 12px;
-  width: 180px;
-  background-repeat: no-repeat;
+  left: -2px;
+  width: 184px;
+  padding-top: 8px;
 }
 
 /* Menuitems */
 
-.MenuButton {
+.menuitem {
   position: relative;
-  height: 32px;
-  width: 170px;
-  display: block;
-  cursor: pointer;
+  width: 184px;
+  margin: 0 0 5px 0;
 }
 
-.Button {
+.MenuButton {
   position: relative;
-  height: 32px;
-  /*width: 150px;*/
-  visibility: hidden;
   display: block;
+  width: 184px;
+  height: 32px;
+  margin: 0;
+  padding: 0 30px 0 17px;
+  border: 0;
+  background: url('images/global/content/topmenu.png') 50% / 100% 100% no-repeat;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 30px;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 0 1px 2px #000000, 0 0 5px rgba(0, 0, 0, 0.85);
+  text-transform: uppercase;
+}
+
+.MenuButton:hover,
+.menuitem-open .MenuButton {
+  color: #fff7cf;
+}
+
+.MenuButtonLabel {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .Extend {
   position: absolute;
-  top: 20px;
-  right: -2px;
-  height: 12px;
-  width: 12px;
-  background-repeat: no-repeat;
+  top: 10px;
+  right: 17px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transform: rotate(45deg);
+  transition: transform 180ms ease, top 180ms ease;
 }
 
-.Lights {
-  visibility: hidden;
-}
-
-.Light_lu {
-  position: absolute;
-  top: 2px;
-  left: 3px;
-  height: 2px;
-  width: 2px;
-  background-repeat: no-repeat;
-}
-
-.Light_ru {
-  position: absolute;
-  top: 2px;
-  right: 3px;
-  height: 2px;
-  width: 2px;
-  background-repeat: no-repeat;
-}
-
-.Light_ld {
-  position: absolute;
-  height: 2px;
-  width: 2px;
-  top: 28px;
-  left: 3px;
-}
-
-.Icon {
-  position: absolute;
-  height: 32px;
-  width: 32px;
-  top: 0px;
-  left: 8px;
-}
-
-.Label {
-  position: absolute;
-  height: 22px;
-  width: 116px;
-  top: 6px;
-  left: 42px;
+.menuitem-open .Extend {
+  top: 13px;
+  transform: rotate(225deg);
 }
 
 /* Submenus(items) */
 
-.LeftChain {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 33px;
-  width: 7px;
-  background-repeat: repeat-y;
-}
-
-.RightChain {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  height: 33px;
-  width: 7px;
-  background-repeat: repeat-y;
-}
-
 .Submenu {
   position: relative;
-  margin-left: 0px;
-  margin-right: 5px;
-  background-color: #0D2E2B;
-  width: 170px;
+  width: 174px;
+  margin: -1px 0 7px 5px;
+  overflow: visible;
+}
+
+.SubmenuTop,
+.SubmenuCenter,
+.SubmenuBottom {
+  width: 174px;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.SubmenuTop {
+  height: 10px;
+  background-image: url('images/global/content/content-top.png');
+}
+
+.SubmenuCenter {
+  min-height: 28px;
+  padding: 4px 11px 3px 11px;
+  background-image: url('images/global/content/content-center.png');
+  background-repeat: repeat-y;
+  box-sizing: border-box;
+}
+
+.SubmenuBottom {
+  height: 10px;
+  background-image: url('images/global/content/content-bottom.png');
 }
 
 .Submenuitem {
   position: relative;
-  margin: 0px;
-  padding: 0px;
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  margin: 0;
+  padding: 3px 4px 3px 20px;
+  box-sizing: border-box;
+  color: #3a2613 !important;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 15px;
+  transition: background-color 160ms ease, color 160ms ease;
 }
 
-.ActiveSubmenuItemIcon {
+.SubmenuArrow {
   position: absolute;
-  top: 5px;
-  left: 8px;
-  width: 10px;
-  height: 10px;
-  background-repeat: no-repeat;
-  visibility: hidden;
+  top: 50%;
+  left: 6px;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid #7c5d31;
+  border-bottom: 1px solid #7c5d31;
+  transform: translateY(-50%) rotate(-45deg);
 }
 
 .SubmenuitemLabel {
-  margin: 0px;
-  border-top: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 22px;
-  border-bottom: 1px solid #4b7874;
+  display: block;
+  width: 100%;
+  color: #3a2613 !important;
   overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.SubmenuitemHover,
+.Submenuitem:hover,
+.ActiveSubmenuitem {
+  background-color: rgba(255, 244, 211, 0.45);
+  color: #5a2800 !important;
 }
 
 /* Submenu links */
-.Submenu a:link    { color: #d7d7d7; text-decoration: none; }
-.Submenu a:visited { color: #d7d7d7; text-decoration: none; }
-.Submenu a:focus   { color: #d7d7d7; text-decoration: none; }
-.Submenu a:active  { color: white; text-decoration: none; }
-.Submenu a:hover   { color: white; text-decoration: none; }
+.Submenu a:link    { color: #3a2613; text-decoration: none; }
+.Submenu a:visited { color: #3a2613; text-decoration: none; }
+.Submenu a:focus   { color: #5a2800; text-decoration: none; }
+.Submenu a:active  { color: #5a2800; text-decoration: none; }
+.Submenu a:hover   { color: #5a2800; text-decoration: none; }
 
 /** -------------------------------
  *  Stylesheet declarations for the
@@ -755,22 +904,22 @@ img {
   position: relative;
   margin: 5px;
   margin-bottom: 18px;
-  color: #5A2800;
-  border-left: 2px solid #3a3738;
-  border-right: 2px solid #3a3738;
-  background-color: #debb9d;
-  background-repeat: no-repeat;
+  color: #332016;
+  border: 0;
+  background-color: transparent;
   overflow: visible;
+  box-shadow: none;
 }
 
 .Content .BoxContent {
   font-family: Verdana, Arial, Times New Roman, sans-serif;
   font-size: 9pt;
-  background-color: #FFF2db;
-  color: #5A2800;
+  background: #ffffff !important;
+  color: #332016;
   min-height: 367px;
   height: auto !important;
   height: 387px;
+  padding: 14px;
 }
 
 /* "star-HTML-hack" to correct Box width in IE */
@@ -794,7 +943,7 @@ img {
 .Content .BoxContent td {
   font-family: Verdana, Arial, Times New Roman, sans-serif;
   font-size: 10pt;
-  color: #5A2800;
+  color: #332016;
  }
 
 /* Content Links */
@@ -825,6 +974,7 @@ img {
   width: 17px;
   height: 17px;
   z-index: 50;
+  display: none;
 }
 
 .Content .Corner-tr {
@@ -834,6 +984,7 @@ img {
   width: 17px;
   height: 17px;
   z-index: 50;
+  display: none;
 }
 
 .Content .BottomCornersHelper {
@@ -853,6 +1004,7 @@ img {
   width: 17px;
   height: 17px;
   z-index: 50;
+  display: none;
 }
 
 .Content .Corner-br {
@@ -862,6 +1014,7 @@ img {
   width: 17px;
   height: 17px;
   z-index: 50;
+  display: none;
 }
 
 .SecretAchievementIcon {
@@ -880,30 +1033,70 @@ img {
   height: 6px;
   width: 100%;
   background-repeat: repeat-x;
+  display: none;
 }
 
 .Content .BorderTitleText {
   position: relative;
-  height: 24px;
-  background-repeat: repeat-x;
+  left: -7px;
+  width: calc(100% + 14px);
+  height: 45px;
+  background: url('images/global/content/haderfornews.png') 50% / 100% 100% no-repeat !important;
+  overflow: hidden;
 }
 
 .Content .Title {
   position: absolute;
   top: 6px;
   left: 5px;
+  display: none;
+}
+
+.Content .PageTitleText {
+  position: absolute;
+  top: 22px;
+  left: 43px;
+  right: 18px;
+  transform: translateY(-50%);
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px #000000, 0 0 5px rgba(0, 0, 0, 0.75);
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.Content .BorderTitleText:after {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 2px #000000;
+  content: "";
+  z-index: 2;
 }
 
 .Content .Border_2 {
-  margin: 4px;
-  padding: 0px;
-  background-color: #793d03;
+  margin: -3px 6px 7px 6px;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1px solid #b8b8b8;
+  box-shadow: none;
 }
 
 .Content .Border_3 {
-  margin: 1px;
-  border-top: 1px solid #793d03;
-  border-bottom: 1px solid #793d03;
+  margin: 0;
+  border: 0;
+  background-color: #ffffff;
 }
 
 /** -------------------------------
@@ -926,8 +1119,8 @@ img {
 }
 #Themeboxes .ThemeboxButton {
   position: absolute;
-  bottom: 20px;
-  left: 22px;
+  bottom: 0px;
+  left: 0px;
   height: 25px;
   width: 135px;
   cursor: pointer;
@@ -938,6 +1131,218 @@ img {
   left: 0px;
   height: 12px;
   width: 180px;
+}
+
+#Themeboxes {
+  position: relative;
+  top: 8px;
+  width: 184px;
+}
+
+#Themeboxes .ThemeboxPanel {
+  position: relative;
+  width: 184px;
+  margin: 0 0 12px 0;
+  color: #3a2613;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+}
+
+#Themeboxes .ThemeboxTitle {
+  position: relative;
+  width: 184px;
+  height: 32px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  background: url('images/global/content/topmenu.png') 50% / 100% 100% no-repeat;
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 30px;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 0 1px 2px #000000, 0 0 5px rgba(0, 0, 0, 0.85);
+}
+
+#Themeboxes .ThemeboxFrame {
+  width: 174px;
+  margin: -1px 0 0 5px;
+}
+
+#Themeboxes .ThemeboxPanelTop,
+#Themeboxes .ThemeboxPanelCenter,
+#Themeboxes .ThemeboxPanelBottom {
+  width: 174px;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#Themeboxes .ThemeboxPanelTop {
+  height: 10px;
+  background-image: url('images/global/content/content-top.png');
+}
+
+#Themeboxes .ThemeboxPanelCenter {
+  padding: 7px 12px 6px 12px;
+  background-image: url('images/global/content/content-center.png');
+  background-repeat: repeat-y;
+  box-sizing: border-box;
+}
+
+#Themeboxes .ThemeboxPanelBottom {
+  height: 10px;
+  background-image: url('images/global/content/content-bottom.png');
+}
+
+#Themeboxes .ThemeboxCoins {
+  display: block;
+  left: -5px;
+  bottom: 13px;
+  max-width: 169px;
+  max-height: 135px;
+  position: relative;
+  margin: 0 auto -47px auto;
+}
+
+#Themeboxes .ThemeboxButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  min-height: 35px;
+  margin: 0 auto;
+  padding: 5px 9px;
+  box-sizing: border-box;
+  border: 1px solid #4b2507;
+  color: #ffffff !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 14px;
+  text-align: center;
+  text-decoration: none !important;
+  text-shadow: 0 1px 2px #000000;
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), 0 2px 3px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+
+#Themeboxes .ThemeboxButton:hover {
+  color: #fff7cf !important;
+  filter: brightness(1.18);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 10px rgba(255, 183, 74, 0.72), 0 3px 5px rgba(0, 0, 0, 0.45);
+}
+
+#Themeboxes .ThemeboxButtonOrange {
+  background: linear-gradient(#ffbc45, #d97816 48%, #98490c 52%, #ee8c23);
+}
+
+#Themeboxes .ThemeboxButtonDiscord {
+  background: linear-gradient(#1694b5, #0a6586 48%, #063b5a 52%, #0c7699);
+  border-color: #07334b;
+}
+
+#Themeboxes .BoostedCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+#Themeboxes .BoostedCard {
+  min-width: 0;
+  padding: 5px 3px;
+  box-sizing: border-box;
+  background: rgba(255, 244, 211, 0.56);
+  border: 1px solid rgba(120, 84, 41, 0.42);
+  text-align: center;
+}
+
+#Themeboxes .BoostedImageWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 4px auto;
+  overflow: hidden;
+}
+
+#Themeboxes .BoostedImageWrap img {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+#Themeboxes .BoostedCard span {
+  display: block;
+  min-height: 26px;
+  color: #3a2613;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#Themeboxes .ThemeboxRankingList {
+  display: grid;
+  gap: 5px;
+}
+
+#Themeboxes .ThemeboxRankingPlayer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 4px 3px 4px 34px;
+  background: rgba(255, 244, 211, 0.48);
+  border: 1px solid rgba(120, 84, 41, 0.35);
+  color: #3a2613 !important;
+  text-align: left;
+  text-decoration: none !important;
+}
+
+#Themeboxes .ThemeboxRankingPlayer:hover {
+  background: rgba(255, 244, 211, 0.78);
+  color: #5a2800 !important;
+}
+
+#Themeboxes .ThemeboxRankingOutfit {
+  position: absolute;
+  left: -30px;
+  top: -14px;
+  width: 64px;
+  height: 64px;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+}
+
+#Themeboxes .ThemeboxRankingText {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#Themeboxes .ThemeboxRankingText strong,
+#Themeboxes .ThemeboxRankingText small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#Themeboxes .ThemeboxRankingText strong {
+  color: #6f3b0c;
+  font-size: 12px;
+}
+
+#Themeboxes .ThemeboxRankingText small {
+  color: #5a2800;
+  font-size: 10px;
+  font-weight: bold;
 }
 /* "star-HTML-hack" to correct the position of the bottom element */
 * html #Themeboxes .Bottom {
@@ -1682,7 +2087,6 @@ img {
   background-position: top right;
   margin-right: 3px;
   font-size: 1px;
-  /*box-shadow: 3px 3px 2px #875f3e;*/
 }
 .TableShadowContainer {
   position: relative;
@@ -1728,7 +2132,7 @@ img {
 }
 /* LABELS */
 .InnerTableContainer .TableContentContainer {
-    box-shadow: 3px 3px 2px #875f3e;
+    box-shadow: none;
 }
 .TableContentContainer {
     border: 1px solid #5f4d41;
@@ -1913,8 +2317,8 @@ img {
 
 
 #TopbarModule {
-    background: url('images/global/content/topbar.png') center center no-repeat;
-    min-height: 46px;
+    background: url('images/global/content/topbar.png') 50% / 100% 100% no-repeat;
+    min-height: 45px;
     margin: 0 auto 8px auto;
     padding: 0 20px;
     display: flex;
@@ -1958,18 +2362,161 @@ img {
 
 /* News Ticker */
 
-.Content #NewsTicker .BoxContent {
-  padding: 5px;
+.Content #newsticker,
+.Content #NewsTicker,
+.Content #powerfulguilds,
+.Content #news,
+.Content #News {
+  border: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.Content #newsticker .BorderTitleText,
+.Content #NewsTicker .BorderTitleText,
+.Content #powerfulguilds .BorderTitleText,
+.Content #news .BorderTitleText,
+.Content #News .BorderTitleText {
+  left: -7px;
+  width: calc(100% + 14px);
+  height: 45px;
+  background: url('images/global/content/haderfornews.png') 50% / 100% 100% no-repeat !important;
+}
+
+.Content #newsticker .BorderTitleText:before,
+.Content #NewsTicker .BorderTitleText:before,
+.Content #powerfulguilds .BorderTitleText:before,
+.Content #news .BorderTitleText:before,
+.Content #News .BorderTitleText:before {
+  position: absolute;
+  top: 22px;
+  left: 43px;
+  transform: translateY(-50%);
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 1;
+  text-shadow: 0 1px 2px #000000, 0 0 5px rgba(0, 0, 0, 0.75);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.Content #newsticker .BorderTitleText:after,
+.Content #NewsTicker .BorderTitleText:after,
+.Content #powerfulguilds .BorderTitleText:after,
+.Content #news .BorderTitleText:after,
+.Content #News .BorderTitleText:after {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 2px #000000;
+  content: "";
+  z-index: 2;
+}
+
+.Content #newsticker .BorderTitleText:before,
+.Content #NewsTicker .BorderTitleText:before {
+  content: "\00DALTIMAS ACTUALIZACIONES";
+}
+
+.Content #newsticker .BorderTitleText:after,
+.Content #NewsTicker .BorderTitleText:after {
+  border-radius: 50%;
+}
+
+.Content #powerfulguilds .BorderTitleText:before {
+  content: "MOST POWERFUL GUILDS";
+}
+
+.Content #news .BorderTitleText:before,
+.Content #News .BorderTitleText:before {
+  content: "NOTICIAS";
+}
+
+.Content #newsticker .Corner-tl,
+.Content #newsticker .Corner-tr,
+.Content #newsticker .CornerWrapper-b,
+.Content #newsticker .Border_1,
+.Content #NewsTicker .Corner-tl,
+.Content #NewsTicker .Corner-tr,
+.Content #NewsTicker .CornerWrapper-b,
+.Content #NewsTicker .Border_1,
+.Content #powerfulguilds .Corner-tl,
+.Content #powerfulguilds .Corner-tr,
+.Content #powerfulguilds .CornerWrapper-b,
+.Content #powerfulguilds .Border_1,
+.Content #news .Corner-tl,
+.Content #news .Corner-tr,
+.Content #news .CornerWrapper-b,
+.Content #news .Border_1,
+.Content #News .Corner-tl,
+.Content #News .Corner-tr,
+.Content #News .CornerWrapper-b,
+.Content #News .Border_1 {
+  display: none;
+}
+
+.Content #newsticker .Title,
+.Content #NewsTicker .Title,
+.Content #powerfulguilds .Title,
+.Content #news .Title,
+.Content #News .Title {
+  display: none;
+}
+
+.Content #newsticker .Border_2,
+.Content #NewsTicker .Border_2,
+.Content #powerfulguilds .Border_2,
+.Content #news .Border_2,
+.Content #News .Border_2 {
+  margin: -3px 6px 7px 6px;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1px solid #b8b8b8;
+  box-shadow: none;
+}
+
+.Content #newsticker .Border_3,
+.Content #NewsTicker .Border_3,
+.Content #powerfulguilds .Border_3,
+.Content #news .Border_3,
+.Content #News .Border_3 {
+  margin: 0;
+  border: 0;
+  background-color: #ffffff;
+}
+
+.Content #newsticker .BoxContent,
+.Content #NewsTicker .BoxContent,
+.Content #powerfulguilds .BoxContent,
+.Content #news .BoxContent,
+.Content #News .BoxContent {
+  background: #ffffff !important;
+  color: #332016;
+}
+
+.Content #newsticker .BoxContent,
+.Content #NewsTicker .BoxContent,
+.Content #powerfulguilds .BoxContent {
+  padding: 8px;
   min-height: 90px;
   height: auto !important;
   height: 100px;
 }
 
+.Content #newsticker .BoxContent .Row,
 .Content #NewsTicker .BoxContent .Row {
   position: relative;
   width: 100%;
 }
 
+.Content #newsticker .NewsTickerIcon,
 .Content #NewsTicker .NewsTickerIcon {
   position: absolute;
   top: 1px;
@@ -1979,12 +2526,14 @@ img {
   background-repeat: no-repeat;
 }
 
+.Content #newsticker .NewsTickerText,
 .Content #NewsTicker .NewsTickerText {
   font-size: 9pt;
   position: relative;
   margin-left: 20px;
 }
 
+.Content #newsticker .NewsTickerDate,
 .Content #NewsTicker .NewsTickerDate {
   font-size: 7pt;
   position: absolute;
@@ -1992,17 +2541,20 @@ img {
   float: left;
 }
 
+.Content #newsticker .NewsTickerShortText,
 .Content #NewsTicker .NewsTickerShortText {
   margin-left: 85px;
   height: 14px;
 }
 
+.Content #newsticker .NewsTickerFullText,
 .Content #NewsTicker .NewsTickerFullText {
   margin-left: 85px;
   margin-right: 20px;
   display: none;
 }
 
+.Content #newsticker .NewsTickerExtend,
 .Content #NewsTicker .NewsTickerExtend {
   position: relative;
   right: 0px;
@@ -2014,6 +2566,90 @@ img {
   float: right;
   cursor: pointer;
   z-index: 10;
+}
+
+.Content #newsticker .BoxContent .Odd,
+.Content #NewsTicker .BoxContent .Odd {
+  background-color: #f3f3f3;
+  border: 1px solid #d4d4d4;
+  border-bottom: 0;
+}
+
+.Content #newsticker .BoxContent .Even,
+.Content #NewsTicker .BoxContent .Even {
+  background-color: #e9e9e9;
+  border: 1px solid #d4d4d4;
+  border-bottom: 0;
+}
+
+.Content #newsticker .BoxContent .Row:last-child .Odd,
+.Content #newsticker .BoxContent .Row:last-child .Even,
+.Content #NewsTicker .BoxContent .Row:last-child .Odd,
+.Content #NewsTicker .BoxContent .Row:last-child .Even {
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.Content #powerfulguilds {
+  margin-top: 5px;
+  margin-bottom: 18px;
+}
+
+.Content #powerfulguilds .BoxContent {
+  min-height: 95px;
+}
+
+.Content #powerfulguilds .PowerfulGuildsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.Content #powerfulguilds .PowerfulGuildCard {
+  display: block;
+  min-height: 104px;
+  padding: 8px 6px;
+  background-color: #f3f3f3;
+  border: 1px solid #d4d4d4;
+  color: #332016;
+  text-align: center;
+  text-decoration: none;
+}
+
+.Content #powerfulguilds .PowerfulGuildCard:hover {
+  background-color: #e9e9e9;
+  color: #000000;
+  text-decoration: none;
+}
+
+.Content #powerfulguilds .PowerfulGuildCard img {
+  display: block;
+  margin: 0 auto 5px auto;
+}
+
+.Content #powerfulguilds .PowerfulGuildName,
+.Content #powerfulguilds .PowerfulGuildKills {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Content #powerfulguilds .PowerfulGuildName {
+  font-weight: bold;
+}
+
+.Content #powerfulguilds .PowerfulGuildKills,
+.Content #powerfulguilds .PowerfulGuildsEmpty {
+  color: #5A2800;
+  font-size: 8pt;
+}
+
+.Content #powerfulguilds .PowerfulGuildsEmpty {
+  padding: 16px;
+  background-color: #f3f3f3;
+  border: 1px solid #d4d4d4;
+  text-align: center;
 }
 
 /* Featured Article */
@@ -2066,9 +2702,8 @@ img {
   position: relative;
   height: 28px;
   margin-bottom: 5px;
-  background-repeat: repeat-x;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
+  background: url('images/global/content/haderfornews.png') 50% / 100% 100% no-repeat !important;
+  border: 0;
 }
 
 .Content #FeaturedArticle .NewsHeadlineIcon {
@@ -2100,45 +2735,73 @@ img {
 
 /* News */
 
+.Content #news .BoxContent,
 .Content #News .BoxContent {
+  padding: 12px;
   min-height: 100px;
   height: auto !important;
   height: 110px;
 }
 
+.Content #news .NewsHeadlineBackground,
 .Content #News .NewsHeadlineBackground {
   position: relative;
-  height: 28px;
-  margin-bottom: 5px;
-  background-repeat: repeat-x;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
+  left: -7px;
+  width: calc(100% + 14px);
+  height: 45px;
+  margin-bottom: 8px;
+  background: url('images/global/content/haderfornews.png') 50% / 100% 100% no-repeat !important;
+  border: 0;
+  overflow: hidden;
 }
 
+.Content #news .NewsHeadlineIcon,
 .Content #News .NewsHeadlineIcon {
   position: absolute;
-  top: -1px;
-  left: 0px;
+  top: 8px;
+  left: 10px;
   margin-left: 5px;
   margin-right: 5px;
 }
 
+.Content #news .NewsHeadlineDate,
 .Content #News .NewsHeadlineDate {
   font-size: 7pt;
   position: absolute;
-  top: 10px;
-  left: 50px;
+  top: 17px;
+  left: 58px;
   width: 85px;
   color: white;
+  text-shadow: 0 1px 1px #000000;
 }
 
+.Content #news .NewsHeadlineText,
 .Content #News .NewsHeadlineText {
-  position: relative;
-  top: 7px;
-  left: 135px;
+  position: absolute;
+  top: 15px;
+  left: 145px;
+  right: 14px;
   font-size: 10pt;
   font-weight: bold;
   color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 0 1px 1px #000000;
+}
+
+.Content #news .NewsHeadline + table,
+.Content #News .NewsHeadline + table {
+  width: 100%;
+  margin: 0 0 14px 0;
+  background-color: #f3f3f3;
+  border: 1px solid #d4d4d4;
+  box-shadow: none;
+}
+
+.Content #news .NewsHeadline + table td,
+.Content #News .NewsHeadline + table td {
+  color: #332016;
 }
 
 /* News Archive */
@@ -2147,9 +2810,8 @@ img {
   position: relative;
   height: 28px;
   margin-bottom: 5px;
-  background-repeat: repeat-x;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
+  background: url('images/global/content/haderfornews.png') 50% / 100% 100% no-repeat !important;
+  border: 0;
 }
 
 .Content #NewsArchive .NewsHeadlineIcon {
@@ -2178,12 +2840,22 @@ img {
   color: white;
 }
 
+.Content #news .NewsHeadlineAuthor,
 .Content #News .NewsHeadlineAuthor {
   position: absolute;
-  top: 7px;
-  right: 10px;
+  top: 15px;
+  right: 14px;
   font-size: 10pt;
   color: white;
+  text-shadow: 0 1px 1px #000000;
+}
+
+.Content #news > .BorderTitleText:before,
+.Content #News > .BorderTitleText:before,
+.Content #news > .BorderTitleText:after,
+.Content #News > .BorderTitleText:after {
+  content: none;
+  display: none;
 }
 
 /* BUTTONS */

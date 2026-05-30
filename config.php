@@ -85,10 +85,9 @@ $config = array(
 		//'1' => 'Your World Name',
 		//'2' => 'Your Second World Name'
 	),
-
 	// images
-	'outfit_images_url' => 'https://mortera-world.com/images/animated-outfits/animoutfit.php', // set to animoutfit.php for animated outfit
-	'item_images_url' => 'https://mortera-world.com/images/items/', // set to images/items if you host your own items in images folder
+	'outfit_images_url' => 'http://104.251.222.95/images/animated-outfits/animoutfit.php', // set to animoutfit.php for animated outfit
+	'item_images_url' => 'http://104.251.222.95/images/items/', // set to images/items if you host your own items in images folder
 
 	// account
 	'account_management' => true, // disable if you're using other method to manage users (fe. tfs account manager)

@@ -49,10 +49,10 @@ if(empty($errors)) {
 			}
 
 			if($saved) {
-				$twig->display('success.html.twig', array(
+				$twig->display('guilds.notice.html.twig', array(
 					'title' => 'Guild Deleted',
 					'description' => 'Guild with name <b>'.$guild_name.'</b> has been deleted.',
-					'custom_buttons' => $twig->render('guilds.back_button.html.twig')
+					'back_action' => getLink('guilds')
 				));
 			}
 			else {

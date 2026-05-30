@@ -78,7 +78,7 @@ function mostPowerfulGuildsList()
 	return $ret;
 }
 
-global $twig_loader;
+global $twig_loader, $powerful_guilds_content;
 $twig->addGlobal('config', $config);
 $twig_loader->prependPath(__DIR__);
 
@@ -96,7 +96,7 @@ if(!isset($_page[0]) || $_page == PAGE)
 		}
 	}
 
-	$twig->display('powerful-guilds.html.twig', [
+	$powerful_guilds_content = $twig->render('powerful-guilds.box.html.twig', [
 		'guilds' => $guilds
 	]);
 	return true;

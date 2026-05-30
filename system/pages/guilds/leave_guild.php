@@ -95,12 +95,10 @@ else
 {
 	if(isset($_REQUEST['todo']) && $_REQUEST['todo'] == 'save') {
 		$player->setRank();
-		$twig->display('success.html.twig', array(
+		$twig->display('guilds.notice.html.twig', array(
 			'title' => 'Leave guild',
-			'description' => 'Player with name <b>'.$player->getName().'</b> leaved guild <b>'.$guild->getName().'</b>.',
-			'custom_buttons' => $twig->render('guilds.back_button.html.twig', array(
-				'action' => getLink('guilds') . '/' . $guild_name
-			))
+			'description' => 'Player with name <b>'.$player->getName().'</b> left guild <b>'.$guild->getName().'</b>.',
+			'back_action' => getLink('guilds') . '/' . $guild_name
 		));
 	}
 	else

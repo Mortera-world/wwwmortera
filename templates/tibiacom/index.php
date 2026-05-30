@@ -94,17 +94,7 @@ if (isset($config['boxes']))
 
         // initialisation of the loginbox status by the value of the variable 'loginStatus' which is provided to the HTML-document by PHP in the file 'header.inc'
         function LoadLoginBox() {
-            if (loginStatus == "false") {
-                document.getElementById('ButtonText').style.backgroundImage = "url('" + IMAGES + "/global/buttons/mediumbutton_login.png')";
-                document.getElementById('LoginstatusText_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-create-account.gif')";
-                document.getElementById('LoginstatusText_2_1').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-create-account.gif')";
-                document.getElementById('LoginstatusText_2_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-create-account-over.gif')";
-            } else {
-                document.getElementById('ButtonText').style.backgroundImage = "url('" + IMAGES + "/global/buttons/mediumbutton_myaccount.png')";
-                document.getElementById('LoginstatusText_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-logout.gif')";
-                document.getElementById('LoginstatusText_2_1').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-logout.gif')";
-                document.getElementById('LoginstatusText_2_2').style.backgroundImage = "url('" + IMAGES + "/loginbox/loginbox-font-logout-over.gif')";
-            }
+            return true;
         }
 
         function LoginButtonAction() {
@@ -125,14 +115,26 @@ if (isset($config['boxes']))
 
         // load the menu and set the active submenu item by using the variable 'activeSubmenuItem'
         function LoadMenu() {
-            document.getElementById("submenu_" + activeSubmenuItem).style.color = "white";
-            document.getElementById("ActiveSubmenuItemIcon_" + activeSubmenuItem).style.visibility = "visible";
+            var activeItem = document.getElementById("submenu_" + activeSubmenuItem);
+            if (activeItem) {
+                activeItem.style.color = "white";
+                activeItem.className += " ActiveSubmenuitem";
+            }
             menus = localStorage.getItem('menus');
-            if (menus.lastIndexOf("&") === -1) {
+            if (!menus || menus.lastIndexOf("&") === -1) {
                 menus = "news=1&account=0&community=0&library=0&forum=0<?php if ($config['gifts_system']) echo '&shops=0'; ?>&charactertrade=0&";
             }
             FillMenuArray();
             InitializeMenu();
+        }
+
+        function UpdateMenuVisuals(sourceId, isOpen) {
+            var menuItem = document.getElementById(sourceId);
+
+            if (menuItem) {
+                menuItem.className = menuItem.className.replace(/\s?menuitem-open/g, '').replace(/\s?menuitem-closed/g, '');
+                menuItem.className += isOpen ? ' menuitem-open' : ' menuitem-closed';
+            }
         }
 
         function SaveMenu() {
@@ -156,16 +158,19 @@ if (isset($config['boxes']))
         // hide or show the corresponding submenus
         function InitializeMenu() {
             for (menuItemName in menu[0]) {
+                var submenu = document.getElementById(menuItemName + "_Submenu");
+                if (!submenu) {
+                    continue;
+                }
+
                 if (menu[0][menuItemName] == "0") {
-                    document.getElementById(menuItemName + "_Submenu").style.visibility = "hidden";
-                    document.getElementById(menuItemName + "_Submenu").style.display = "none";
-                    document.getElementById(menuItemName + "_Lights").style.visibility = "visible";
-                    document.getElementById(menuItemName + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/plus.gif)";
+                    submenu.style.visibility = "hidden";
+                    submenu.style.display = "none";
+                    UpdateMenuVisuals(menuItemName, false);
                 } else {
-                    document.getElementById(menuItemName + "_Submenu").style.visibility = "visible";
-                    document.getElementById(menuItemName + "_Submenu").style.display = "block";
-                    document.getElementById(menuItemName + "_Lights").style.visibility = "hidden";
-                    document.getElementById(menuItemName + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/minus.gif)";
+                    submenu.style.visibility = "visible";
+                    submenu.style.display = "block";
+                    UpdateMenuVisuals(menuItemName, true);
                 }
             }
         }
@@ -189,7 +194,7 @@ if (isset($config['boxes']))
                 CloseMenuItem(sourceId);
             } else {
                 $.each(menu[0], function (index, value) {
-                    if (value === '1') {
+                    if (value == 1) {
                         CloseMenuItem(index);
                     }
                 });
@@ -200,50 +205,36 @@ if (isset($config['boxes']))
         function OpenMenuItem(sourceId) {
             menu[0][sourceId] = 1;
             document.getElementById(sourceId + "_Submenu").style.visibility = "visible";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/global/general/minus.gif)";
-            document.getElementById(sourceId + "_Lights").style.visibility = "hidden";
+            UpdateMenuVisuals(sourceId, true);
             $('#' + sourceId + '_Submenu').slideDown('slow');
-            //document.getElementById(sourceId+"_Submenu").style.visibility = "visible";
-            //document.getElementById(sourceId+"_Submenu").style.display = "block";
-            //document.getElementById(sourceId+"_Lights").style.visibility = "hidden";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/minus.gif)";
         }
 
         function CloseMenuItem(sourceId) {
             menu[0][sourceId] = 0;
-            document.getElementById(sourceId + "_Lights").style.visibility = "visible";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/global/general/plus.gif)";
+            UpdateMenuVisuals(sourceId, false);
             $('#' + sourceId + '_Submenu').slideUp('fast', function () {
                 document.getElementById(sourceId + "_Submenu").style.visibility = "hidden";
             });
-            //document.getElementById(sourceId+"_Submenu").style.visibility = "hidden";
-            //document.getElementById(sourceId+"_Submenu").style.display = "none";
-            //document.getElementById(sourceId+"_Lights").style.visibility = "visible";
-            document.getElementById(sourceId + "_Extend").style.backgroundImage = "url(" + IMAGES + "/general/plus.gif)";
         }
 
         // mouse-over effects of menubuttons and submenuitems
         function MouseOverMenuItem(source) {
-            if (source.firstChild.style) {
-                source.firstChild.style.visibility = "visible";
-            }
+            return true;
         }
 
         function MouseOutMenuItem(source) {
-            if (source.firstChild.style) {
-                source.firstChild.style.visibility = "hidden";
-            }
+            return true;
         }
 
         function MouseOverSubmenuItem(source) {
-            if (source.style) {
-                source.style.backgroundColor = "#14433F";
+            if (source && source.className.indexOf('SubmenuitemHover') === -1) {
+                source.className += ' SubmenuitemHover';
             }
         }
 
         function MouseOutSubmenuItem(source) {
-            if (source.style) {
-                source.style.backgroundColor = "#0D2E2B";
+            if (source) {
+                source.className = source.className.replace(/\s?SubmenuitemHover/g, '');
             }
         }
     </script>
@@ -316,102 +307,36 @@ if (isset($config['boxes']))
         <div id="ContentRow">
             <div id="MenuColumn">
                 <div id="Loginbox">
-                    <div id="LoginTop"
-                         style="background-image:url(<?= $template_path; ?>/images/general/box-top.gif)"></div>
-                    <div id="BorderLeft" class="LoginBorder"
-                         style="background-image:url(<?= $template_path; ?>/images/general/chain.gif)"></div>
-
-
-                    <div id="LoginButtonContainer"
-                         style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-textfield-background.gif)">
-                        <div id="LoginButton"
-                             style="background-image:url(<?= $template_path; ?>/images/global/buttons/mediumbutton.gif)">
-                            <div onClick="LoginButtonAction();" onMouseOver="MouseOverBigButton('LoginButtonOver');"
-                                 onMouseOut="MouseOutBigButton('LoginButtonOver');">
-                                <div id="LoginButtonOver" class="Button"
-                                     style="background-image:url(<?= $template_path; ?>/images/global/buttons/mediumbutton-over.gif); visibility: hidden;"></div>
-                                <div id="ButtonText" <?= !$logged ? "style='background-image:url(\"$template_path/images/global/buttons/mediumbutton_login.png\")'" : '' ?>></div>
-                            </div>
+                    <div class="LoginboxTitle">ACCOUNT</div>
+                    <div class="LoginboxPanel">
+                        <div class="LoginPanelTop"></div>
+                        <div class="LoginPanelCenter">
+                            <a class="LoginActionButton LoginActionButtonPrimary" href="<?= getLink('account/manage'); ?>">
+                                <span class="LoginButtonIcon LoginButtonIconAccount"></span>
+                                <span><?= !$logged ? 'Login' : 'My Account'; ?></span>
+                            </a>
+                            <a class="LoginActionButton <?= !$logged ? 'LoginActionButtonCreate' : 'LoginActionButtonLogout'; ?>"
+                               href="<?= !$logged ? getLink('account/create') : getLink('account/logout'); ?>">
+                                <span class="LoginButtonIcon <?= !$logged ? 'LoginButtonIconCreate' : 'LoginButtonIconLogout'; ?>"></span>
+                                <span><?= !$logged ? 'Create Account' : 'Logout'; ?></span>
+                            </a>
                         </div>
-
+                        <div class="LoginPanelBottom"></div>
                     </div>
-
-                    <div style="clear:both"></div>
-
-                    <div class="Loginstatus"
-                         style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-textfield-background.gif)">
-                        <div id="LoginstatusText_2" onClick="LoginstatusTextAction(this);"
-                             onMouseOver="MouseOverLoginBoxText(this);" onMouseOut="MouseOutLoginBoxText(this);">
-                            <div id="LoginstatusText_2_1" class="LoginstatusText"
-                                 style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-font-create-account.gif)"></div>
-                            <div id="LoginstatusText_2_2" class="LoginstatusText"
-                                 style="background-image:url(<?= $template_path; ?>/images/loginbox/loginbox-font-create-account-over.gif)"></div>
-                        </div>
-                    </div>
-
-                    <div id="BorderRight" class="LoginBorder"
-                         style="background-image:url(<?= $template_path; ?>/images/general/chain.gif)"></div>
-                    <div id="LoginBottom" class="Loginstatus"
-                         style="background-image:url(<?= $template_path; ?>/images/general/box-bottom.gif)"></div>
                 </div>
 
-                <div class="SmallMenuBox" id="DownloadBox">
-                    <div class="SmallBoxTop"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/box-top.gif)"></div>
-                    <div class="SmallBoxBorder"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/chain.gif);"></div>
-                    <div class="SmallBoxButtonContainer"
-                         style="background-image:url(<?= $template_path; ?>/images/global/loginbox/loginbox-textfield-background.gif)">
-                        <a href="?subtopic=downloadclient&step=downloadagreement">
-                            <div id="PlayNowContainer">
-                                <div class="MediumButtonBackground"
-                                     style="background-image:url(<?= $template_path; ?>/images/global/buttons/mediumbutton.gif)"
-                                     onmouseover="MouseOverBigButton('DownloadButtonOver');"
-                                     onmouseout="MouseOutBigButton('DownloadButtonOver');">
-                                    <div id="DownloadButtonOver" class="MediumButtonOver"
-                                         style="background-image: url(<?= $template_path; ?>/images/global/buttons/mediumbutton-over.gif); visibility: hidden;"></div>
-                                    <input class="MediumButtonText" type="image" name="Download" alt="Download"
-                                           src="<?= $template_path; ?>/images/global/buttons/mediumbutton_download.png">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="SmallBoxBorder BorderRight"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/chain.gif);"></div>
-                    <div class="Loginstatus SmallBoxBottom"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/box-bottom.gif);"></div>
-                </div>
-				<div class="SmallMenuBoxWiki" id="DownloadBox">
-                    <div class="SmallBoxTop"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/box-top.gif)"></div>
-                    <div class="SmallBoxBorder"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/chain.gif);"></div>
-                    <div class="SmallBoxButtonContainer"
-                         style="background-image:url(<?= $template_path; ?>/images/global/loginbox/loginbox-textfield-background.gif)">
-                        <a href="wikia.html">
-                            <div id="PlayNowContainerWiki">
-                                <div class="MediumButtonBackgroundWiki"
-                                     style="background-image:url(<?= $template_path; ?>/images/global/buttons/mediumbutton.gif)"
-                                     onmouseover="MouseOverBigButton('WkiButtonOver');"
-                                     onmouseout="MouseOutBigButton('WkiButtonOver');">
-                                    <div id="WkiButtonOver" class="MediumButtonOverWiki"
-                                         style="background-image: url(<?= $template_path; ?>/images/global/buttons/mediumbutton-over.gif); visibility: hidden;"></div>
-                                    <input class="MediumButtonTextWiki" type="image" name="Wiki" alt="Wiki"
-                                           src="<?= $template_path; ?>/images/global/buttons/mediumbutton_wikia.png">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="SmallBoxBorder BorderRight"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/chain.gif);"></div>
-                    <div class="Loginstatus SmallBoxBottom"
-                         style="background-image:url(<?= $template_path; ?>/images/global/general/box-bottom.gif);"></div>
+                <div class="SideQuickButtons">
+                    <a class="LoginActionButton SideActionButton SideActionDownload" href="?subtopic=downloadclient&step=downloadagreement">
+                        <span class="SideActionIcon SideActionIconDownload"></span>
+                        <span>Download</span>
+                    </a>
+                    <a class="LoginActionButton SideActionButton SideActionWiki" href="wikia.html">
+                        <span class="SideActionIcon SideActionIconWiki"></span>
+                        <span>Wikia</span>
+                    </a>
                 </div>
 
                 <div id='Menu'>
-                    <div id='MenuTop'
-                         style='background-image:url(<?= $template_path; ?>/images/general/box-top.gif);'></div>
-
                     <?php
                     $menus = get_template_menus();
 
@@ -421,30 +346,13 @@ if (isset($config['boxes']))
                         }
                         ?>
                         <div id='<?= $cat['id']; ?>' class='menuitem'>
-                            <span onClick="MenuItemAction('<?= $cat['id']; ?>')">
-                                <div class='MenuButton'
-                                     style='background-image:url(<?= $template_path ?>/images/menu/button-background.gif);'>
-                                    <div onMouseOver='MouseOverMenuItem(this);' onMouseOut='MouseOutMenuItem(this);'><div
-                                                class='Button'
-                                                style='background-image:url(<?= $template_path; ?>/images/menu/button-background-over.gif);'></div>
-                                        <span id='<?= $cat['id']; ?>_Lights' class='Lights'>
-                                            <div class='light_lu'
-                                                 style='background-image:url(<?= $template_path; ?>/images/menu/green-light.gif);'></div>
-                                            <div class='light_ld'
-                                                 style='background-image:url(<?= $template_path; ?>/images/menu/green-light.gif);'></div>
-                                            <div class='light_ru'
-                                                 style='background-image:url(<?= $template_path; ?>/images/menu/green-light.gif);'></div>
-                                        </span>
-                                        <div id='<?= $cat['id']; ?>_Icon' class='Icon'
-                                             style='background-image:url(<?= $template_path ?><?= getImageMenuRandom($cat['id']) ?>);'></div>
-                                        <div id='<?= $cat['id']; ?>_Label' class='Label'
-                                             style='background-image:url(<?= $template_path; ?>/images/menu/label-<?= $cat['id']; ?>.png);'></div>
-                                        <div id='<?= $cat['id']; ?>_Extend' class='Extend'
-                                             style='background-image:url(<?= $template_path; ?>/images/general/plus.gif);'></div>
-                                    </div>
-                                </div>
-                            </span>
+                            <button type='button' class='MenuButton' onClick="MenuItemAction('<?= $cat['id']; ?>')">
+                                <span class='MenuButtonLabel'><?= strtoupper($cat['name']); ?></span>
+                                <span id='<?= $cat['id']; ?>_Extend' class='Extend'></span>
+                            </button>
                             <div id='<?= $cat['id']; ?>_Submenu' class='Submenu'>
+                                <div class='SubmenuTop'></div>
+                                <div class='SubmenuCenter'>
                                 <?php
                                 $default_menu_color = "ffffff";
 
@@ -455,29 +363,17 @@ if (isset($config['boxes']))
                                         <div id='submenu_<?= str_replace('/', '', $menu['link']); ?>'
                                              class='Submenuitem' onMouseOver='MouseOverSubmenuItem(this)'
                                              onMouseOut='MouseOutSubmenuItem(this)' style="color: <?= $link_color; ?>;">
-                                            <div class='LeftChain'
-                                                 style='background-image:url(<?= $template_path; ?>/images/general/chain.gif);'></div>
-                                            <div id='ActiveSubmenuItemIcon_<?= str_replace('/', '', $menu['link']); ?>'
-                                                 class='ActiveSubmenuItemIcon'
-                                                 style='background-image:url(<?= $template_path; ?>/images/menu/icon-activesubmenu.gif);'></div>
-                                            <div class='SubmenuitemLabel'
-                                                 style="color: <?= $link_color; ?>;"><?= $menu['name']; ?></div>
-                                            <div class='RightChain'
-                                                 style='background-image:url(<?= $template_path; ?>/images/general/chain.gif);'></div>
+                                            <span class='SubmenuArrow'></span>
+                                            <span class='SubmenuitemLabel'
+                                                  style="color: <?= $link_color; ?>;"><?= $menu['name']; ?></span>
                                         </div>
                                     </a>
                                     <?php
                                 }
                                 ?>
+                                </div>
+                                <div class='SubmenuBottom'></div>
                             </div>
-                            <?php
-                            if ($id == MENU_CATEGORY_SHOP || (!$config['gifts_system'] && $id == MENU_CATEGORY_SHOP - 1)) {
-                                ?>
-                                <div id='MenuBottom'
-                                     style='background-image:url(<?= $template_path; ?>/images/general/box-bottom.gif);'></div>
-                                <?php
-                            }
-                            ?>
                         </div>
                         <?php
                     }
@@ -511,18 +407,13 @@ if (isset($config['boxes']))
                             <div class="Border_1"
                                  style="background-image:url(<?= $template_path; ?>/images/content/border-1.gif);"></div>
                             <div class="BorderTitleText"
-                                 style="background-image:url(<?= $template_path; ?>/images/content/newsheadline_background.gif);"></div>
-                            <?php
-                            $headline = $template_path . '/images/header/headline-' . PAGE . '.gif';
-                            if (!file_exists($headline))
-                                $headline = $template_path . '/headline.php?t=' . ucfirst($title);
-                            ?>
-                            <img class="Title" src="<?= $headline; ?>" alt="Contentbox headline"/>
+                                 style="background-image:url(<?= $template_path; ?>/images/global/content/haderfornews.png);">
+                                <span class="PageTitleText"><?= escapeHtml(ucfirst($title)); ?></span>
+                            </div>
                             <div class="Border_2">
                                 <div class="Border_3">
                                     <?php $hooks->trigger(HOOK_TIBIACOM_BORDER_3); ?>
-                                    <div class="BoxContent"
-                                         style="background-image:url(<?= $template_path; ?>/images/content/scroll.gif);">
+                                    <div class="BoxContent">
                                         <?= template_place_holder('center_top') . $content; ?>
                                     </div>
                                 </div>
@@ -569,39 +460,124 @@ if (isset($config['boxes']))
                 $bossaddons = $bossquery["lookaddons"];
                 $bossmount = $bossquery["lookmount"];
                 ?>
-                <div id="RightArtwork">
-                    <img id="Creature"
-                         src="<?= $config['outfit_images_url'] ?>?id=<?= $creaturetype; ?>&addons=<?= $creatureaddons; ?>&head=<?= $creaturehead; ?>&body=<?= $creaturebody; ?>&legs=<?= $creaturelegs; ?>&feet=<?= $creaturefeet; ?>&mount=<?= $creaturemount; ?>"
-                         alt="Creature of the Day"
-                         title="Today's boosted creature: <?= ucwords(strtolower(trim($creaturename))); ?>">
-
-                    <?php if ($bosstypeEx != 0): ?>
-                        <img id="Boss" src="<?= $config['item_images_url'] ?><?= $bosstypeEx; ?>.gif"
-                             alt="Boss of the Day"
-                             title="Today's boosted boss: <?= ucwords(strtolower(trim($bossname))); ?>">
-                    <?php else: ?>
-                        <img id="Boss"
-                             src="<?= $config['outfit_images_url'] ?>?id=<?= $bosstype; ?>&addons=<?= $bossaddons; ?>&head=<?= $bosshead; ?>&body=<?= $bossbody; ?>&legs=<?= $bosslegs; ?>&feet=<?= $bossfeet; ?>&mount=<?= $bossmount; ?>"
-                             alt="Boss of the Day"
-                             title="Today's boosted boss: <?= ucwords(strtolower(trim($bossname))); ?>">
-                    <?php endif; ?>
-
-                    <img id="PedestalAndOnline" src="<?= $template_path; ?>/images/header/pedestal.gif"
-                         alt="Monster Pedestal and Players Online Box"/>
-                </div>
-
                 <div id="Themeboxes">
                     <?php
-                    $twig_loader->prependPath(__DIR__ . '/boxes/templates');
+                    $boostedCreatureName = ucwords(strtolower(trim($creaturename)));
+                    $boostedBossName = ucwords(strtolower(trim($bossname)));
+                    $boostedCreatureImage = $config['outfit_images_url'] . '?id=' . $creaturetype . '&addons=' . $creatureaddons . '&head=' . $creaturehead . '&body=' . $creaturebody . '&legs=' . $creaturelegs . '&feet=' . $creaturefeet . '&mount=' . $creaturemount;
+                    $boostedBossImage = $bosstypeEx != 0
+                        ? $config['item_images_url'] . $bosstypeEx . '.gif'
+                        : $config['outfit_images_url'] . '?id=' . $bosstype . '&addons=' . $bossaddons . '&head=' . $bosshead . '&body=' . $bossbody . '&legs=' . $bosslegs . '&feet=' . $bossfeet . '&mount=' . $bossmount;
 
-                    foreach ($config['boxes'] as $box) {
-                        /** @var string $template_name */
-                        $file = TEMPLATES . $template_name . '/boxes/' . $box . '.php';
-                        if (file_exists($file)) {
-                            include($file); ?>
-                            <?php
-                        }
-                    }
+                    $topResets = $db->query('SELECT players.name, player_storage.value, players.looktype, players.lookaddons, players.lookhead, players.lookbody, players.looklegs, players.lookfeet
+                        FROM players
+                        JOIN player_storage ON players.id = player_storage.player_id
+                        WHERE player_storage.key = 500 AND players.group_id < 3
+                        ORDER BY CAST(player_storage.value AS DECIMAL) DESC
+                        LIMIT 5')->fetchAll();
+
+                    $topAscensions = $db->query('SELECT players.name, player_storage.value, players.looktype, players.lookaddons, players.lookhead, players.lookbody, players.looklegs, players.lookfeet
+                        FROM players
+                        JOIN player_storage ON players.id = player_storage.player_id
+                        WHERE player_storage.key = 501 AND players.group_id < 3
+                        ORDER BY CAST(player_storage.value AS DECIMAL) DESC
+                        LIMIT 5')->fetchAll();
+                    ?>
+
+                    <div class="ThemeboxPanel ThemeboxStore">
+                        <div class="ThemeboxTitle">STORE</div>
+                        <div class="ThemeboxFrame">
+                            <div class="ThemeboxPanelTop"></div>
+                            <div class="ThemeboxPanelCenter">
+                                <img class="ThemeboxCoins" src="<?= $template_path; ?>/images/themeboxes/donate/coins.gif" alt="Mortera Coins">
+                                <a class="ThemeboxButton ThemeboxButtonOrange" href="<?= getLink('points'); ?>">Obtener Mortera Coins</a>
+                            </div>
+                            <div class="ThemeboxPanelBottom"></div>
+                        </div>
+                    </div>
+
+                    <div class="ThemeboxPanel ThemeboxBoosted">
+                        <div class="ThemeboxTitle">BOOSTED</div>
+                        <div class="ThemeboxFrame">
+                            <div class="ThemeboxPanelTop"></div>
+                            <div class="ThemeboxPanelCenter">
+                                <div class="BoostedCards">
+                                    <div class="BoostedCard">
+                                        <div class="BoostedImageWrap">
+                                            <img src="<?= $boostedCreatureImage; ?>" alt="<?= escapeHtml($boostedCreatureName); ?>">
+                                        </div>
+                                        <span><?= escapeHtml($boostedCreatureName); ?></span>
+                                    </div>
+                                    <div class="BoostedCard">
+                                        <div class="BoostedImageWrap">
+                                            <img src="<?= $boostedBossImage; ?>" alt="<?= escapeHtml($boostedBossName); ?>">
+                                        </div>
+                                        <span><?= escapeHtml($boostedBossName); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ThemeboxPanelBottom"></div>
+                        </div>
+                    </div>
+
+                    <div class="ThemeboxPanel ThemeboxDiscord">
+                        <div class="ThemeboxTitle">DISCORD</div>
+                        <div class="ThemeboxFrame">
+                            <div class="ThemeboxPanelTop"></div>
+                            <div class="ThemeboxPanelCenter">
+                                <a class="ThemeboxButton ThemeboxButtonDiscord" href="<?= $config['discord_link'] ?: '#'; ?>" target="_blank" rel="noopener noreferrer">Join Discord</a>
+                            </div>
+                            <div class="ThemeboxPanelBottom"></div>
+                        </div>
+                    </div>
+
+                    <div class="ThemeboxPanel ThemeboxRanking">
+                        <div class="ThemeboxTitle">TOP RESETS</div>
+                        <div class="ThemeboxFrame">
+                            <div class="ThemeboxPanelTop"></div>
+                            <div class="ThemeboxPanelCenter">
+                                <div class="ThemeboxRankingList">
+                                    <?php foreach ($topResets as $player):
+                                        $playerOutfit = $config['outfit_images_url'] . '?id=' . $player['looktype'] . (!empty($player['lookaddons']) ? '&addons=' . $player['lookaddons'] : '') . '&head=' . $player['lookhead'] . '&body=' . $player['lookbody'] . '&legs=' . $player['looklegs'] . '&feet=' . $player['lookfeet'];
+                                        ?>
+                                        <a class="ThemeboxRankingPlayer" href="<?= getPlayerLink($player['name'], false); ?>">
+                                            <span class="ThemeboxRankingOutfit" style="background-image:url('<?= $playerOutfit; ?>');"></span>
+                                            <span class="ThemeboxRankingText">
+                                                <strong><?= escapeHtml($player['name']); ?></strong>
+                                                <small>Resets: <?= (int)$player['value']; ?></small>
+                                            </span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="ThemeboxPanelBottom"></div>
+                        </div>
+                    </div>
+
+                    <div class="ThemeboxPanel ThemeboxRanking">
+                        <div class="ThemeboxTitle">TOP ASCENSIONS</div>
+                        <div class="ThemeboxFrame">
+                            <div class="ThemeboxPanelTop"></div>
+                            <div class="ThemeboxPanelCenter">
+                                <div class="ThemeboxRankingList">
+                                    <?php foreach ($topAscensions as $player):
+                                        $playerOutfit = $config['outfit_images_url'] . '?id=' . $player['looktype'] . (!empty($player['lookaddons']) ? '&addons=' . $player['lookaddons'] : '') . '&head=' . $player['lookhead'] . '&body=' . $player['lookbody'] . '&legs=' . $player['looklegs'] . '&feet=' . $player['lookfeet'];
+                                        ?>
+                                        <a class="ThemeboxRankingPlayer" href="<?= getPlayerLink($player['name'], false); ?>">
+                                            <span class="ThemeboxRankingOutfit" style="background-image:url('<?= $playerOutfit; ?>');"></span>
+                                            <span class="ThemeboxRankingText">
+                                                <strong><?= escapeHtml($player['name']); ?></strong>
+                                                <small>Ascensions: <?= (int)$player['value']; ?></small>
+                                            </span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="ThemeboxPanelBottom"></div>
+                        </div>
+                    </div>
+
+                    <?php
                     if ($config['template_allow_change'])
                         echo '<span style="color: white">Template:</span><br/>' . template_form();
                     ?>

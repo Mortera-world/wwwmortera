@@ -34,18 +34,15 @@ if(empty($errors)) {
 			}
 
 			if($saved) {
-				$twig->display('success.html.twig', array(
+				$twig->display('guilds.notice.html.twig', array(
 					'title' => 'Guild Deleted',
 					'description' => 'Guild with name <b>' . $guild_name . '</b> has been deleted.',
-					'custom_buttons' => $twig->render('guilds.back_button.html.twig')
+					'back_action' => getLink('guilds')
 				));
 			}
 			else {
-				$twig->display('success.html.twig', array(
-					'title' => 'Delete Guild',
-					'description' => 'Are you sure you want delete guild <b>' . $guild_name . '</b>?<br/>
-				<form action="?subtopic=guilds&guild=' . $guild->getName() . '&action=delete_by_admin" METHOD="post"><input type="hidden" name="todo" value="save"><input type="submit" value="Yes, delete"></form>',
-					'custom_buttons' => $twig->render('guilds.back_button.html.twig')
+				$twig->display('guilds.delete_by_admin.html.twig', array(
+					'guild' => $guild
 				));
 			}
 		}

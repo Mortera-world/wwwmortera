@@ -1,20 +1,3 @@
-<style>
-.btn_nick{
-	border-radius: 0 0.3em 0.3em 0;
-    border: 1px solid #5f4d41;
-	color: #5f4d41;
-    background-color: #fff2db;
-}
-.btn_nick:hover{
-    border: 1px solid #fff2db;
-	color: #fff2db;
-    background-color: #5f4d41;
-}
-.input_nick{
-	border-radius: 0.3em 0px 0px 0.3em;
-	border: 1px solid #5f4d41;
-}
-</style>
 <?php
 /**
  * Show guild
@@ -113,6 +96,7 @@ $guild_balance = $guild->getCustomField('balance');
 
 // RESIDENCE
 $guild_residence = $guild->getCustomField('residence');
+$house_name = null;
 $select_guildhouse = $db->query('SELECT `house_id`, `listid`, `list` FROM `house_lists` WHERE `house_id` = '.$guild_residence.'');
 $get_guildhouse = $select_guildhouse->fetch();
 $count_guildhouse = $select_guildhouse->rowCount();

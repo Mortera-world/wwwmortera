@@ -1,22 +1,27 @@
-{% set title = 'Created guild' %}
+<link rel="stylesheet" href="tools/simple-page.css">
 
 {% set motd = '' %}
 {% if constant('MOTD_EXISTS') %}
-{% set motd = ' and motd' %}
+  {% set motd = ', MOTD' %}
 {% endif %}
 
-{% set description = '<b>Congratulations!</b><br/>You have created guild <b>' ~ guild_name ~ '</b>. <b>' ~ leader_name ~ '</b> is leader of this guild. Now you can invite players, change picture, description' ~ motd ~ ' of guild. Press submit to open guild manager.' %}
-{% set custom_buttons = '' %}
-{{ include('success.html.twig') }}
-<br/>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr>
-		<td>
-			<div style="text-align:center">
-				<form action="{{ getLink('guilds') ~ '/' ~ guild_name }}" method="post">
-				{{ include('buttons.submit.html.twig') }}
-				</form>
-			</div>
-		</td>
-	</tr>
-</table>
+<div class="guilds-page guild-edit-page">
+  <section class="guild-notice-card">
+    <span>Guild created</span>
+    <h1>Created guild</h1>
+    <p>
+      <b>Congratulations!</b> You have created guild <b>{{ guild_name }}</b>.
+      <b>{{ leader_name }}</b> is the leader. You can now invite players and edit the banner,
+      description{{ motd }}.
+    </p>
+
+    <div class="guild-form-actions guild-form-actions-center">
+      <form action="{{ getLink('guilds') ~ '/' ~ guild_name|url_encode }}" method="post">
+        <button class="guild-button" type="submit">Submit</button>
+      </form>
+      <form action="{{ getLink('guilds') }}" method="post">
+        <button class="guild-button guild-button-danger" type="submit">Back</button>
+      </form>
+    </div>
+  </section>
+</div>

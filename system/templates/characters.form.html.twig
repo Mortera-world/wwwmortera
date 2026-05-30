@@ -1,41 +1,17 @@
-<form action="{{ link }}" method="post">
-	<div class="TableContainer">
-	<div class="CaptionContainer">
-		<div class="CaptionInnerContainer">
-			<span class="CaptionEdgeLeftTop" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionEdgeRightTop" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionBorderTop" style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-			<span class="CaptionVerticalLeft" style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-			<div class="Text">Search Character</div>
-			<span class="CaptionVerticalRight" style="background-image:url({{ template_path }}/images/global/content/box-frame-vertical.gif);"></span>
-			<span class="CaptionBorderBottom" style="background-image:url({{ template_path }}/images/global/content/table-headline-border.gif);"></span>
-			<span class="CaptionEdgeLeftBottom" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-			<span class="CaptionEdgeRightBottom" style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
-		</div>
-	</div>
-		<table class="Table1" cellpadding="0" cellspacing="0">
-			<tbody>
-				<tr>
-				<td>
-					<div class="InnerTableContainer">
-					<table style="width:100%;">
-						<tbody>
-							<tr>
-								<td style="vertical-align:middle;" class="LabelV150">Character Name:</td>
-								<td class="GreedyCell">
-									<input style="width: 100%;" name="name" value="" size="29" maxlength="29"{% if autofocus %} autofocus{% endif %}>
-								</td>
-								<td>
-									<div style="margin-left: 15px;">
-									{{ include('buttons.submit.html.twig') }}</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</form>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<section class="characters-search-panel">
+  <div>
+    <span>Character Search</span>
+    <h1>Search Character</h1>
+    <p>Escribe el nombre del personaje para abrir su informacion.</p>
+  </div>
+
+  <form class="characters-search-form" action="{{ link }}" method="post">
+    <label>
+      <span>Character Name</span>
+      <input name="name" value="" size="29" maxlength="29"{% if autofocus %} autofocus{% endif %} autocomplete="off">
+    </label>
+    <button class="characters-blue-button" type="submit">Submit</button>
+  </form>
+</section>

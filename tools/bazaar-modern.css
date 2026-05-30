@@ -1,0 +1,653 @@
+.bazaar-modern-header {
+  background: #f3f3f3;
+  border: 1px solid #cbd8d2;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111827;
+  margin: 0 0 14px;
+  padding: 18px;
+}
+
+.bazaar-modern-kicker {
+  color: #9a5200;
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.bazaar-modern-header h1 {
+  color: #06172a;
+  font-size: 28px;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.bazaar-modern-header p {
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+
+.bazaar-modern-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.bazaar-modern-tabs a {
+  background: #ffffff;
+  border: 1px solid #c8d3cd;
+  border-radius: 6px;
+  color: #132238 !important;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 8px 11px;
+  text-decoration: none !important;
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.bazaar-modern-tabs a:hover,
+.bazaar-modern-tabs a.is-active {
+  border-color: #0b8a4a;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+.bazaar-modern-tabs a.is-active {
+  background: linear-gradient(180deg, #23c16b 0%, #07813f 100%);
+  color: #ffffff !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+.SmallBox,
+.MessageContainer,
+.Message,
+.HintBox {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.SmallBox {
+  background: #ffffff !important;
+  border: 1px solid #cbd8d2 !important;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+}
+
+.BoxFrameHorizontal,
+.BoxFrameEdgeLeftTop,
+.BoxFrameEdgeRightTop,
+.BoxFrameVerticalLeft,
+.BoxFrameVerticalRight,
+.BoxFrameEdgeRightBottom,
+.BoxFrameEdgeLeftBottom {
+  display: none !important;
+}
+
+.TableContainer {
+  background: #ffffff !important;
+  border: 1px solid #cbd8d2 !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  margin: 0 0 14px !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.CaptionContainer,
+.CaptionInnerContainer {
+  background: #f3f3f3 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+.CaptionInnerContainer > span {
+  display: none !important;
+}
+
+.CaptionInnerContainer .Text {
+  color: #06172a !important;
+  display: block !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+  height: auto !important;
+  line-height: 1.2 !important;
+  padding: 14px 16px !important;
+  position: static !important;
+  text-align: left !important;
+  text-shadow: none !important;
+  width: auto !important;
+}
+
+.InnerTableContainer,
+.TableContentContainer,
+.TableContent,
+.Table3,
+.Table5 {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.Table3,
+.Table5,
+.TableContent {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+}
+
+.TableContent td,
+.Table3 td,
+.Table5 td {
+  border-color: #e2ddd2 !important;
+}
+
+.TableContent tr.Odd,
+.TableContent tr.Even,
+.Odd,
+.Even {
+  background: #ffffff !important;
+}
+
+.TableContent tr:nth-child(even) {
+  background: #f7f7f7 !important;
+}
+
+.LabelV {
+  color: #6d3b00 !important;
+  font-size: 12px;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+}
+
+.Auction {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%) !important;
+  border: 1px solid #ccd7d1;
+  border-radius: 8px;
+  box-shadow: none !important;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.AuctionHeader {
+  background: #f3f3f3 !important;
+  border-bottom: 1px solid #d8ddd8;
+  color: #4b5563 !important;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 12px 14px !important;
+}
+
+.AuctionCharacterName,
+.AuctionCharacterName a {
+  color: #06172a !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+}
+
+.AuctionLinks {
+  float: right;
+}
+
+.AuctionBody {
+  align-items: stretch;
+  display: grid !important;
+  gap: 12px;
+  grid-template-columns: 120px minmax(210px, 1fr) minmax(260px, 320px);
+  padding: 12px;
+}
+
+.AuctionBodyBlock {
+  background: #ffffff !important;
+  border: 1px solid #d8ddd8 !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  margin: 0 !important;
+  padding: 10px !important;
+}
+
+.AuctionOutfit {
+  align-items: center;
+  display: flex !important;
+  justify-content: center;
+  min-height: 116px;
+}
+
+.AuctionOutfitImage {
+  max-height: 96px;
+  max-width: 96px;
+}
+
+.AuctionItemsViewBox {
+  display: grid !important;
+  grid-template-columns: repeat(3, 44px);
+  gap: 6px;
+  justify-content: center;
+}
+
+.CVIcon.CVIconObject {
+  align-items: center;
+  background: #111827 !important;
+  border: 1px solid #2f3b4b !important;
+  border-radius: 6px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  margin: 0 !important;
+  overflow: visible !important;
+  position: relative;
+  width: 40px;
+}
+
+.CVIcon.CVIconObject.NoEquipment {
+  background: #1f2937 !important;
+  color: #ffffff;
+  font-size: 9px;
+}
+
+.ShortAuctionData,
+.CurrentBid {
+  color: #111827 !important;
+  font-size: 12px;
+}
+
+.ShortAuctionData {
+  grid-column: 3;
+}
+
+.CurrentBid {
+  grid-column: 3;
+}
+
+.SpecialCharacterFeatures {
+  display: grid !important;
+  gap: 8px;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+}
+
+.BazaarFeatureTile {
+  align-items: center;
+  background: #f3f3f3;
+  border: 1px solid #d8ddd8;
+  border-radius: 7px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 70px;
+  padding: 8px;
+  text-align: center;
+}
+
+.BazaarFeatureTile img {
+  height: 16px;
+  margin-bottom: 5px;
+  object-fit: contain;
+  width: 16px;
+}
+
+.BazaarFeatureTile span {
+  color: #8b4f00;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.BazaarFeatureTile strong {
+  color: #06172a;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-top: 2px;
+}
+
+.BazaarGeneralPanel {
+  background: #f3f3f3;
+  border-top: 1px solid #d8ddd8;
+  padding: 14px;
+}
+
+.BazaarGeneralTop {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(260px, 1fr) minmax(300px, 1fr);
+}
+
+.BazaarGeneralGroup {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.BazaarGeneralRow,
+.BazaarGeneralSkill {
+  align-items: center;
+  border-bottom: 1px solid #1f2937;
+  box-sizing: border-box;
+  display: grid;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 12px;
+}
+
+.BazaarGeneralRow:last-child,
+.BazaarGeneralSkill:last-child {
+  border-bottom: 0;
+}
+
+.BazaarGeneralRow {
+  grid-template-columns: minmax(130px, 1fr) auto;
+}
+
+.BazaarGeneralSkill {
+  grid-template-columns: minmax(120px, 1fr) 48px 74px;
+}
+
+.BazaarGeneralRow span,
+.BazaarGeneralSkill span {
+  color: #8b4f00;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.BazaarGeneralSkill span {
+  color: #06172a;
+}
+
+.BazaarGeneralRow strong,
+.BazaarGeneralSkill strong {
+  align-items: center;
+  color: #000000;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 900;
+  gap: 5px;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.BazaarGeneralPercent {
+  background: #e9edf0;
+  border: 1px solid #d0d7dd;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.BazaarGeneralPercent div {
+  background: linear-gradient(90deg, #23c16b 0%, #10a95a 100%);
+  height: 100%;
+}
+
+.BazaarGeneralPercent em {
+  color: #000000;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+  left: 0;
+  line-height: 10px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+}
+
+.BazaarGeneralFull {
+  background: #ffffff;
+  border-radius: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.BazaarInlineIcon {
+  height: 16px;
+  object-fit: contain;
+  width: 16px;
+}
+
+@media (max-width: 760px) {
+  .BazaarGeneralTop {
+    grid-template-columns: 1fr;
+  }
+
+  .BazaarGeneralSkill {
+    grid-template-columns: minmax(100px, 1fr) 42px 70px;
+  }
+}
+
+.CurrentBid .Container {
+  display: block;
+  width: 100%;
+}
+
+.CurrentBid form {
+  display: grid !important;
+  gap: 8px;
+  margin: 0 !important;
+  width: 100%;
+}
+
+.CurrentBid .MyMaxBidInput {
+  display: block;
+  width: 100% !important;
+}
+
+.CurrentBid .BigButton,
+.CurrentBid .BigButton > div {
+  box-sizing: border-box;
+  display: flex !important;
+  width: 100% !important;
+}
+
+.ShortAuctionDataLabel,
+.MyMaxBidLabel {
+  color: #6d3b00 !important;
+  font-size: 11px;
+  font-weight: 900 !important;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.ShortAuctionDataValue {
+  color: #06172a !important;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.ShortAuctionDataBidRow {
+  background: #f3f3f3 !important;
+  border: 1px solid #d8ddd8 !important;
+  border-radius: 6px;
+  box-shadow: none !important;
+  margin-top: 8px;
+  padding: 8px !important;
+}
+
+.MyMaxBidInput,
+input[type="number"],
+input[type="text"],
+select {
+  background: #ffffff !important;
+  border: 1px solid #bfcac4 !important;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #111827 !important;
+  font-size: 13px;
+  font-weight: 700;
+  min-height: 34px;
+  padding: 7px 9px;
+}
+
+.BigButton {
+  background: none !important;
+  display: inline-block !important;
+  height: auto !important;
+  margin: 3px !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+
+.BigButton > div {
+  background: linear-gradient(180deg, #23c16b 0%, #07813f 100%) !important;
+  border: 1px solid #045e2d;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(17, 24, 39, 0.22);
+  display: inline-flex !important;
+  min-height: 33px;
+  min-width: 94px;
+  padding: 0 12px;
+}
+
+.BigButton[style*="sbutton_red"] > div,
+a[href*="news"] .BigButton > div,
+input[value="Cancel"].BigButtonText {
+  background: linear-gradient(180deg, #e05d51 0%, #a61e1e 100%) !important;
+  border-color: #7d1212;
+}
+
+.BigButton[style*="sbutton.gif"] > div {
+  background: linear-gradient(180deg, #1c9df0 0%, #0563b6 100%) !important;
+  border-color: #003b77;
+}
+
+.BigButtonOver {
+  display: none !important;
+}
+
+.BigButtonText {
+  background: transparent !important;
+  border: 0 !important;
+  color: #ffffff !important;
+  cursor: pointer;
+  display: block !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  height: auto !important;
+  left: auto !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  min-height: 33px;
+  padding: 0 !important;
+  position: static !important;
+  text-align: center !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45) !important;
+  text-transform: uppercase;
+  top: auto !important;
+  width: 100% !important;
+}
+
+.BigButton > div:hover {
+  filter: brightness(1.07);
+}
+
+.AuctionPagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  padding: 12px;
+}
+
+.AuctionPagination a,
+.AuctionPagination span {
+  background: #ffffff;
+  border: 1px solid #c8d3cd;
+  border-radius: 5px;
+  color: #111827 !important;
+  font-weight: 900;
+  min-width: 30px;
+  padding: 7px 9px;
+  text-align: center;
+  text-decoration: none !important;
+}
+
+.AuctionPagination .is-active {
+  background: linear-gradient(180deg, #23c16b 0%, #07813f 100%);
+  color: #ffffff !important;
+}
+
+#ProgressBar {
+  background: #ffffff;
+  border: 1px solid #cbd8d2;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  padding: 14px;
+}
+
+#ProgressBar img,
+#BackgroundContainer,
+.TubeContainer {
+  display: none !important;
+}
+
+#ProgressBar #MainContainer,
+#ProgressBar #StepsContainer1,
+#ProgressBar #StepsContainer2 {
+  height: auto !important;
+  position: static !important;
+}
+
+#ProgressBar .Steps {
+  background: #f3f3f3;
+  border: 1px solid #d8ddd8;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: inline-flex;
+  height: auto !important;
+  margin: 4px;
+  min-width: 140px;
+  padding: 8px 10px;
+  position: static !important;
+  width: auto !important;
+}
+
+#ProgressBar .SingleStepContainer,
+#ProgressBar .StepText {
+  color: #111827 !important;
+  font-size: 12px;
+  font-weight: 900 !important;
+  height: auto !important;
+  position: static !important;
+  text-align: left !important;
+  width: auto !important;
+}
+
+.ItemSummaryList {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+}
+
+@media (max-width: 760px) {
+  .AuctionBody {
+    grid-template-columns: 1fr;
+  }
+
+  .ShortAuctionData,
+  .CurrentBid {
+    grid-column: auto;
+  }
+
+  .AuctionItemsViewBox {
+    grid-template-columns: repeat(6, 40px);
+  }
+}

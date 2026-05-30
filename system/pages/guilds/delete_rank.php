@@ -92,19 +92,18 @@ if(empty($guild_errors)) {
 				}
 			}
 			if($saved) {
-				$twig->display('success.html.twig', array(
+				$twig->display('guilds.notice.html.twig', array(
 					'title' => 'Rank Deleted',
 					'description' => 'Rank <b>'.$rank->getName().'</b> has been deleted. Players with this rank has now other rank.',
-					'custom_buttons' => ''
+					'back_action' => '?subtopic=guilds&guild='.$guild->getName().'&action=manager'
 				));
 			} else {
 				$twig->display('error_box.html.twig', array('errors' => $guild_errors2));
+				$twig->display('guilds.back_button.html.twig', array(
+					'new_line' => true,
+					'action' => '?subtopic=guilds&guild='.$guild->getName().'&action=manager'
+				));
 			}
-
-			$twig->display('guilds.back_button.html.twig', array(
-				'new_line' => true,
-				'action' => '?subtopic=guilds&guild='.$guild->getName().'&action=manager'
-			));
 		}
 		else
 		{

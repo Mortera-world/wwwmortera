@@ -1,10 +1,12 @@
 <script type="text/javascript" src="tools/js/tipped.js"></script>
 <link rel="stylesheet" type="text/css" href="tools/css/tipped.css"/>
+<link rel="stylesheet" href="tools/simple-page.css">
 <script>
   $(document).ready(function () {
     Tipped.create('.item_image');
   });
 </script>
+<div class="characters-page">
 {% set rows = 0 %}
 
 {% if canEdit %}
@@ -312,294 +314,119 @@
             style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
     </div>
   </div>
-  <div style="top: 15px;" id="DetailsToggle" class="BigToggleButton"
-         onclick="CollapseTable('DetailsCollapseContainer'); $('#labelshow').html($('#labelshow').html() == 'show' ? 'hide' : 'show');"
-         onmouseover="ActivateHelperDiv($(this), '', 'Click here to expand the list of Character Details.', '');"
-         onmouseout="$('#HelperDivContainer').hide();">
-      <div id="Indicator_DetailsCollapseContainer" class="CircleSymbolMinus"
-           style="position: absolute; height: 18px; width: 18px; top: -8px; right: -8px; z-index: 99; cursor: pointer; background-image: url({{ BASE_URL }}templates/tibiacom/images/global/content/circle-symbol-plus.gif);"></div>
-    </div>
-	<div class="InnerTableContainer" id="DetailsCollapseContainer" style="display: none;">
-  <table class="Table3" cellpadding="0" cellspacing="0">
-    <tbody>
-    <tr>
-      <td style="width: 10rem;">
-        <!-- OUTFIT -->
-        {% if config.characters.outfit %}
-          <div class="InnerTableContainer">
-            <table style="width: 98%;">
-              <tbody>
-              <tr>
-                <td>
-                  <div class="TableContentContainer">
-                    <table class="TableContent" width="100%" style="border: none;">
-                      <tbody>
-                      <tr bgcolor="{{ getStyle(2) }}">
-                        <td align="center" style="border: none; width: 64px;">
-                          <b>Current outfit:</b>
-                        </td>
-                        <td style="border: none;">
-                          <div style="width:64px; height:64px;">
-                            <img
-                              style="margin-left:{% if player.getLookType() in [75, 266, 302] %}5px;margin-top:0;width:60px;height:60px;{% else %}-18px;margin-top:-28px;width:80px;height:80px;{% endif %}"
-                              src="{{ outfit }}" alt="player outfit"/>
-                          </div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+	<div id="DetailsCollapseContainer" class="character-details-modern">
+    <aside class="character-details-sidebar">
+      {% if config.characters.outfit %}
+        <div class="character-outfit-panel">
+          <span>Current Outfit</span>
+          <div class="character-outfit-box">
+            <img
+              style="margin-left:{% if player.getLookType() in [75, 266, 302] %}5px;margin-top:0;width:60px;height:60px;{% else %}-18px;margin-top:-28px;width:80px;height:80px;{% endif %}"
+              src="{{ outfit }}" alt="player outfit"/>
           </div>
-          <!-- OUTFIT END -->
-        {% endif %}
-
-        {{ hook(constant('HOOK_CHARACTERS_AFTER_QUESTS')) }}
-
-        {% if config.characters.equipment %}
-          <!-- EQUIPMENT -->
-<div class="InnerTableContainer">
-    <table style="border-collapse: collapse; border: none;">
-        <tbody>
-            <tr>
-                <td style="border: none;">
-                    <div class="TableContentContainer">
-                        <table class="TableContent" width="100%" style="border: none; border-collapse: collapse;">
-                            <tbody>
-                                <tr bgcolor="{{ getStyle(2) }}">
-                                    <td align="center" style="border: none;">
-                                        <b>Inventory:</b>
-                                    </td>
-                                </tr>
-                                <tr bgcolor="{{ getStyle(2) }}">
-                                    <td style="border: none;">
-                                        <table width="100" align="center" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: none;">
-                                            <tr>
-                                                <td style="border: none; padding:0px;">
-                                                    <table cellspacing="0" style="background: transparent; border-collapse: collapse; border: none;">
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[2]|raw }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[6]|raw }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[9]|raw }}</td>
-                                                        </tr>
-														<br>
-														<br>
-                                                        <tr>
-                                                            <td style="color: #5A2800; text-align: center; font-size: 10px; border: none;">Soul: {{ soul }}</td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <table cellspacing="0" style="background: transparent; border-collapse: collapse; border: none;">
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[1]|raw }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[4]|raw }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[7]|raw }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[8]|raw }}</td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="border: none;">
-                                                    <table cellspacing="0" style="background: transparent; border-collapse: collapse; border: none;">
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[3]|raw }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[5]|raw }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: none;">{{ equipment[10]|raw }}</td>
-                                                        </tr>
-														<br>
-														<br>
-                                                        <tr>
-                                                            <td style="color: #5A2800; text-align: center; font-size: 10px; border: none;">Cap: {{ cap }}</td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-          <!-- EQUIPMENT_END -->
-        {% endif %}
-
-        {{ hook(constant('HOOK_CHARACTERS_AFTER_EQUIPMENT')) }}
-      </td>
-
-      <!-- LIFE MANA -->
-      <td>
-        <div class="InnerTableContainer">
-          <table style="width:99%;">
-            <tbody>
-            <tr>
-              <td>
-                <div class="TableContentContainer">
-                  <table class="TableContent" width="85%" style="border:1px solid #faf0d7;">
-                    <tbody>
-                    <tr bgcolor="{{ getStyle(2) }}">
-                      <td style="border:0px; width:15%; text-align: right;"><b>Health:</b></td>
-                      <td style="border:0px; text-align: center;">
-                        {{ health_current }}/{{ health_max }} ({{ health_percent }}%)
-                        <div class="progress">
-                          <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ health_percent }}"
-                               aria-valuemin="0" aria-valuemax="100" style="width: {{ health_percent }}%;"></div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr bgcolor="{{ getStyle(2) }}">
-                      <td style="border:0px; width:15%; text-align: right;"><b>Mana:</b></td>
-                      <td style="border:0px; text-align: center;">
-                        {{ mana_current }}/{{ mana_max }} ({{ mana_percent }}%)
-                        <div class="progress">
-                          <div class="progress-bar bg-default" role="progressbar" aria-valuenow="{{ mana_percent }}"
-                               aria-valuemin="0" aria-valuemax="100" style="width: {{ mana_percent }}%;"></div>
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
         </div>
-        <!-- LIFE MANA END -->
+      {% endif %}
 
-        <!-- EXPERIENCE -->
-        <div class="InnerTableContainer">
-          <table style="width:99%;">
-            <tbody>
-            <tr>
-              <td>
-                <div class="TableContentContainer">
-                  <table class="TableContent" width="85%" style="border:1px solid #faf0d7;">
-                    <tbody>
-                    <tr bgcolor="{{ getStyle(2) }}">
-                      <td style="border:0px; width:15%; text-align: right;"><b>Experience:</b></td>
-                      <td style="border:0px; text-align: center;">
-                        Have <b>{{ player.getExperience() }}</b> and need <b>{{ expLeft }}</b> to Level
-                        <b>{{ player.getLevel() + 1 }}</b>.
-                      </td>
-                    </tr>
-                    <tr bgcolor="{{ getStyle(2) }}">
-                      <td style="border:0px; width:15%; text-align: right;"><b>Percent:</b></td>
-                      <td style="border:0px; text-align: center;">
-                        {{ player.getExperience() }}/{{ expNext }} ({{ expLeftPercent }}%)
-                        <div class="progress">
-                          <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ expLeftPercent }}"
-                               aria-valuemin="0" aria-valuemax="100" style="width:{{ expLeftPercent }}%"></div>
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- EXPERIENCE END -->
+      {{ hook(constant('HOOK_CHARACTERS_AFTER_QUESTS')) }}
 
-        {{ hook(constant('HOOK_CHARACTERS_BEFORE_SKILLS')) }}
-
-        {% if config.characters.skills %}
-          <!-- SKILLS -->
-          <div class="InnerTableContainer">
-            <table style="width:99%;">
-              <tbody>
-              <tr>
-                <td>
-                  <div class="TableContentContainer">
-                    <table class="TableContent" width="85%" style="border:1px solid #faf0d7;">
-                      <tbody>
-                      <tr bgcolor="{{ getStyle(2) }}" style="text-align: center;">
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/level.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/ml.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/fist.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/club.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/sword.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/axe.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/dist.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/def.gif" width="30"/>
-                        </td>
-                        <td style="border:0px;">
-                                                     <img style="border-radius: 5px; border: 2px solid #592700;" src="images/fish.gif" width="30"/>
-                        </td>
-                      </tr>
-                      <tr bgcolor="{{ getStyle(2) }}" style="text-align: center;">
-                        <td style="border:0px;"><b>Level</b></td>
-                        <td style="border:0px;"><b>ML</b></td>
-                        <td style="border:0px;"><b>Fist</b></td>
-                        <td style="border:0px;"><b>Club</b></td>
-                        <td style="border:0px;"><b>Sword</b></td>
-                        <td style="border:0px;"><b>Axe</b></td>
-                        <td style="border:0px;"><b>Dist</b></td>
-                        <td style="border:0px;"><b>Def</b></td>
-                        <td style="border:0px;"><b>Fish</b></td>
-                      </tr>
-                      <tr bgcolor="{{ getStyle(2) }}" style="text-align: center;">
-                        <td style="border:0px;">{{ player.getLevel() }}</td>
-                        {% set i = 0 %}
-                        {% for skill in skills %}
-                          {% set i = i + 1 %}
-                          <td style="border:0px;">{{ skill.value }}</td>
-                        {% endfor %}
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+      {% if config.characters.equipment %}
+        <div class="character-inventory-panel">
+          <span>Inventory</span>
+          <div class="character-inventory-grid">
+            <div class="character-inventory-column">
+              <div class="character-item-slot">{{ equipment[2]|raw }}</div>
+              <div class="character-item-slot">{{ equipment[6]|raw }}</div>
+              <div class="character-item-slot">{{ equipment[9]|raw }}</div>
+              <div class="character-stat-slot">Soul: {{ soul }}</div>
+            </div>
+            <div class="character-inventory-column">
+              <div class="character-item-slot">{{ equipment[1]|raw }}</div>
+              <div class="character-item-slot">{{ equipment[4]|raw }}</div>
+              <div class="character-item-slot">{{ equipment[7]|raw }}</div>
+              <div class="character-item-slot">{{ equipment[8]|raw }}</div>
+            </div>
+            <div class="character-inventory-column">
+              <div class="character-item-slot">{{ equipment[3]|raw }}</div>
+              <div class="character-item-slot">{{ equipment[5]|raw }}</div>
+              <div class="character-item-slot">{{ equipment[10]|raw }}</div>
+              <div class="character-stat-slot">Cap: {{ cap }}</div>
+            </div>
           </div>
-          <!-- SKILLS END -->
-        {% endif %}
+        </div>
+      {% endif %}
 
-        {{ hook(constant('HOOK_CHARACTERS_AFTER_SKILLS')) }}
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      {{ hook(constant('HOOK_CHARACTERS_AFTER_EQUIPMENT')) }}
+    </aside>
+
+    <section class="character-details-stats">
+      <div class="character-stat-card">
+        <div class="character-stat-row">
+          <div class="character-stat-icon">♥</div>
+          <strong>Health</strong>
+          <div class="character-stat-value">
+            <b>{{ health_current }}/{{ health_max }} ({{ health_percent }}%)</b>
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ health_percent }}"
+                   aria-valuemin="0" aria-valuemax="100" style="width: {{ health_percent }}%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="character-stat-row">
+          <div class="character-stat-icon">♦</div>
+          <strong>Mana</strong>
+          <div class="character-stat-value">
+            <b>{{ mana_current }}/{{ mana_max }} ({{ mana_percent }}%)</b>
+            <div class="progress">
+              <div class="progress-bar bg-default" role="progressbar" aria-valuenow="{{ mana_percent }}"
+                   aria-valuemin="0" aria-valuemax="100" style="width: {{ mana_percent }}%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="character-stat-card">
+        <div class="character-stat-row">
+          <div class="character-stat-icon">★</div>
+          <strong>Experience</strong>
+          <div class="character-stat-value">
+            Have <b>{{ player.getExperience() }}</b> and need <b>{{ expLeft }}</b> to Level
+            <b>{{ player.getLevel() + 1 }}</b>.
+          </div>
+        </div>
+        <div class="character-stat-row">
+          <div class="character-stat-icon">%</div>
+          <strong>Percent</strong>
+          <div class="character-stat-value">
+            <b>{{ player.getExperience() }}/{{ expNext }} ({{ expLeftPercent }}%)</b>
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ expLeftPercent }}"
+                   aria-valuemin="0" aria-valuemax="100" style="width:{{ expLeftPercent }}%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {{ hook(constant('HOOK_CHARACTERS_BEFORE_SKILLS')) }}
+
+    {% if config.characters.skills %}
+      <section class="character-skills-panel">
+        <span>Skills</span>
+        <div class="character-skills-grid">
+          <div class="character-skill-cell"><img src="images/level.gif" alt=""><b>Level</b><strong>{{ player.getLevel() }}</strong></div>
+          <div class="character-skill-cell"><img src="images/ml.gif" alt=""><b>ML</b><strong>{{ skills[0].value }}</strong></div>
+          <div class="character-skill-cell"><img src="images/fist.gif" alt=""><b>Fist</b><strong>{{ skills[1].value }}</strong></div>
+          <div class="character-skill-cell"><img src="images/club.gif" alt=""><b>Club</b><strong>{{ skills[2].value }}</strong></div>
+          <div class="character-skill-cell"><img src="images/sword.gif" alt=""><b>Sword</b><strong>{{ skills[3].value }}</strong></div>
+          <div class="character-skill-cell"><img src="images/axe.gif" alt=""><b>Axe</b><strong>{{ skills[4].value }}</strong></div>
+          <div class="character-skill-cell"><img src="images/dist.gif" alt=""><b>Dist</b><strong>{{ skills[5].value }}</strong></div>
+          <div class="character-skill-cell"><img src="images/def.gif" alt=""><b>Def</b><strong>{{ skills[6].value }}</strong></div>
+          <div class="character-skill-cell"><img src="images/fish.gif" alt=""><b>Fish</b><strong>{{ skills[7].value }}</strong></div>
+        </div>
+      </section>
+    {% endif %}
+
+    {{ hook(constant('HOOK_CHARACTERS_AFTER_SKILLS')) }}
   </div>
 </div>
 
@@ -627,13 +454,11 @@
             style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
     </div>
   </div>
-  <div style="top: 15px;" id="QuestsCollapse" class="BigToggleButton"
-       onclick="CollapseTable('QuestsCollapseContainer'); $('#labelshow').html($('#labelshow').html() == 'show' ? 'hide' : 'show');"
-       onmouseover="ActivateHelperDiv($(this), '', 'Click here to expand the list of Quests.', '');"
-       onmouseout="$('#HelperDivContainer').hide();">
-    <div id="Indicator_QuestsCollapseContainer" class="CircleSymbolMinus"
-         style="position: absolute; height: 18px; width: 18px; top: -8px; right: -8px; z-index: 99; cursor: pointer; background-image: url({{ BASE_URL }}templates/tibiacom/images/global/content/circle-symbol-plus.gif);"></div>
-  </div>
+  <button type="button" id="QuestsCollapse" class="characters-collapse-toggle CircleSymbolPlus"
+       onclick="$('#QuestsCollapseContainer').slideToggle('slow'); $(this).toggleClass('CircleSymbolPlus CircleSymbolMinus');"
+       aria-label="Toggle character quests">
+    <span class="characters-collapse-symbol"></span>
+  </button>
   <table class="Table3" cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
@@ -693,13 +518,11 @@
             style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
     </div>
   </div>
-  <div style="top: 15px;" id="AchievementsCollapse" class="BigToggleButton"
-       onclick="CollapseTable('AchievementsCollapseContainer'); $('#labelshow').html($('#labelshow').html() == 'show' ? 'hide' : 'show');"
-       onmouseover="ActivateHelperDiv($(this), '', 'Click here to expand the Achievements list.', '');"
-       onmouseout="$('#HelperDivContainer').hide();">
-    <div id="Indicator_AchievementsCollapseContainer" class="CircleSymbolMinus"
-         style="position: absolute; height: 18px; width: 18px; top: -8px; right: -8px; z-index: 99; cursor: pointer; background-image: url({{ BASE_URL }}templates/tibiacom/images/global/content/circle-symbol-plus.gif);"></div>
-  </div>
+  <button type="button" id="AchievementsCollapse" class="characters-collapse-toggle CircleSymbolPlus"
+       onclick="$('#AchievementsCollapseContainer').slideToggle('slow'); $(this).toggleClass('CircleSymbolPlus CircleSymbolMinus');"
+       aria-label="Toggle achievements">
+    <span class="characters-collapse-symbol"></span>
+  </button>
   <table class="Table3" cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
@@ -802,13 +625,11 @@
               style="background-image:url({{ template_path }}/images/global/content/box-frame-edge.gif);"></span>
       </div>
     </div>
-    <div style="top: 15px;" id="DeathsCollapse" class="BigToggleButton"
-         onclick="CollapseTable('DeathsCollapseContainer'); $('#labelshow').html($('#labelshow').html() == 'show' ? 'hide' : 'show');"
-         onmouseover="ActivateHelperDiv($(this), '', 'Click here to expand the list of Deaths.', '');"
-         onmouseout="$('#HelperDivContainer').hide();">
-      <div id="Indicator_DeathsCollapseContainer" class="CircleSymbolMinus"
-           style="position: absolute; height: 18px; width: 18px; top: -8px; right: -8px; z-index: 99; cursor: pointer; background-image: url({{ BASE_URL }}templates/tibiacom/images/global/content/circle-symbol-plus.gif);"></div>
-    </div>
+    <button type="button" id="DeathsCollapse" class="characters-collapse-toggle CircleSymbolPlus"
+         onclick="$('#DeathsCollapseContainer').slideToggle('slow'); $(this).toggleClass('CircleSymbolPlus CircleSymbolMinus');"
+         aria-label="Toggle character deaths">
+      <span class="characters-collapse-symbol"></span>
+    </button>
     <table class="Table3" cellpadding="0" cellspacing="0">
       <tbody>
       <tr>
@@ -1153,3 +974,4 @@
   </tr>
 </table>
 <br/>{{ search_form|raw }}
+</div>

@@ -14,6 +14,8 @@ defined('MYAAC') or die('Direct access not allowed!');
 //set rights in guild
 $guild_name = isset($_REQUEST['guild']) ? urldecode($_REQUEST['guild']) : NULL;
 $name = isset($_REQUEST['name']) ? stripslashes($_REQUEST['name']) : NULL;
+$guild_vice = false;
+$level_in_guild = 0;
 if (!$logged) {
     $errors[] = "You are not logged in. You can't invite players.";
 }
@@ -95,31 +97,30 @@ if (empty($errors)) {
 }
 
 $show = true;
+$show_back = false;
 if (!empty($errors)) {
     $twig->display('error_box.html.twig', array('errors' => $errors));
+    $show = false;
+    $show_back = true;
 } else {
     if (isset($_REQUEST['todo']) && $_REQUEST['todo'] == 'save') {
         $guild->invite($player);
-        $twig->display('success.html.twig', array(
+        $twig->display('guilds.notice.html.twig', array(
             'title' => 'Invite player',
             'description' => 'Player with name <b>' . $player->getName() . '</b> has been invited to your guild.',
-            'custom_buttons' => ''
+            'back_action' => getLink('guilds') . '/' . $guild_name
         ));
 
         $show = false;
     }
 }
 
-if ($show) {
-    $twig->display('success.html.twig', array(
-        'title' => 'Invite player',
-        'description' => $twig->render('guilds.invite.html.twig', array(
-            'guild_name' => $guild->getName()
-        )),
-        'custom_buttons' => ''
+if ($show && isset($guild) && $guild->isLoaded()) {
+    $twig->display('guilds.invite.html.twig', array(
+        'guild_name' => $guild->getName()
+    ));
+} else if ($show_back) {
+    $twig->display('guilds.back_button.html.twig', array(
+        'action' => getLink('guilds') . '/' . $guild_name
     ));
 }
-
-$twig->display('guilds.back_button.html.twig', array(
-    'action' => getLink('guilds') . '/' . $guild_name
-));

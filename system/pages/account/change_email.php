@@ -82,28 +82,18 @@ else
 		else
 		{
 			$custom_buttons = '
-<table width="100%">
-	<tr>
-		<td width="30">&nbsp;</td>
-		<td align=left>
-			<form action="' . getLink('account/email') . '" method="post"><input type="hidden" name="changeemailsave" value=1 >
-				<INPUT TYPE=image NAME="I Agree" SRC="' . $template_path . '/images/global/buttons/sbutton_iagree.gif" BORDER=0 WIDTH=120 HEIGHT=17>
-			</form>
-		</td>
-		<td align=left>
-			<form action="' . getLink('account/email') . '" method="post">
-				<input type="hidden" name="emailchangecancel" value=1 >
-				' . $twig->render('buttons.cancel.html.twig') . '
-			</form>
-		</td>
-		<td align=right>
-			<form action="?subtopic=accountmanagement" method="post" >
-				' . $twig->render('buttons.back.html.twig') . '
-			</form>
-		</td>
-		<td width="30">&nbsp;</td>
-	</tr>
-</table>';
+<link rel="stylesheet" href="tools/simple-page.css">
+<div class="account-form-actions">
+	<form action="' . getLink('account/email') . '" method="post">
+		<input type="hidden" name="changeemailsave" value="1">
+		<button class="account-form-button account-form-button-green" type="submit">I Agree</button>
+	</form>
+	<form action="' . getLink('account/email') . '" method="post">
+		<input type="hidden" name="emailchangecancel" value="1">
+		<button class="account-form-button account-form-button-red" type="submit">Cancel</button>
+	</form>
+	<a class="account-form-button account-form-button-blue" href="' . getLink('account/manage') . '">Back</a>
+</div>';
 			$twig->display('success.html.twig', array(
 				'title' => 'Email Address Change Accepted',
 				'description' => 'Do you accept <b>'.$email_new.'</b> as your new email adress?',
@@ -114,33 +104,14 @@ else
 	else if(!isset($_POST['emailchangecancel']) || $_POST['emailchangecancel'] != 1)
 	{
 		$custom_buttons = '
-<table style="width:100%;" >
-	<tr align="center">
-		<td>
-			<table border="0" cellspacing="0" cellpadding="0" >
-				<form action="' .getLink('account/email') . '" method="post" >
-					<tr>
-						<td style="border:0px;" >
-							<input type="hidden" name="emailchangecancel" value="1" >
-							' . $twig->render('buttons.cancel.html.twig') . '
-						</td>
-					</tr>
-				</form>
-			</table>
-		</td>
-		<td>
-			<table border="0" cellspacing="0" cellpadding="0" >
-				<form action="' . getLink('account/manage') . '" method="post" >
-					<tr>
-						<td style="border:0px;" >
-							' . $twig->render('buttons.back.html.twig') . '
-						</td>
-					</tr>
-				</form>
-			</table>
-		</td>
-	</tr>
-</table>';
+<link rel="stylesheet" href="tools/simple-page.css">
+<div class="account-form-actions">
+	<form action="' . getLink('account/email') . '" method="post">
+		<input type="hidden" name="emailchangecancel" value="1">
+		<button class="account-form-button account-form-button-red" type="submit">Cancel</button>
+	</form>
+	<a class="account-form-button account-form-button-blue" href="' . getLink('account/manage') . '">Back</a>
+</div>';
 		$twig->display('success.html.twig', array(
 			'title' => 'Change of Email Address',
 			'description' => 'A request has been submitted to change the email address of this account to <b>'.$email_new.'</b>.<br/>The actual change will take place on <b>'.date("j F Y, G:i:s", $email_new_time).'</b>.<br>If you do not want to change your email address, please click on "Cancel".',
@@ -152,7 +123,7 @@ if(isset($_POST['emailchangecancel']) && $_POST['emailchangecancel'] == 1) {
 	$account_logged->setCustomField("email_new", "");
 	$account_logged->setCustomField("email_new_time", 0);
 
-	$custom_buttons = '<div style="text-align:center"><table border="0" cellspacing="0" cellpadding="0" ><form action="?subtopic=accountmanagement" method="post" ><tr><td style="border:0px;" >' . $twig->render('buttons.back.html.twig') . '</td></tr></form></table></div>';
+	$custom_buttons = '<link rel="stylesheet" href="tools/simple-page.css"><div class="account-form-actions"><a class="account-form-button account-form-button-blue" href="' . getLink('account/manage') . '">Back</a></div>';
 
 	$twig->display('success.html.twig', array(
 		'title' => 'Email Address Change Cancelled',

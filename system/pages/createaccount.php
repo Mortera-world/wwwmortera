@@ -18,66 +18,16 @@ if ($config['account_country'])
 
 if ($logged) {
     ?>
-    <div class="TableContainer">
-        <div class="CaptionContainer">
-            <div class="CaptionInnerContainer">
-                <span class="CaptionEdgeLeftTop"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightTop"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionBorderTop"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionVerticalLeft"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/box-frame-vertical.gif);"></span>
-                <div class="Text">Please logout before attempting to create a new account.</div>
-                <span class="CaptionVerticalRight"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/box-frame-vertical.gif);"></span>
-                <span class="CaptionBorderBottom"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/table-headline-border.gif);"></span>
-                <span class="CaptionEdgeLeftBottom"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/box-frame-edge.gif);"></span>
-                <span class="CaptionEdgeRightBottom"
-                      style="background-image:url(<?= $template_path; ?>/images/global/content/box-frame-edge.gif);"></span>
-            </div>
+    <link rel="stylesheet" href="tools/simple-page.css">
+    <div class="create-account-page">
+        <section class="create-account-hero">
+            <span>Already logged in</span>
+            <h1>Create Account</h1>
+            <p>Please logout before attempting to create a new account.</p>
+        </section>
+        <div class="create-account-submit">
+            <a class="create-account-button" href="?account/manage">Go to Account</a>
         </div>
-        <table class="Table3" cellpadding="0" cellspacing="0">
-            <tbody>
-            <tr>
-                <td>
-                    <div class="InnerTableContainer">
-                        <table style="width:100%;">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="TableContentContainer">
-                                        <table class="TableContent" width="100%" style="border:1px solid #faf0d7;">
-                                            <tbody>
-                                            <tr bgcolor="#F1E0C6">
-                                                <td>Please logout before attempting to create a new account.</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <br>
-    <div style="width: 135px; margin: 0 auto;">
-        <div class="BigButton"
-             style="background-image:url(<?= $template_path; ?>/images/global/buttons/sbutton.gif)"><a
-                href="?account/manage">
-                <div onmouseover="MouseOverBigButton(this);" onmouseout="MouseOutBigButton(this);">
-                    <div class="BigButtonOver"
-                         style="background-image: url(<?= $template_path; ?>/images/global/buttons/sbutton_over.gif); visibility: hidden;"></div>
-                    <input class="BigButtonText" type="button" value="Login"></div>
-            </a></div>
     </div>
     <?php
     return;

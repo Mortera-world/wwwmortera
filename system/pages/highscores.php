@@ -19,6 +19,24 @@ $list = $_GET['list'] ?? '';
 $_page = $_GET['page'] ?? 0;
 $vocation = $_GET['vocation'] ?? null;
 
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$rank_vocation = trim((string)($_POST['profession'] ?? ''));
+	$rank_category = trim((string)($_POST['category'] ?? 'experience'));
+	$allowed_categories = array('axe', 'club', 'distance', 'experience', 'fishing', 'fist', 'magic', 'shield', 'sword', 'frags', 'balance');
+
+	if(!in_array($rank_category, $allowed_categories, true)) {
+		$rank_category = 'experience';
+	}
+
+	$target = getLink('highscores') . '/' . $rank_category;
+	if($rank_vocation !== '') {
+		$target .= '/' . strtolower($rank_vocation);
+	}
+
+	header('Location: ' . $target);
+	exit;
+}
+
 if (!is_numeric($_page) || $_page < 0 || $_page > PHP_INT_MAX) {
     $_page = 0;
 }
@@ -169,111 +187,10 @@ else
 		$list = 'experience';
 	}
 }
-?>
-<div class="TableContainer">
-  <div class="CaptionContainer">
-    <div class="CaptionInnerContainer"> <span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> <span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> <span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span> <span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-      <div class="Text">Highscores Filter</div>
-      <span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span> <span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span> <span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> <span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> </div>
-  </div>
-  <table class="Table1" cellpadding="0" cellspacing="0">
-    <tbody>
-      <tr>
-        <td><div class="InnerTableContainer">
-            <table style="width:100%;">
-              <tbody>
-				<form method="post" action="">
-				<tr>
-                  <td>World:</td>
-                  <td><select name="world">
-                      <option value="0" selected>All Worlds</option>
-                    </select></td>
-				</tr>
-                <tr>
-                  <td>Vocation:</td>
-                  <td><select name="profession">
-                      <option value="" selected>(all)</option>
-                      <option value="knight">Knights</option>
-                      <option value="paladin">Paladins</option>
-                      <option value="sorcerer">Sorcerers</option>
-                      <option value="druid">Druids</option>
-                    </select></td>
-					<td><div class="BigButton" style="background-image:url(https://static.tibia.com/images/global/buttons/button_blue.gif)"><div onmouseover="MouseOverBigButton(this);" onmouseout="MouseOutBigButton(this);"><div class="BigButtonOver" style="background-image:url(https://static.tibia.com/images/global/buttons/button_blue_over.gif);"></div><input class="BigButtonText" type="submit" value="Submit"></div>
-                    </div></td>
-				</tr>
-				<tr>
-                  <td>Category:</td>
-                  <td><select name="category">
-                      <option value="axe">Axe Fighting</option>
-                      <option value="club">Club Fighting</option>
-                      <option value="distance">Distance Fighting</option>
-                      <option value="experience" selected="selected">Experience Points</option>
-                      <option value="fishing">Fishing</option>
-                      <option value="fist">Fist Fighting</option>
-                      <option value="magic">Magic Level</option>
-                      <option value="shield">Shielding</option>
-                      <option value="sword">Sword Fighting</option>
-                    </select></td>
-                </tr>
-				</form>
-              </tbody>
-            </table>
-          </div></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<?php
-$rank_world = $_POST['world'];
-$rank_vocation = $_POST['profession'];
-$rank_category = $_POST['category'];
-
-if(empty($rank_vocation)){
-	if(isset($rank_category)){
-		header('Location: ?highscores/'.$rank_category.'');
-	}
-}else{
-	if(isset($rank_category)){
-		header('Location: ?highscores/'.$rank_category.'/'.$rank_vocation.'');
-	}
-}
-?>
-
-<p><i>Skills displayed in the Highscores do not include any bonuses (loyalty, equipment etc.).</i></p>
-
-
-<div class="TableContainer">
-  <div class="CaptionContainer">
-    <div class="CaptionInnerContainer"> <span class="CaptionEdgeLeftTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> <span class="CaptionEdgeRightTop" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> <span class="CaptionBorderTop" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span> <span class="CaptionVerticalLeft" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span>
-      <div class="Text">Highscores</div>
-      <span class="CaptionVerticalRight" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-vertical.gif);"></span> <span class="CaptionBorderBottom" style="background-image:url(https://static.tibia.com/images/global/content/table-headline-border.gif);"></span> <span class="CaptionEdgeLeftBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> <span class="CaptionEdgeRightBottom" style="background-image:url(https://static.tibia.com/images/global/content/box-frame-edge.gif);"></span> </div>
-  </div>
-  <table class="Table3" cellpadding="0" cellspacing="0">
-    <tbody>
-      <tr>
-        <td><div class="InnerTableContainer">
-            <table style="width:100%;">
-              <tbody>
-                <tr>
-                  <td><div class="TableContentContainer">
-                      <table class="TableContent" width="100%" style="border:1px solid #faf0d7;">
-                        <tbody>
-                          <tr class="LabelH">
-                            <td>Rank</td>
-							<?php if($config['highscores_outfit']){ ?>
-							<td style="width: 64px;">Outfit</td>
-							<?php } ?>
-                            <td style="width: 40%;">Name</td>
-                            <td style="text-align:right;">Vocation</td>
-                            <td style="text-align: right;"><?php echo ($skill != SKILL_FRAGS && $skill != SKILL_BALANCE ? 'Level' : ($skill == SKILL_BALANCE ? 'Balance' : 'Frags')); ?></td>
-							<?php if($skill == POT::SKILL__LEVEL){ ?>
-                            <td style="text-align: right;">Points</td>
-							<?php } ?>
-                          </tr>
-<?php
-
 $show_link_to_next_page = false;
 $i = 0;
+$highscore_players = array();
+$is_online = array();
 
 $online_exist = false;
 if($db->hasColumn('players', 'online'))
@@ -301,76 +218,195 @@ foreach($skills as $player)
         }
     }
 
-	if(++$i <= $config['highscores_length'])
-	{
-		if($skill == POT::SKILL__MAGIC)
+	if(++$i <= $config['highscores_length']) {
+		if($skill == POT::SKILL__MAGLEVEL)
 			$player['value'] = $player['maglevel'];
 		else if($skill == POT::SKILL__LEVEL)
 			$player['value'] = $player['level'];
-echo '
-			<tr style="height: 20px;"><td>' . ($offset + $i) . '.</td>';
-			if($config['highscores_outfit'])
-			echo '<td><img style="position:absolute;margin-top:' . (in_array($player['looktype'], array(75, 266, 302)) ? '-15px;margin-left:5px' : '-45px;margin-left:-25px') . ';" src="' . $config['outfit_images_url'] . '?id=' . $player['looktype'] . ($outfit_addons ? '&addons=' . $player['lookaddons'] : '') . '&head=' . $player['lookhead'] . '&body=' . $player['lookbody'] . '&legs=' . $player['looklegs'] . '&feet=' . $player['lookfeet'] . '" alt="" /></td>';
 
-echo '
-			<td>
-				<a href="' . getPlayerLink($player['name'], false) . '">
-					<span style="color: ' . ($player['online'] > 0 ? 'green' : 'red') . '">' . $player['name'] . '</span>
-				</a>';
-				if($config['highscores_vocation']) {
-					if(isset($player['promotion'])) {
-						if((int)$player['promotion'] > 0)
-							$player['vocation'] += ($player['promotion'] * $config['vocations_amount']);
-					}
+		if(isset($player['promotion']) && (int)$player['promotion'] > 0)
+			$player['vocation'] += ($player['promotion'] * $config['vocations_amount']);
 
-					$tmp = 'Unknown';
-					if(isset($config['vocations'][$player['vocation']])) {
-						$tmp = $config['vocations'][$player['vocation']];
-					}
+		$tmp = 'Unknown';
+		if(isset($config['vocations'][$player['vocation']]))
+			$tmp = $config['vocations'][$player['vocation']];
 
-				}
-echo '
-			</td>
-			<td style="text-align:left;">' . $tmp . '</td>
-			<td>
-				<div style="text-align:left;">'.$player['value'].'</div>
-			</td>';
-
-		if($skill == POT::SKILL__LEVEL)
-			echo '<td><div style="text-align:left">' . number_format($player['experience']) . '</div></td>';
-
-		echo '</tr>';
-	}
-	else
+		$highscore_players[] = array(
+			'rank' => $offset + $i,
+			'name' => $player['name'],
+			'url' => getPlayerLink($player['name'], false),
+			'online' => (int)$player['online'] > 0,
+			'vocation' => $tmp,
+			'level' => (int)$player['level'],
+			'value' => $skill == SKILL_BALANCE ? number_format((int)$player['value']) : number_format((int)$player['value']),
+			'experience' => isset($player['experience']) ? number_format((int)$player['experience']) : null,
+			'outfit' => ($config['highscores_outfit'] && !empty($player['looktype']) ? $config['outfit_images_url'] . '?id=' . (int)$player['looktype'] . ($outfit_addons && isset($player['lookaddons']) ? '&addons=' . (int)$player['lookaddons'] : '') . '&head=' . (int)$player['lookhead'] . '&body=' . (int)$player['lookbody'] . '&legs=' . (int)$player['looklegs'] . '&feet=' . (int)$player['lookfeet'] : null),
+		);
+	} else {
 		$show_link_to_next_page = true;
+	}
 }
 
-if(!$i) {
-	$extra = ($config['highscores_outfit'] ? 1 : 0);
-?>
-<tr bgcolor="<?php echo $config['darkborder'] ?>"><td colspan="<?php echo $skill == POT::SKILL__LEVEL ? 5 + $extra : 4 + $extra ?>">No records yet.</td></tr>
-<?php }
-//link to previous page if actual page is not first
-if($_page > 0){
-?>
-<TR><TD WIDTH="5%" ALIGN="left" VALIGN="bottom"><A HREF="<?php echo getLink('highscores') . '/' . $list . (isset($vocation) ? '/' . $vocation : '') . '/' . ($_page - 1) ?>" CLASS="size_xxs">prev</A></TD></TR>
-<?php
+$category_labels = array(
+	'axe' => 'Axe Fighting',
+	'club' => 'Club Fighting',
+	'distance' => 'Distance Fighting',
+	'experience' => 'Experience Points',
+	'fishing' => 'Fishing',
+	'fist' => 'Fist Fighting',
+	'magic' => 'Magic Level',
+	'shield' => 'Shielding',
+	'sword' => 'Sword Fighting',
+);
+
+if($config['highscores_frags'] && $config['otserv_version'] == TFS_03)
+	$category_labels['frags'] = 'Frags';
+
+if($config['highscores_balance'])
+	$category_labels['balance'] = 'Balance';
+
+$current_category = $list ?: 'experience';
+if(is_numeric($current_category)) {
+	$current_category = 'experience';
 }
-//link to next page if any result will be on next page
-if($show_link_to_next_page){
-?>
-<TR><TD WIDTH="5%" ALIGN="left" VALIGN="bottom"><A HREF="<?php echo getLink('highscores') . '/' . $list . (isset($vocation) ? '/' . $vocation : '') . '/' . ($_page + 1) ?>" CLASS="size_xxs">Next</A></TD></TR>
-<?php
+
+$current_category_label = $category_labels[$current_category] ?? 'Experience Points';
+$stat_label = $current_category_label;
+if($skill == POT::SKILL__LEVEL)
+	$stat_label = 'Level';
+else if($skill == POT::SKILL__MAGLEVEL)
+	$stat_label = 'Magic Level';
+else if($skill == SKILL_FRAGS)
+	$stat_label = 'Frags';
+else if($skill == SKILL_BALANCE)
+	$stat_label = 'Balance';
+
+$selected_vocation = isset($vocation) ? strtolower($vocation) : '';
+$vocation_options = array(
+	'' => '(all)',
+	'knight' => 'Knights',
+	'paladin' => 'Paladins',
+	'sorcerer' => 'Sorcerers',
+	'druid' => 'Druids',
+);
+
+if(!function_exists('highscoresEscape')) {
+	function highscoresEscape($value): string
+	{
+		return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+	}
 }
 ?>
-                        </tbody>
-                      </table>
-                    </div></td>
-                </tr>
-              </tbody>
-            </table>
-          </div></td>
-      </tr>
-    </tbody>
-  </table>
+
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="highscores-page">
+	<section class="highscores-hero">
+		<div>
+			<span>Ranking</span>
+			<h1>Highscores</h1>
+			<p>Los mejores personajes del servidor ordenados por <?php echo highscoresEscape($current_category_label); ?>.</p>
+		</div>
+		<strong><?php echo count($highscore_players); ?> shown</strong>
+	</section>
+
+	<section class="highscores-filter-panel">
+		<div>
+			<span>Filter</span>
+			<h2>Choose ranking</h2>
+			<p>Selecciona vocacion y categoria para ver otro highscore.</p>
+		</div>
+
+		<form class="highscores-filter-form" method="post" action="">
+			<label>
+				<span>World</span>
+				<select name="world">
+					<option value="0" selected>All Worlds</option>
+				</select>
+			</label>
+
+			<label>
+				<span>Vocation</span>
+				<select name="profession">
+					<?php foreach($vocation_options as $value => $label) { ?>
+						<option value="<?php echo highscoresEscape($value); ?>"<?php echo $selected_vocation === $value ? ' selected' : ''; ?>><?php echo highscoresEscape($label); ?></option>
+					<?php } ?>
+				</select>
+			</label>
+
+			<label>
+				<span>Category</span>
+				<select name="category">
+					<?php foreach($category_labels as $value => $label) { ?>
+						<option value="<?php echo highscoresEscape($value); ?>"<?php echo $current_category === $value ? ' selected' : ''; ?>><?php echo highscoresEscape($label); ?></option>
+					<?php } ?>
+				</select>
+			</label>
+
+			<button class="guild-button highscores-submit" type="submit">Submit</button>
+		</form>
+	</section>
+
+	<p class="highscores-note">Skills displayed in the Highscores do not include any bonuses, loyalty or equipment.</p>
+
+	<section class="highscores-list">
+		<div class="highscores-section-head">
+			<div>
+				<span><?php echo highscoresEscape($stat_label); ?></span>
+				<h2>Top characters</h2>
+			</div>
+			<strong>Page <?php echo (int)$_page + 1; ?></strong>
+		</div>
+
+		<?php if(empty($highscore_players)) { ?>
+			<div class="guilds-empty highscores-empty">
+				<h2>No records yet.</h2>
+				<p>No hay personajes para mostrar en esta categoria.</p>
+			</div>
+		<?php } else { ?>
+			<div class="highscores-card-grid">
+				<?php foreach($highscore_players as $player) { ?>
+					<a class="highscore-card" href="<?php echo highscoresEscape($player['url']); ?>">
+						<div class="highscore-rank">#<?php echo (int)$player['rank']; ?></div>
+
+						<div class="highscore-outfit">
+							<?php if($player['outfit']) { ?>
+								<img src="<?php echo highscoresEscape($player['outfit']); ?>" alt="<?php echo highscoresEscape($player['name']); ?>">
+							<?php } else { ?>
+								<b><?php echo highscoresEscape(substr($player['name'], 0, 1)); ?></b>
+							<?php } ?>
+						</div>
+
+						<div class="highscore-main">
+							<h2><?php echo highscoresEscape($player['name']); ?></h2>
+							<div class="highscore-meta">
+								<span><?php echo highscoresEscape($player['vocation']); ?></span>
+								<span>Level <?php echo (int)$player['level']; ?></span>
+								<span class="<?php echo $player['online'] ? 'is-online' : 'is-offline'; ?>"><?php echo $player['online'] ? 'Online' : 'Offline'; ?></span>
+							</div>
+						</div>
+
+						<div class="highscore-stat">
+							<span><?php echo highscoresEscape($stat_label); ?></span>
+							<strong><?php echo highscoresEscape($player['value']); ?></strong>
+							<?php if($skill == POT::SKILL__LEVEL && $player['experience']) { ?>
+								<em><?php echo highscoresEscape($player['experience']); ?> exp</em>
+							<?php } ?>
+						</div>
+					</a>
+				<?php } ?>
+			</div>
+		<?php } ?>
+	</section>
+
+	<?php if($_page > 0 || $show_link_to_next_page) { ?>
+		<nav class="highscores-pagination">
+			<?php if($_page > 0) { ?>
+				<a class="guild-button" href="<?php echo highscoresEscape(getLink('highscores') . '/' . $list . (isset($vocation) ? '/' . $vocation : '') . '/' . ($_page - 1)); ?>">Prev</a>
+			<?php } ?>
+			<?php if($show_link_to_next_page) { ?>
+				<a class="guild-button" href="<?php echo highscoresEscape(getLink('highscores') . '/' . $list . (isset($vocation) ? '/' . $vocation : '') . '/' . ($_page + 1)); ?>">Next</a>
+			<?php } ?>
+		</nav>
+	<?php } ?>
 </div>

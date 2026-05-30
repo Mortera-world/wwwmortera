@@ -1,59 +1,61 @@
-<div style="width: 100%;">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tbody>
-        <tr>
-            <td>
-                <div class="TableContainer">
-                    <div class="CaptionContainer">
-                        <div class="CaptionInnerContainer">
-                            <span class="CaptionEdgeLeftTop"
-                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
-                            <span class="CaptionEdgeRightTop"
-                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
-                            <span class="CaptionBorderTop"
-                                  style="background-image:url(templates/tibiacom/images/global/content/table-headline-border.gif);"></span>
-                            <span class="CaptionVerticalLeft"
-                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-vertical.gif);"></span>
-                            <div class="Text">
-                                <div style="height: 16px;">Roulette Winners</div>
-                            </div>
-                            <span class="CaptionVerticalRight"
-                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-vertical.gif);"></span>
-                            <span class="CaptionBorderBottom"
-                                  style="background-image:url(templates/tibiacom/images/global/content/table-headline-border.gif);"></span>
-                            <span class="CaptionEdgeLeftBottom"
-                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
-                            <span class="CaptionEdgeRightBottom"
-                                  style="background-image:url(templates/tibiacom/images/global/content/box-frame-edge.gif);"></span>
-                        </div>
-                    </div>
-                    <table class="Table3" cellpadding="0" cellspacing="0">
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div class="InnerTableContainer">
-                                    <table width="100%">
-                                        <tr>
-                                            <th>Player Name</th>
-                                            <th>Reward Count</th>
-                                            <th>Reward ID</th>
-                                        </tr>
-                                         {% for winner in winners %}
-                                        <tr>
-                            <td style="background-color: #D4C0A1;"><a href="{{ winner.player_link }}">{{ winner.player_name }}</a></td>
-                            <td style="background-color: #D4C0A1;">{{ winner.reward_count }}</td>
-                            <td style="background-color: #D4C0A1;"><img src="/images/items/{{ winner.reward_id }}.gif" alt="Reward Image" width="32" height="32"></td>
-                        </tr>
-                                        {% endfor %}
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="roulette-page">
+  <section class="roulette-hero">
+    <h1>Top rewards de la ruleta</h1>
+    <p>Un vistazo rapido a los jugadores que han sacado premios en la ruleta del servidor.</p>
+  </section>
+
+  <details class="roulette-rewards">
+    <summary>Posibles rewards de la ruleta</summary>
+    <div class="roulette-reward-grid">
+      {% for reward in possible_rewards %}
+        <div class="roulette-reward-example">
+          <img src="{{ reward.image }}" alt="{{ reward.name }}">
+          <strong>{{ reward.name }}</strong>
+          <span>ID {{ reward.item_id }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </details>
+
+  <section class="roulette-ranking">
+    <h2>Ranking de ganadores</h2>
+    <p>Se muestran los jugadores con rewards registrados. El listado se ordena de mayor a menor cantidad total.</p>
+
+    <div class="roulette-player-list">
+      {% for winner in winners %}
+        <article class="roulette-player-card">
+          <a class="roulette-outfit-wrap" href="{{ winner.player_link }}">
+            <img class="roulette-outfit" src="{{ winner.outfit }}" alt="{{ winner.player_name }}">
+          </a>
+
+          <div class="roulette-player-main">
+            <div class="roulette-player-heading">
+              <div>
+                <a class="roulette-player-name" href="{{ winner.player_link }}">{{ winner.player_name }}</a>
+                <div class="roulette-player-meta">Nivel {{ winner.level }} &bull; {{ winner.vocation }}</div>
+              </div>
+
+              <div class="roulette-total">
+                <strong>{{ winner.total_rewards }}</strong>
+                <span>rewards</span>
+              </div>
+            </div>
+
+            <div class="roulette-item-grid">
+              {% for item in winner.items %}
+                <div class="roulette-item">
+                  <img src="{{ item.image }}" alt="Reward {{ item.item_id }}">
+                  <strong>x{{ item.count }}</strong>
                 </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+              {% endfor %}
+            </div>
+          </div>
+        </article>
+      {% else %}
+        <div class="roulette-empty">Todavia no hay rewards registrados.</div>
+      {% endfor %}
+    </div>
+  </section>
 </div>

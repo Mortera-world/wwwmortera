@@ -126,10 +126,10 @@ else {
 	
 	$insert_war = $db->exec("INSERT INTO `guild_wars` (`guild1`, `guild2`, `name1`, `name2`, `status`, `duration`, `kills`, `price`, `comment`) VALUES ('".intval($myguild_id)."', '".intval($opp_id)."', '".$myguild_name."', '".$opp_name."', '1', '".$war_days."', '".$war_kills."', '".$war_price."', '".$war_comment."');");
 
-		$twig->display('success.html.twig', array(
+		$twig->display('guilds.notice.html.twig', array(
 			'title' => 'Success Declared War',
 			'description' => 'You declared a war against the '.$opp_name.' guild. ',
-			'custom_buttons' => ''
+			'back_action' => getLink('guilds') . '/' . $guild_name
 		));
 		$show = false;
 	

@@ -102,10 +102,10 @@ else
 	if(isset($_REQUEST['todo']) && $_REQUEST['todo'] == 'save')
 	{
 		$guild->deleteInvite($player);
-		$twig->display('success.html.twig', array(
+		$twig->display('guilds.notice.html.twig', array(
 			'title' => 'Deleted player invitation',
 			'description' => 'Player with name <b>' . $player->getName() . '</b> has been deleted from invites list.',
-			'custom_buttons' => $twig->render('guilds.back_button.html.twig', array('action' => '?subtopic=guilds&action=show&guild=' . $guild_name))
+			'back_action' => '?subtopic=guilds&action=show&guild=' . $guild_name
 		));
 	}
 	else {

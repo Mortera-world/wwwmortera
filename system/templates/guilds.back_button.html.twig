@@ -1,8 +1,7 @@
-{% if new_line is defined and new_line %}
-<br/>
-{% endif %}
-<div style="text-align:center">
-	<form action="{% if action is not defined %}{{ getLink('guilds') }}{% else %}{{ action }}{% endif %}" method="post">
-		{{ include('buttons.back.html.twig') }}
-	</form>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="guild-form-actions guild-form-actions-center{% if new_line is defined and new_line %} guild-back-spaced{% endif %}">
+  <form action="{% if action is not defined %}{{ getLink('guilds') }}{% else %}{{ action }}{% endif %}" method="post">
+    <button class="guild-button guild-button-danger" type="submit">Back</button>
+  </form>
 </div>

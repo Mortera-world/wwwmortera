@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="guilds-page guild-edit-page">
+  <section class="guild-notice-card">
+    <span>{{ eyebrow|default('Guilds') }}</span>
+    <h1>{{ title|raw }}</h1>
+    <p>{{ description|raw }}</p>
+
+    <div class="guild-form-actions guild-form-actions-center">
+      {% if primary_action is defined and primary_action %}
+        <form action="{{ primary_action }}" method="post">
+          <button class="guild-button" type="submit">{{ primary_label|default('Submit') }}</button>
+        </form>
+      {% endif %}
+
+      <form action="{{ back_action|default(getLink('guilds')) }}" method="post">
+        <button class="guild-button guild-button-danger" type="submit">{{ back_label|default('Back') }}</button>
+      </form>
+    </div>
+  </section>
+</div>

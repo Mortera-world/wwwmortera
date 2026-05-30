@@ -1,37 +1,38 @@
-<form action="?subtopic=guilds&action=change_rank&guild={{ guild_name }}&todo=save" method="post">
-	<table border="0" cellspacing="1" cellpadding="4" width="100%">
-		<tr bgcolor="{{ config.vdarkborder }}"><td class="white"><b>Change Rank</b></td></tr>
-		<tr bgcolor="{{ config.darkborder }}">
-			<td>
-				<table border="0" cellpadding="1">
-					<tr>
-						<td>Name: <select name="name">
-								{% for player in players %}
-									<option value="{{ player[0] }}">{{ player[1] }}</option>
-								{% endfor %}
-							</select>&nbsp;Rank:&nbsp;<select name="rankid">
-								{% for rank in ranks %}
-									<option value="{{ rank[0] }}">{{ rank[1] }}</option>
-								{% endfor %}
-							</select>
-						</td>
-						<td>
-							{{ include('buttons.submit.html.twig') }}
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</form>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr>
-		<td>
-			<div style="text-align:center">
-				<form action="?subtopic=guilds&action=show&guild={{ guild_name }}" method="post">
-					{{ include('buttons.back.html.twig') }}
-				</form>
-			</div>
-		</td>
-	</tr>
-</table>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="guilds-page guild-edit-page">
+  {% if notice is defined and notice %}
+    <div class="guild-edit-alert">{{ notice|raw }}</div>
+  {% endif %}
+
+  <form class="guild-edit-panel" action="?subtopic=guilds&action=change_rank&guild={{ guild_name|url_encode }}&todo=save" method="post">
+    <span>Member rank</span>
+    <h1>Change Rank</h1>
+    <p>Select a member and assign a new guild rank.</p>
+
+    <div class="guild-field-grid">
+      <label class="guild-field">
+        <span>Name</span>
+        <select name="name">
+          {% for player in players %}
+            <option value="{{ player[0] }}">{{ player[1] }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label class="guild-field">
+        <span>Rank</span>
+        <select name="rankid">
+          {% for rank in ranks %}
+            <option value="{{ rank[0] }}">{{ rank[1] }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+
+    <div class="guild-form-actions">
+      <button class="guild-button" type="submit">Submit</button>
+      <a class="guild-button guild-button-danger" href="{{ getLink('guilds') ~ '/' ~ guild_name|url_encode }}">Back</a>
+    </div>
+  </form>
+</div>

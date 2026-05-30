@@ -1,43 +1,21 @@
-<div class="TableContainer">
-	<table class="Table1" cellpadding="0" cellspacing="0">
-		<div class="CaptionContainer" >
-			<div class="CaptionInnerContainer" >
-				<span class="CaptionEdgeLeftTop" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);"></span>
-				<span class="CaptionEdgeRightTop" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);"></span>
-				<span class="CaptionBorderTop" style="background-image:url({{ template_path }}/images/content/table-headline-border.gif);"></span>
-				<span class="CaptionVerticalLeft" style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></span>
-				<div class="Text" >Delete Guild</div>
-				<span class="CaptionVerticalRight" style="background-image:url({{ template_path }}/images/content/box-frame-vertical.gif);"></span>
-				<span class="CaptionBorderBottom" style="background-image:url({{ template_path }}/images/content/table-headline-border.gif);"></span>
-				<span class="CaptionEdgeLeftBottom" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);"></span>
-				<span class="CaptionEdgeRightBottom" style="background-image:url({{ template_path }}/images/content/box-frame-edge.gif);"></span>
-			</div>
-		</div>
-		<tr>
-			<td>
-				<div class="InnerTableContainer">
-					<table style="width:100%;" >
-						<tr>
-							<form action="?subtopic=guilds&guild={{ guild.getName() }}&action=delete_guild" method="post">
-							<td>
-							<b>Are you sure you want delete guild <b>{{ guild.getName() }}</b>?
-							</td>
-							<td>
-								<input type="hidden" name="todo" value="save"/>
-								{% set button_name = 'Yes, delete.' %}
-								{% include('buttons.base_green.html.twig') %}
-							</td>
-							</form>
-						</tr>
-					</table>
-				</div>
-			</td>
-		</tr>
-	</table>
-</div>
-<br/>
-<div style="display: flex; justify-content: center;">
-	<form action="?guilds/{{ guild.getName() }}" method="post">
-		{{ include('buttons.back.html.twig') }}
-	</form>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="guilds-page guild-edit-page">
+  <section class="guild-edit-panel">
+    <span>Danger zone</span>
+    <h1>Delete Guild</h1>
+    <p>This action will remove the guild and cannot be undone.</p>
+
+    <div class="guild-confirm-box">
+      Are you sure you want to delete guild <b>{{ guild.getName() }}</b>?
+    </div>
+
+    <form action="?subtopic=guilds&guild={{ guild.getName()|url_encode }}&action=delete_guild" method="post">
+      <input type="hidden" name="todo" value="save">
+      <div class="guild-form-actions">
+        <button class="guild-button guild-button-danger" type="submit">Yes, Delete</button>
+        <a class="guild-button guild-button-danger" href="{{ getLink('guilds') ~ '/' ~ guild.getName()|url_encode }}">Back</a>
+      </div>
+    </form>
+  </section>
 </div>

@@ -1,17 +1,3 @@
-<style>
-#PantheonEventAllLocationsTable .AdditionalTableShadow, #ExperienceTable .AdditionalTableShadow {
-    border: 1px solid #5f4d41;
-    box-shadow: 3px 3px 2px #875f3e;
-    margin-right: 5px;
-    margin-bottom: 5px;
-}
-.AdditionalTableHeadline {
-    background-color: #d5c0a1;
-}
-.AdditionalTableHeadline td {
-    border: 1px solid #faf0d7;
-}
-</style>
 <?php
 /**
  * Experience table

@@ -1,32 +1,23 @@
-<table border="0" cellspacing="1" cellpadding="4" width="100%">
-	<tr bgcolor="{{ config.vdarkborder }}">
-		<td class="white"><b>Accept invitation</b></td>
-	</tr>
-	<tr bgcolor="{{ config.lightborder }}">
-		<td width="100%">Select character to join guild:</td>
-	</tr>
-	<tr bgcolor="{{ config.darkborder }}">
-		<td>
-			<form action="?subtopic=guilds&action=accept_invite&guild={{ guild_name }}&todo=save" method="post">
-				{% set i = 0 %}
-				{% for player in invited_players %}
-				<input type="radio" name="name" id="name_{{ i }}" value="{{ player }}" /><label for="name_{{ i }}">{{ player }}</label>
-				{% set i = i + 1 %}
-				{% endfor %}
-				{{ include('buttons.submit.html.twig') }}
-			</form>
-		</td>
-	</tr>
-</table>
-<br/>
-<div style="text-align:center">
-	<table border="0" cellspacing="0" cellpadding="0" width="100%">
-		<tr>
-			<td>
-				<form action="{{ getLink('guilds') ~ '/' ~ guild_name }}" method="post">
-					{{ include('buttons.back.html.twig') }}
-				</form>
-			</td>
-		</tr>
-	</table>
+<link rel="stylesheet" href="tools/simple-page.css">
+
+<div class="guilds-page guild-edit-page">
+  <form class="guild-edit-panel" action="?subtopic=guilds&action=accept_invite&guild={{ guild_name|url_encode }}&todo=save" method="post">
+    <span>Guild invitation</span>
+    <h1>Accept Invitation</h1>
+    <p>Select the character that will join this guild.</p>
+
+    <div class="guild-radio-list">
+      {% for player in invited_players %}
+        <label class="guild-radio-option">
+          <input type="radio" name="name" value="{{ player }}"{% if loop.first %} checked{% endif %}>
+          {{ player }}
+        </label>
+      {% endfor %}
+    </div>
+
+    <div class="guild-form-actions">
+      <button class="guild-button" type="submit">Submit</button>
+      <a class="guild-button guild-button-danger" href="{{ getLink('guilds') ~ '/' ~ guild_name|url_encode }}">Back</a>
+    </div>
+  </form>
 </div>

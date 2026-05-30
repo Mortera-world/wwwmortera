@@ -79,6 +79,135 @@
  * @link      https://github.com/opentibiabr/myaac
  */
 defined('MYAAC') or die('Direct access not allowed!');
+
+if (!function_exists('characterEquipmentExtractTier')) {
+    function characterEquipmentExtractTier($attributes): int
+    {
+        if (empty($attributes)) {
+            return 0;
+        }
+
+        $attributes = (string)$attributes;
+        $offset = 0;
+        $length = strlen($attributes);
+
+        while ($offset < $length) {
+            $attribute = ord($attributes[$offset]);
+            $offset++;
+
+            switch ($attribute) {
+                case 0:
+                    return 0;
+                case 1:
+                case 18:
+                    $offset += 8;
+                    break;
+                case 4:
+                case 5:
+                case 12:
+                case 22:
+                case 39:
+                    $offset += 2;
+                    break;
+                case 6:
+                case 7:
+                case 19:
+                case 24:
+                case 25:
+                case 26:
+                case 34:
+                case 42:
+                    if ($offset + 2 > $length) {
+                        return 0;
+                    }
+
+                    $stringLength = unpack('v', substr($attributes, $offset, 2))[1];
+                    $offset += 2 + $stringLength;
+                    break;
+                case 15:
+                case 17:
+                case 32:
+                case 33:
+                case 36:
+                    $offset += 1;
+                    break;
+                case 16:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                case 31:
+                case 35:
+                case 38:
+                case 43:
+                case 44:
+                    $offset += 4;
+                    break;
+                case 40:
+                    if ($offset >= $length) {
+                        return 0;
+                    }
+
+                    return max(1, min(30, ord($attributes[$offset])));
+                case 41:
+                    return 0;
+                default:
+                    return 0;
+            }
+        }
+
+        return 0;
+    }
+}
+
+if (!function_exists('characterEquipmentExtractUpgradeCount')) {
+    function characterEquipmentExtractUpgradeCount($attributes): int
+    {
+        if (empty($attributes)) {
+            return 0;
+        }
+
+        $attributes = (string)$attributes;
+        $pos = strpos($attributes, 'upgrade_count');
+        if ($pos === false) {
+            return 0;
+        }
+
+        $valuePos = $pos + strlen('upgrade_count') + 1;
+        $bytes = substr($attributes, $valuePos, 8);
+        if (strlen($bytes) < 4) {
+            return 0;
+        }
+
+        $value = (int)(unpack('V', substr($bytes, 0, 4))[1] ?? 0);
+        if ($value <= 0) {
+            return 0;
+        }
+
+        return min(100, $value);
+    }
+}
+
+if (!function_exists('characterEquipmentRenderItem')) {
+    function characterEquipmentRenderItem($itemType, int $tier = 0, int $upgradeCount = 0): string
+    {
+        $image = getItemImage($itemType);
+        if ($tier <= 0 && $upgradeCount <= 0) {
+            return $image;
+        }
+
+        $badges = '';
+        if ($tier > 0) {
+            $badges .= '<span class="character-item-tier">' . $tier . '</span>';
+        }
+
+        if ($upgradeCount > 0) {
+            $badges .= '<span class="character-item-upgrade">+' . $upgradeCount . '</span>';
+        }
+
+        return '<span class="character-tiered-item">' . $image . $badges . '</span>';
+    }
+}
 $title = 'Characters';
 
 require_once SYSTEM . 'item.php';
@@ -287,9 +416,14 @@ if ($player->isLoaded() && !$player->isDeleted()) {
             }
         } else {
             global $db;
-            $eq_sql = $db->query('SELECT `pid`, `itemtype` FROM player_items WHERE player_id = ' . $player->getId() . ' AND (`pid` >= 1 and `pid` <= 10)');
-            foreach ($eq_sql as $eq)
-                $equipment[$eq['pid']] = $eq['itemtype'];
+            $eq_sql = $db->query('SELECT `pid`, `itemtype`, `attributes` FROM player_items WHERE player_id = ' . $player->getId() . ' AND (`pid` >= 1 and `pid` <= 10)');
+            foreach ($eq_sql as $eq) {
+                $equipment[$eq['pid']] = [
+                    'itemtype' => $eq['itemtype'],
+                    'tier' => characterEquipmentExtractTier($eq['attributes'] ?? ''),
+                    'upgrade_count' => characterEquipmentExtractUpgradeCount($eq['attributes'] ?? '')
+                ];
+            }
 
             for ($i = 0; $i <= 10; $i++) {
                 if (!isset($equipment[$i]) || $equipment[$i] == 0)
@@ -297,8 +431,8 @@ if ($player->isLoaded() && !$player->isDeleted()) {
             }
 
             for ($i = 1; $i < 11; $i++) {
-                if (Validator::number($equipment[$i]))
-                    $equipment[$i] = getItemImage($equipment[$i]);
+                if (is_array($equipment[$i]) && Validator::number($equipment[$i]['itemtype']))
+                    $equipment[$i] = characterEquipmentRenderItem($equipment[$i]['itemtype'], $equipment[$i]['tier'], $equipment[$i]['upgrade_count']);
                 else
                     $equipment[$i] = '<img src="images/items/' . $equipment[$i] . '.gif" width="40" height="40" border="0" alt=" ' . $equipment[$i] . '" />';
             }

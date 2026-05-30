@@ -12,6 +12,7 @@
 defined('MYAAC') or die('Direct access not allowed!');
 
 $guild_name = isset($_REQUEST['guild']) ? urldecode($_REQUEST['guild']) : null;
+$logo_saved = false;
 if(!Validator::guildName($guild_name)) {
 	$errors[] = Validator::getLastError();
 }
@@ -89,7 +90,7 @@ if(empty($errors)) {
 					$twig->display('error_box.html.twig', array('errors' => $upload_errors));
 				}
 				else {
-					success('Logo has been changed.');
+					$logo_saved = true;
 					$guild->setCustomField('logo_name', $save_file_name.'.'.$extension);
 				}
 			}
@@ -102,7 +103,8 @@ if(empty($errors)) {
 			$twig->display('guilds.change_logo.html.twig', array(
 				'guild_logo' => $guild_logo,
 				'guild' => $guild,
-				'max_image_size_b' => $max_image_size_b
+				'max_image_size_b' => $max_image_size_b,
+				'saved' => $logo_saved
 			));
 
 		}

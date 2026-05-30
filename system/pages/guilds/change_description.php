@@ -47,12 +47,9 @@ if(empty($errors)) {
 				$saved = true;
 			}
 
-			if($saved) {
-				success('Changes has been saved');
-			}
-
 			$twig->display('guilds.change_description.html.twig', array(
-				'guild' => $guild
+				'guild' => $guild,
+				'saved' => $saved
 			));
 		}
 		else {

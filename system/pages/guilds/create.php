@@ -14,6 +14,7 @@ defined('MYAAC') or die('Direct access not allowed!');
 $guild_name = isset($_REQUEST['guild']) ? urldecode($_REQUEST['guild']) : NULL;
 $name = isset($_REQUEST['name']) ? stripslashes($_REQUEST['name']) : NULL;
 $todo = isset($_REQUEST['todo']) ? $_REQUEST['todo'] : NULL;
+$create_form_errors = array();
 if (!$logged) {
     $guild_errors[] = 'You are not logged in. You can\'t create guild.';
 }
@@ -94,7 +95,7 @@ if ($todo == 'save') {
 }
 
 if (!empty($guild_errors)) {
-    $twig->display('error_box.html.twig', array('errors' => $guild_errors));
+    $create_form_errors = $guild_errors;
     unset($todo);
 }
 
@@ -124,6 +125,9 @@ if (isset($todo) && $todo == 'save') {
 } else {
     sort($array_of_player_nig);
     $twig->display('guilds.create.html.twig', array(
-        'players' => $array_of_player_nig
+        'players' => $array_of_player_nig,
+        'errors' => $create_form_errors,
+        'submitted_guild_name' => $guild_name,
+        'submitted_name' => $name
     ));
 }

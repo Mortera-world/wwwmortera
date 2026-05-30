@@ -11,6 +11,7 @@
  */
 defined('MYAAC') or die('Direct access not allowed!');
 
+$rank_notice = null;
 if(!$logged) {
 	$errors[] = "You are not logged in. You can't change rank.";
 }
@@ -110,11 +111,7 @@ if($guild_vice)
 		if(empty($errors))
 		{
 			$player_to_change->setRank($rank);
-			$twig->display('success.html.twig', array(
-				'title' => 'Rank Changed',
-				'description' => 'Rank of player <b>'.$player_to_change->getName().'</b> has been changed to <b>'.$rank->getName().'</b>.',
-				'custom_buttons' => ''
-			));
+			$rank_notice = 'Rank of player <b>'.$player_to_change->getName().'</b> has been changed to <b>'.$rank->getName().'</b>.';
 		}
 		else {
 			$twig->display('error_box.html.twig', array('errors' => $errors));
@@ -126,7 +123,8 @@ if($guild_vice)
 	$twig->display('guilds.change_rank.html.twig', array(
 		'players' => isset($result['players']) ? $result['players'] : array(),
 		'guild_name' => $guild->getName(),
-		'ranks' => $result['ranks']
+		'ranks' => $result['ranks'],
+		'notice' => $rank_notice
 	));
 }
 else {
