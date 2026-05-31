@@ -13,6 +13,8 @@ if ($logged) {
 }
 
 require SYSTEM . 'pages/char_bazaar/modern_header.php';
+require SYSTEM . 'pages/char_bazaar/settle_expired.php';
+charBazaarSettleExpiredAuctions($db, (int) $config['bazaar_tax']);
 $subtopic = $_GET['subtopic'] ?? null;
 $getPageDetails = $_GET['details'] ?? null;
 $getPageAction = $_GET['action'] ?? null;

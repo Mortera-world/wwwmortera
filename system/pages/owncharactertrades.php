@@ -12,6 +12,8 @@ if ($logged) {
 }
 
 require SYSTEM . 'pages/char_bazaar/modern_header.php';
+require SYSTEM . 'pages/char_bazaar/settle_expired.php';
+charBazaarSettleExpiredAuctions($db, (int) $config['bazaar_tax']);
 ?>
 <div class="SmallBox">
     <div class="MessageContainer">

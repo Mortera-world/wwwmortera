@@ -15,6 +15,7 @@ if ($logged) {
 }
 
 require SYSTEM . 'pages/char_bazaar/modern_header.php';
+require SYSTEM . 'pages/char_bazaar/settle_expired.php';
 // GET PAGES
 $subtopic = $_GET['subtopic'] ?? null;
 $getPageDetails = $_GET['details'] ?? null;
@@ -25,6 +26,7 @@ $getPageAction = $_GET['action'] ?? null;
 $charbazaar_tax = $config['bazaar_tax'];
 $charbazaar_bid = $config['bazaar_bid'];
 /* CHAR BAZAAR CONFIG END */
+charBazaarSettleExpiredAuctions($db, (int) $charbazaar_tax);
 
 /* COUNTER CONFIG */
 $showCounter = true;
@@ -205,10 +207,14 @@ if ($getPageAction == 'bid') {
     $Auction_maxbid = $_POST['maxbid'];
 
     /* GET INFO CHARACTER */
-    $getAuction = $db->query('SELECT `id`, `account_old`, `account_new`, `player_id`, `price`, `date_end`, `date_start`, `bid_account`, `bid_price` FROM `myaac_charbazaar` WHERE `id` = ' . $db->quote($Auction_iden) . '');
+    $getAuction = $db->query('SELECT `id`, `account_old`, `account_new`, `player_id`, `price`, `date_end`, `date_start`, `bid_account`, `bid_price`, `status` FROM `myaac_charbazaar` WHERE `id` = ' . $db->quote($Auction_iden) . '');
     $getAuction = $getAuction->fetch();
     /* GET INFO CHARACTER END */
 
+    if (!$getAuction || (int) $getAuction['status'] !== 0 || strtotime($getAuction['date_end']) <= time()) {
+        header('Location: ' . BASE_URL . '?subtopic=currentcharactertrades');
+        exit;
+    }
 
     if ($logged && $getAuction['account_old'] != $account_logged) {
 
@@ -573,8 +579,13 @@ if ($getPageAction == 'bidfinish') {
         $bid_iden = $_POST['bid_iden'];
         $bid_max = $_POST['bid_max'];
 
-        $getAuction = $db->query("SELECT `id`, `account_old`, `account_new`, `player_id`, `price`, `date_end`, `date_start`, `bid_account`, `bid_price` FROM `myaac_charbazaar` WHERE `id` = {$db->quote($bid_iden)}");
+        $getAuction = $db->query("SELECT `id`, `account_old`, `account_new`, `player_id`, `price`, `date_end`, `date_start`, `bid_account`, `bid_price`, `status` FROM `myaac_charbazaar` WHERE `id` = {$db->quote($bid_iden)}");
         $getAuction = $getAuction->fetch();
+
+        if (!$getAuction || (int) $getAuction['status'] !== 0 || strtotime($getAuction['date_end']) <= time()) {
+            header('Location: ' . BASE_URL . '?subtopic=currentcharactertrades');
+            exit;
+        }
 
         $getAuctionBid = $db->query("SELECT `id`, `account_id`, `auction_id`, `bid`, `date` FROM `myaac_charbazaar_bid` WHERE `auction_id` = {$db->quote($bid_iden)} ORDER BY `bid` DESC LIMIT 1");
         $countAuctionBid = $getAuctionBid->rowCount();
@@ -600,7 +611,7 @@ if ($getPageAction == 'bidfinish') {
             $Update_Auction = $db->exec('UPDATE `myaac_charbazaar` SET `price` = ' . $db->quote($bid_max) . ', `bid_account` = ' . $account_logged . ', `bid_price` = ' . $db->quote($bid_max) . ' WHERE `id` = ' . $getAuction['id'] . '');
 
             // INSERT NEW BID
-            $Insert_NewBid = $db->exec('UPDATE `myaac_charbazaar_bid` SET `account_id` = ' . $account_logged . ', `auction_id` = ' . $getAuction['id'] . ', `bid` = ' . $db->quote($bid_max) . '');
+            $Insert_NewBid = $db->exec('UPDATE `myaac_charbazaar_bid` SET `account_id` = ' . $account_logged . ', `auction_id` = ' . $getAuction['id'] . ', `bid` = ' . $db->quote($bid_max) . ' WHERE `id` = ' . (int) $getAuctionBid['id']);
 
         } else {
 
