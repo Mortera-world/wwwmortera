@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
+<link rel="stylesheet" href="/tools/simple-page.css?v=20260531">
 
 <div class="lost-account-page">
     <section class="lost-account-hero">

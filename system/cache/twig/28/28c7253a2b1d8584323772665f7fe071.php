@@ -34,7 +34,7 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
     {
         $macros = $this->macros;
         // line 1
-        echo "<link rel=\"stylesheet\" href=\"/tools/simple-page.css?v=20260529\">
+        echo "<link rel=\"stylesheet\" href=\"/tools/simple-page.css?v=20260531\">
 
 <div class=\"account-management-page\">
   <section class=\"account-management-hero\">
@@ -140,16 +140,25 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
             <button class=\"account-management-button account-management-button-green\" type=\"submit\">Register Account</button>
           </form>
         ";
+        } elseif (twig_get_attribute($this->env, $this->source,         // line 58
+($context["config"] ?? null), "generate_new_reckey", [], "any", false, false, false, 58)) {
+            // line 59
+            echo "          <form action=\"";
+            echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/register/new"), "html", null, true);
+            echo "\" method=\"post\">
+            <button class=\"account-management-button account-management-button-green\" type=\"submit\">Buy New Recovery Key</button>
+          </form>
+        ";
         }
-        // line 59
+        // line 63
         echo "      </div>
     </article>
   </section>
 
   ";
-        // line 63
+        // line 67
         if (twig_test_empty(($context["recovery_key"] ?? null))) {
-            // line 64
+            // line 68
             echo "    <section class=\"account-management-notice\">
       <div>
         <span>Recovery Key</span>
@@ -157,7 +166,7 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
         <p>Registra tu cuenta para obtener una recovery key y mejorar la proteccion de acceso.</p>
       </div>
       <form action=\"";
-            // line 70
+            // line 74
             echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/register"), "html", null, true);
             echo "\" method=\"post\">
         <button class=\"account-management-button account-management-button-green\" type=\"submit\">Register Account</button>
@@ -165,25 +174,25 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
     </section>
   ";
         }
-        // line 75
+        // line 79
         echo "
   ";
-        // line 76
+        // line 80
         if (($context["email_request"] ?? null)) {
-            // line 77
+            // line 81
             echo "    <section class=\"account-management-notice account-management-notice-warn\">
       <div>
         <span>Email Request</span>
         <strong>Hay un cambio de correo pendiente</strong>
         <p>A request has been submitted to change the email address to <b>";
-            // line 81
+            // line 85
             echo twig_escape_filter($this->env, ($context["email_new"] ?? null), "html", null, true);
             echo "</b>. After <b>";
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["email_new_time"] ?? null), "j F Y, G:i:s"), "html", null, true);
             echo "</b> you can accept the new email address.</p>
       </div>
       <form action=\"";
-            // line 83
+            // line 87
             echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/email"), "html", null, true);
             echo "\" method=\"post\">
         <button class=\"account-management-button account-management-button-blue\" type=\"submit\">Review</button>
@@ -191,7 +200,7 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
     </section>
   ";
         }
-        // line 88
+        // line 92
         echo "
   <section class=\"account-management-card\">
     <div class=\"account-management-card-heading account-management-heading-row\">
@@ -202,15 +211,15 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
       </div>
       <div class=\"account-management-actions\">
         <form action=\"";
-        // line 97
+        // line 101
         echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/character/create"), "html", null, true);
         echo "\" method=\"post\">
           <button class=\"account-management-button account-management-button-green\" type=\"submit\">Create Character</button>
         </form>
         ";
-        // line 100
-        if (twig_get_attribute($this->env, $this->source, ($context["config"] ?? null), "account_change_character_name", [], "any", false, false, false, 100)) {
-            // line 101
+        // line 104
+        if (twig_get_attribute($this->env, $this->source, ($context["config"] ?? null), "account_change_character_name", [], "any", false, false, false, 104)) {
+            // line 105
             echo "          <form action=\"";
             echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/character/name"), "html", null, true);
             echo "\" method=\"post\">
@@ -218,10 +227,10 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
           </form>
         ";
         }
-        // line 105
+        // line 109
         echo "        ";
-        if (twig_get_attribute($this->env, $this->source, ($context["config"] ?? null), "account_change_character_sex", [], "any", false, false, false, 105)) {
-            // line 106
+        if (twig_get_attribute($this->env, $this->source, ($context["config"] ?? null), "account_change_character_sex", [], "any", false, false, false, 109)) {
+            // line 110
             echo "          <form action=\"";
             echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/character/sex"), "html", null, true);
             echo "\" method=\"post\">
@@ -229,84 +238,84 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
           </form>
         ";
         }
-        // line 110
+        // line 114
         echo "      </div>
     </div>
 
     <div class=\"account-management-character-list\">
       ";
-        // line 114
+        // line 118
         $context["i"] = 0;
-        // line 115
+        // line 119
         echo "      ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["players"] ?? null));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["player"]) {
-            // line 116
+            // line 120
             echo "        ";
             $context["i"] = (($context["i"] ?? null) + 1);
-            // line 117
+            // line 121
             echo "        <article class=\"account-management-character\">
           <div class=\"account-management-character-index\">";
-            // line 118
+            // line 122
             echo twig_escape_filter($this->env, ($context["i"] ?? null), "html", null, true);
             echo "</div>
           <div class=\"account-management-character-main\">
             <a href=\"";
-            // line 120
-            echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()(("characters/" . twig_urlencode_filter(twig_get_attribute($this->env, $this->source, $context["player"], "getName", [], "method", false, false, false, 120)))), "html", null, true);
+            // line 124
+            echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()(("characters/" . twig_urlencode_filter(twig_get_attribute($this->env, $this->source, $context["player"], "getName", [], "method", false, false, false, 124)))), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["player"], "getName", [], "method", false, false, false, 120), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["player"], "getName", [], "method", false, false, false, 124), "html", null, true);
             echo "</a>
             ";
-            // line 121
-            if (twig_get_attribute($this->env, $this->source, $context["player"], "isDeleted", [], "method", false, false, false, 121)) {
-                // line 122
+            // line 125
+            if (twig_get_attribute($this->env, $this->source, $context["player"], "isDeleted", [], "method", false, false, false, 125)) {
+                // line 126
                 echo "              <strong class=\"account-management-badge account-management-badge-red\">Deleted</strong>
             ";
             }
-            // line 124
+            // line 128
             echo "            ";
-            if (twig_get_attribute($this->env, $this->source, $context["player"], "isMain", [], "method", false, false, false, 124)) {
-                // line 125
+            if (twig_get_attribute($this->env, $this->source, $context["player"], "isMain", [], "method", false, false, false, 128)) {
+                // line 129
                 echo "              <strong class=\"account-management-badge\">Main</strong>
             ";
             }
-            // line 127
+            // line 131
             echo "            <p>";
-            echo twig_escape_filter($this->env, (($__internal_compile_2 = twig_get_attribute($this->env, $this->source, ($context["config"] ?? null), "vocations", [], "any", false, false, false, 127)) && is_array($__internal_compile_2) || $__internal_compile_2 instanceof ArrayAccess ? ($__internal_compile_2[twig_get_attribute($this->env, $this->source, $context["player"], "getVocation", [], "method", false, false, false, 127)] ?? null) : null), "html", null, true);
+            echo twig_escape_filter($this->env, (($__internal_compile_2 = twig_get_attribute($this->env, $this->source, ($context["config"] ?? null), "vocations", [], "any", false, false, false, 131)) && is_array($__internal_compile_2) || $__internal_compile_2 instanceof ArrayAccess ? ($__internal_compile_2[twig_get_attribute($this->env, $this->source, $context["player"], "getVocation", [], "method", false, false, false, 131)] ?? null) : null), "html", null, true);
             echo " - Level ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["player"], "getLevel", [], "method", false, false, false, 127), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["player"], "getLevel", [], "method", false, false, false, 131), "html", null, true);
             echo " - ";
             echo twig_escape_filter($this->env, (($__internal_compile_3 = (($__internal_compile_4 = ($context["config"] ?? null)) && is_array($__internal_compile_4) || $__internal_compile_4 instanceof ArrayAccess ? ($__internal_compile_4["lua"] ?? null) : null)) && is_array($__internal_compile_3) || $__internal_compile_3 instanceof ArrayAccess ? ($__internal_compile_3["serverName"] ?? null) : null), "html", null, true);
             echo "</p>
           </div>
           <div class=\"account-management-character-state\">
             ";
-            // line 130
-            if (twig_get_attribute($this->env, $this->source, $context["player"], "isOnline", [], "method", false, false, false, 130)) {
-                // line 131
+            // line 134
+            if (twig_get_attribute($this->env, $this->source, $context["player"], "isOnline", [], "method", false, false, false, 134)) {
+                // line 135
                 echo "              <span class=\"account-management-online\">Online</span>
             ";
             } else {
-                // line 133
+                // line 137
                 echo "              <span class=\"account-management-offline\">Offline</span>
             ";
             }
-            // line 135
+            // line 139
             echo "          </div>
           <div class=\"account-management-character-actions\">
             ";
-            // line 137
-            if ( !twig_get_attribute($this->env, $this->source, $context["player"], "isDeleted", [], "method", false, false, false, 137)) {
-                // line 138
+            // line 141
+            if ( !twig_get_attribute($this->env, $this->source, $context["player"], "isDeleted", [], "method", false, false, false, 141)) {
+                // line 142
                 echo "              <a class=\"account-management-mini-button\" href=\"";
-                echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()(("account/character/comment/" . twig_urlencode_filter(twig_get_attribute($this->env, $this->source, $context["player"], "getName", [], "method", false, false, false, 138)))), "html", null, true);
+                echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()(("account/character/comment/" . twig_urlencode_filter(twig_get_attribute($this->env, $this->source, $context["player"], "getName", [], "method", false, false, false, 142)))), "html", null, true);
                 echo "\">Edit</a>
             ";
             }
-            // line 140
+            // line 144
             echo "            <a class=\"account-management-mini-button account-management-mini-button-red\" href=\"";
             echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/character/delete"), "html", null, true);
             echo "\">Delete</a>
@@ -316,14 +325,14 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 144
+            // line 148
             echo "        <div class=\"account-management-empty\">No tienes personajes en esta cuenta.</div>
       ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['player'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 146
+        // line 150
         echo "    </div>
   </section>
 
@@ -337,7 +346,7 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
 
       <div class=\"account-management-info-list\">
         <div><span>Account ";
-        // line 158
+        // line 162
         if (twig_constant("USE_ACCOUNT_NAME")) {
             echo "Name";
         } else {
@@ -347,34 +356,34 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
         echo twig_escape_filter($this->env, ($context["account"] ?? null), "html", null, true);
         echo "</strong></div>
         <div><span>Email Address</span><strong>";
-        // line 159
+        // line 163
         echo twig_escape_filter($this->env, ($context["account_email"] ?? null), "html", null, true);
         echo ($context["email_change"] ?? null);
         echo "</strong></div>
         <div><span>Created</span><strong>";
-        // line 160
+        // line 164
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["account_created"] ?? null), "M d Y, G:i:s"), "html", null, true);
         echo "</strong></div>
         <div><span>Last Login</span><strong>";
-        // line 161
+        // line 165
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["account_web_lastlogin"] ?? null), "M d Y, G:i:s"), "html", null, true);
         echo "</strong></div>
         <div><span>Account Status</span><strong>";
-        // line 162
+        // line 166
         echo ($context["account_status"] ?? null);
         echo "</strong></div>
         <div><span>Tibia Coins</span><strong>";
-        // line 163
+        // line 167
         echo twig_escape_filter($this->env, ($context["account_coins"] ?? null), "html", null, true);
         echo " (";
         echo twig_escape_filter($this->env, ($context["account_coins_transferable"] ?? null), "html", null, true);
         echo " transferable)</strong></div>
         <div><span>Tournament Coins</span><strong>";
-        // line 164
+        // line 168
         echo twig_escape_filter($this->env, ($context["tournament_coins"] ?? null), "html", null, true);
         echo "</strong></div>
         <div><span>Registered</span><strong>";
-        // line 165
+        // line 169
         echo ($context["account_registered"] ?? null);
         echo "</strong></div>
       </div>
@@ -388,9 +397,9 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
           <p>Informacion visible o administrativa del perfil.</p>
         </div>
         ";
-        // line 176
+        // line 180
         if ( !($context["account_update_info_on_register"] ?? null)) {
-            // line 177
+            // line 181
             echo "          <form action=\"";
             echo twig_escape_filter($this->env, $this->env->getFunction('getLink')->getCallable()("account/info"), "html", null, true);
             echo "\" method=\"post\">
@@ -398,32 +407,30 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
           </form>
         ";
         }
-        // line 181
+        // line 185
         echo "      </div>
 
       <div class=\"account-management-info-list\">
         <div><span>Real Name</span><strong>";
-        // line 184
+        // line 188
         ((($context["account_rlname"] ?? null)) ? (print (twig_escape_filter($this->env, ($context["account_rlname"] ?? null), "html", null, true))) : (print ("-")));
         echo "</strong></div>
         <div><span>Address</span><strong>";
-        // line 185
+        // line 189
         ((($context["account_location"] ?? null)) ? (print (twig_escape_filter($this->env, ($context["account_location"] ?? null), "html", null, true))) : (print ("-")));
         echo "</strong></div>
         <div><span>Phone</span><strong>";
-        // line 186
+        // line 190
         ((($context["account_phone"] ?? null)) ? (print (twig_escape_filter($this->env, ($context["account_phone"] ?? null), "html", null, true))) : (print ("-")));
         echo "</strong></div>
         ";
-        // line 187
+        // line 191
         if ((($context["account_show_rk"] ?? null) &&  !twig_test_empty(($context["recovery_key"] ?? null)))) {
-            // line 188
-            echo "          <div><span>Recovery Key</span><strong>";
-            echo twig_escape_filter($this->env, ($context["recovery_key"] ?? null), "html", null, true);
-            echo "</strong></div>
+            // line 192
+            echo "          <div><span>Recovery Key</span><strong>Registered</strong></div>
         ";
         }
-        // line 190
+        // line 194
         echo "      </div>
     </article>
   </section>
@@ -437,40 +444,40 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
 
     <div class=\"account-management-log-list\">
       ";
-        // line 202
+        // line 206
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["actions"] ?? null));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["action"]) {
-            // line 203
+            // line 207
             echo "        <div class=\"account-management-log-row\">
           <strong>";
-            // line 204
-            echo twig_get_attribute($this->env, $this->source, $context["action"], "action", [], "any", false, false, false, 204);
+            // line 208
+            echo twig_get_attribute($this->env, $this->source, $context["action"], "action", [], "any", false, false, false, 208);
             echo "</strong>
           <span>";
-            // line 205
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["action"], "date", [], "any", false, false, false, 205), "d M Y, H:i:s"), "html", null, true);
+            // line 209
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["action"], "date", [], "any", false, false, false, 209), "d M Y, H:i:s"), "html", null, true);
             echo "</span>
           <small title=\"";
-            // line 206
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["action"], "ipv6", [], "any", false, false, false, 206), "html", null, true);
+            // line 210
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["action"], "ipv6", [], "any", false, false, false, 210), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["action"], "ip", [], "any", false, false, false, 206), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["action"], "ip", [], "any", false, false, false, 210), "html", null, true);
             echo "</small>
         </div>
       ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 209
+            // line 213
             echo "        <div class=\"account-management-empty\">No hay logs disponibles.</div>
       ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['action'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 211
+        // line 215
         echo "    </div>
   </section>
 </div>
@@ -489,7 +496,7 @@ class __TwigTemplate_83c7faa5d3d009d6bb2cd702bce2405e extends \Twig\Template
 
     public function getDebugInfo()
     {
-        return array (  474 => 211,  467 => 209,  457 => 206,  453 => 205,  449 => 204,  446 => 203,  441 => 202,  427 => 190,  421 => 188,  419 => 187,  415 => 186,  411 => 185,  407 => 184,  402 => 181,  394 => 177,  392 => 176,  378 => 165,  374 => 164,  368 => 163,  364 => 162,  360 => 161,  356 => 160,  351 => 159,  341 => 158,  327 => 146,  320 => 144,  310 => 140,  304 => 138,  302 => 137,  298 => 135,  294 => 133,  290 => 131,  288 => 130,  277 => 127,  273 => 125,  270 => 124,  266 => 122,  264 => 121,  258 => 120,  253 => 118,  250 => 117,  247 => 116,  241 => 115,  239 => 114,  233 => 110,  225 => 106,  222 => 105,  214 => 101,  212 => 100,  206 => 97,  195 => 88,  187 => 83,  180 => 81,  174 => 77,  172 => 76,  169 => 75,  161 => 70,  153 => 64,  151 => 63,  145 => 59,  137 => 55,  135 => 54,  127 => 49,  121 => 46,  104 => 32,  101 => 31,  97 => 29,  95 => 28,  87 => 24,  81 => 22,  71 => 20,  69 => 19,  59 => 15,  55 => 14,  44 => 6,  37 => 1,);
+        return array (  481 => 215,  474 => 213,  464 => 210,  460 => 209,  456 => 208,  453 => 207,  448 => 206,  434 => 194,  430 => 192,  428 => 191,  424 => 190,  420 => 189,  416 => 188,  411 => 185,  403 => 181,  401 => 180,  387 => 169,  383 => 168,  377 => 167,  373 => 166,  369 => 165,  365 => 164,  360 => 163,  350 => 162,  336 => 150,  329 => 148,  319 => 144,  313 => 142,  311 => 141,  307 => 139,  303 => 137,  299 => 135,  297 => 134,  286 => 131,  282 => 129,  279 => 128,  275 => 126,  273 => 125,  267 => 124,  262 => 122,  259 => 121,  256 => 120,  250 => 119,  248 => 118,  242 => 114,  234 => 110,  231 => 109,  223 => 105,  221 => 104,  215 => 101,  204 => 92,  196 => 87,  189 => 85,  183 => 81,  181 => 80,  178 => 79,  170 => 74,  162 => 68,  160 => 67,  154 => 63,  146 => 59,  144 => 58,  137 => 55,  135 => 54,  127 => 49,  121 => 46,  104 => 32,  101 => 31,  97 => 29,  95 => 28,  87 => 24,  81 => 22,  71 => 20,  69 => 19,  59 => 15,  55 => 14,  44 => 6,  37 => 1,);
     }
 
     public function getSourceContext()

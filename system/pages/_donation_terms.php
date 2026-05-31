@@ -5,7 +5,7 @@ $termsDefaultLanguage = isset($termsDefaultLanguage) ? $termsDefaultLanguage : '
 $termsTitleEs = 'Terminos y Condiciones';
 $termsTitleEn = 'Terms and Conditions';
 ?>
-<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
+<link rel="stylesheet" href="/tools/simple-page.css?v=20260531">
 
 <div class="simple-page" id="<?= $termsPrefix; ?>-page">
     <div class="simple-card">

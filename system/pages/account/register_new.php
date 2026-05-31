@@ -3,67 +3,89 @@
  * Register Account New
  *
  * @package   MyAAC
- * @author    Gesior <jerzyskalski@wp.pl>
- * @author    Slawkens <slawkens@gmail.com>
- * @author    OpenTibiaBR
- * @copyright 2023 MyAAC
- * @link      https://github.com/opentibiabr/myaac
  */
 defined('MYAAC') or die('Direct access not allowed!');
 
-if (isset($_POST['reg_password']))
-    $reg_password = encrypt(($config_salt_enabled ? $account_logged->getCustomField('salt') : '') . $_POST['reg_password']);
+$errors = [];
+$generatedRecoveryKey = '';
+$showForm = true;
+$needCoins = (int) ($config['generate_new_reckey_price'] ?? 0);
+$coinName = 'transferable Tibia Coins';
+$coins = (int) $account_logged->getCustomField('coins_transferable');
+$currentRecoveryKey = (string) $account_logged->getCustomField('key');
+$canGenerate = true;
 
-$reckey = $account_logged->getCustomField('key');
-if ((!$config['generate_new_reckey'] || !$config['mail_enabled']) || empty($reckey))
-    echo "You can't get new recovery key";
-else {
-    $coinType = $config['account_change_coin_type'] ?? 'coins';
-    $coinName = $coinType == 'coins' ? $coinType : 'transferable coins';
-    $needCoins = $config['generate_new_reckey_price'];
+if (!$config['generate_new_reckey']) {
+    $errors[] = 'Buying a new recovery key is disabled on this server.';
+    $canGenerate = false;
+} elseif ($currentRecoveryKey === '') {
+    $errors[] = 'Your account is not registered yet. Register it first to receive your first recovery key.';
+    $canGenerate = false;
+} elseif ($needCoins <= 0) {
+    $errors[] = 'The recovery key price is not configured correctly.';
+    $canGenerate = false;
+}
 
-    $coins = $account_logged->getCustomField($coinType);
-    if (isset($_POST['registeraccountsave']) && $_POST['registeraccountsave'] == '1') {
-        if ($reg_password == $account_logged->getPassword()) {
-            if ($coins < $needCoins) {
-                $errors[] = "You need {$needCoins} {$coinName} to generate new recovery key. You have <b>{$coins}</b> {$coinName}.";
-            } else {
-                $show_form = false;
-                $new_rec_key = generateRandomString($config['recovery_key_length'] ?? 15, false, true, true);
+if (isset($_POST['registeraccountsave']) && $_POST['registeraccountsave'] === '1' && $canGenerate) {
+    $password = (string) ($_POST['reg_password'] ?? '');
+    $encryptedPassword = encrypt(($config_salt_enabled ? $account_logged->getCustomField('salt') : '') . $password);
 
-                $mailBody = $twig->render('mail.account.register.html.twig', array(
-                    'recovery_key' => $new_rec_key
-                ));
+    if ($password === '' || $encryptedPassword !== $account_logged->getPassword()) {
+        $errors[] = 'Wrong password to account.';
+    } elseif ($coins < $needCoins) {
+        $errors[] = "You need {$needCoins} {$coinName} to generate a new recovery key. You have <b>{$coins}</b> {$coinName}.";
+    } else {
+        $newRecoveryKey = generateRandomString($config['recovery_key_length'] ?? 15, false, true, true);
 
-                if (_mail($account_logged->getEMail(), $config['lua']['serverName'] . " - new recovery key", $mailBody)) {
-                    $account_logged->setCustomField("key", $new_rec_key);
-                    $account_logged->setCustomField($coinType, $account_logged->getCustomField($coinType) - $needCoins);
-                    $account_logged->logAction("Generated new recovery key for {$needCoins} {$coinName}");
-                    $message = "<br />Your recovery key were send on email address <b>{$account_logged->getEMail()}</b> for {$needCoins} {$coinName}";
-                } else
-                    $message = '<br /><p class="error">An error occurred while sending email ( <b>' . $account_logged->getEMail() . '</b> ) with recovery key! Recovery key not changed. Try again later. For Admin: More info can be found in system/logs/mailer-error.log</p>';
+        try {
+            $db->beginTransaction();
 
-                $twig->display('success.html.twig', array(
-                    'title' => 'Account Registered',
-                    'description' => '<ul>' . $message . '</ul>'
-                ));
+            $accountStatement = $db->prepare('SELECT `coins_transferable` FROM `accounts` WHERE `id` = :account FOR UPDATE');
+            $accountStatement->execute([':account' => (int) $account_logged->getId()]);
+            $accountRow = $accountStatement->fetch(PDO::FETCH_ASSOC);
+
+            if (!$accountRow || (int) $accountRow['coins_transferable'] < $needCoins) {
+                throw new RuntimeException("You need {$needCoins} {$coinName} to generate a new recovery key.");
             }
-        } else
-            $errors[] = 'Wrong password to account.';
-    }
 
-    //show errors if not empty
-    if (!empty($errors)) {
-        $twig->display('error_box.html.twig', array('errors' => $errors));
-    }
+            $updateAccount = $db->prepare(
+                'UPDATE `accounts` SET `coins_transferable` = `coins_transferable` - :cost, `key` = :recovery_key ' .
+                'WHERE `id` = :account AND `coins_transferable` >= :cost'
+            );
+            $updateAccount->execute([
+                ':cost' => $needCoins,
+                ':recovery_key' => $newRecoveryKey,
+                ':account' => (int) $account_logged->getId(),
+            ]);
 
-    if ($show_form) {
-        //show form
-        $twig->display('account.generate_new_recovery_key.html.twig', array(
-            'coins'     => $coins,
-            'coin_type' => $coinType,
-            'coin_name' => $coinName,
-            'color'     => $coins >= $needCoins ? 'green' : 'red',
-        ));
+            if ($updateAccount->rowCount() === 0) {
+                throw new RuntimeException('The recovery key could not be updated. Try again.');
+            }
+
+            $db->commit();
+
+            $generatedRecoveryKey = $newRecoveryKey;
+            $coins -= $needCoins;
+            $showForm = false;
+            $account_logged->logAction("Generated new recovery key for {$needCoins} {$coinName}");
+        } catch (Exception $exception) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+            $errors[] = $exception->getMessage();
+        }
     }
 }
+
+if (!empty($errors)) {
+    $twig->display('error_box.html.twig', ['errors' => $errors]);
+}
+
+$twig->display('account.generate_new_recovery_key.html.twig', [
+    'coins' => $coins,
+    'coin_name' => $coinName,
+    'need_coins' => $needCoins,
+    'color' => $coins >= $needCoins ? 'green' : 'red',
+    'generated_recovery_key' => $generatedRecoveryKey,
+    'show_form' => $canGenerate && $showForm && empty($generatedRecoveryKey),
+]);

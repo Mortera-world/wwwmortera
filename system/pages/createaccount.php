@@ -18,7 +18,7 @@ if ($config['account_country'])
 
 if ($logged) {
     ?>
-    <link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
+    <link rel="stylesheet" href="/tools/simple-page.css?v=20260531">
     <div class="create-account-page">
         <section class="create-account-hero">
             <span>Already logged in</span>

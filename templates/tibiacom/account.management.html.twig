@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
+<link rel="stylesheet" href="/tools/simple-page.css?v=20260531">
 
 <div class="account-management-page">
   <section class="account-management-hero">
@@ -54,6 +54,10 @@
         {% if recovery_key is empty %}
           <form action="{{ getLink('account/register') }}" method="post">
             <button class="account-management-button account-management-button-green" type="submit">Register Account</button>
+          </form>
+        {% elseif config.generate_new_reckey %}
+          <form action="{{ getLink('account/register/new') }}" method="post">
+            <button class="account-management-button account-management-button-green" type="submit">Buy New Recovery Key</button>
           </form>
         {% endif %}
       </div>
@@ -185,7 +189,7 @@
         <div><span>Address</span><strong>{{ account_location ?: '-' }}</strong></div>
         <div><span>Phone</span><strong>{{ account_phone ?: '-' }}</strong></div>
         {% if account_show_rk and recovery_key is not empty %}
-          <div><span>Recovery Key</span><strong>{{ recovery_key }}</strong></div>
+          <div><span>Recovery Key</span><strong>Registered</strong></div>
         {% endif %}
       </div>
     </article>

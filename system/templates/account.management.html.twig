@@ -37,6 +37,8 @@
       <a href="{{ getLink('account/manage') }}">My Account</a>
       {% if recovery_key is empty %}
         <a href="{{ getLink('account/register') }}">Register Account</a>
+      {% elseif config.generate_new_reckey %}
+        <a href="{{ getLink('account/register/new') }}">Buy New Recovery Key</a>
       {% endif %}
       {% for name, link in menus %}
         <a href="{{ getLink(link) }}">{{ name }}</a>

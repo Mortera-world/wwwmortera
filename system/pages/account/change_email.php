@@ -82,7 +82,7 @@ else
 		else
 		{
 			$custom_buttons = '
-<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
+<link rel="stylesheet" href="/tools/simple-page.css?v=20260531">
 <div class="account-form-actions">
 	<form action="' . getLink('account/email') . '" method="post">
 		<input type="hidden" name="changeemailsave" value="1">
@@ -104,7 +104,7 @@ else
 	else if(!isset($_POST['emailchangecancel']) || $_POST['emailchangecancel'] != 1)
 	{
 		$custom_buttons = '
-<link rel="stylesheet" href="/tools/simple-page.css?v=20260529">
+<link rel="stylesheet" href="/tools/simple-page.css?v=20260531">
 <div class="account-form-actions">
 	<form action="' . getLink('account/email') . '" method="post">
 		<input type="hidden" name="emailchangecancel" value="1">
@@ -123,7 +123,7 @@ if(isset($_POST['emailchangecancel']) && $_POST['emailchangecancel'] == 1) {
 	$account_logged->setCustomField("email_new", "");
 	$account_logged->setCustomField("email_new_time", 0);
 
-	$custom_buttons = '<link rel="stylesheet" href="/tools/simple-page.css?v=20260529"><div class="account-form-actions"><a class="account-form-button account-form-button-blue" href="' . getLink('account/manage') . '">Back</a></div>';
+	$custom_buttons = '<link rel="stylesheet" href="/tools/simple-page.css?v=20260531"><div class="account-form-actions"><a class="account-form-button account-form-button-blue" href="' . getLink('account/manage') . '">Back</a></div>';
 
 	$twig->display('success.html.twig', array(
 		'title' => 'Email Address Change Cancelled',

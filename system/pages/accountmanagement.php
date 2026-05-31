@@ -78,7 +78,7 @@ if ($action == '') {
     if (empty($recovery_key)) {
         $account_registered = '<span style="color: red"><img src="' . $template_path . '/images/premiumfeatures/icon_no.png"> Not registered.</span>';
     } else {
-        if ($config['generate_new_reckey'] && $config['mail_enabled'])
+        if ($config['generate_new_reckey'])
             $account_registered = '<b><span style="color: green">Yes ( <a href="' . getLink('account/register/new') . '"> Buy new Recovery Key </a> )</span></b>';
         else
             $account_registered = '<b><span style="color: green"><img src="' . $template_path . '/images/premiumfeatures/icon_yes.png"> Registered.</span></b>';

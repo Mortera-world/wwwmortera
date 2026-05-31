@@ -5080,6 +5080,26 @@
   box-shadow: 0 0 0 2px rgba(19, 143, 84, 0.15);
 }
 
+.recovery-key-result-card {
+  border-color: #87c9a1;
+}
+
+.recovery-key-result {
+  background: #fff8e7;
+  border: 1px solid #d3a44c;
+  border-radius: 7px;
+  box-sizing: border-box;
+  color: #111820;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 18px 0;
+  overflow-wrap: anywhere;
+  padding: 16px;
+  text-align: center;
+}
+
 .account-form-actions {
   display: flex;
   flex-wrap: wrap;
