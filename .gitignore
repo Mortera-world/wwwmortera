@@ -1,3 +1,4 @@
 # php sessions
+system/cache/*
 system/php_sessions/*
 !system/php_sessions/index.html

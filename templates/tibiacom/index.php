@@ -333,10 +333,6 @@ $asset_version = '20260529';
                         <span class="SideActionIcon SideActionIconDownload"></span>
                         <span>Download</span>
                     </a>
-                    <a class="LoginActionButton SideActionButton SideActionWiki" href="wikia.html">
-                        <span class="SideActionIcon SideActionIconWiki"></span>
-                        <span>Wikia</span>
-                    </a>
                 </div>
 
                 <div id='Menu'>
