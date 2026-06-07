@@ -101,7 +101,7 @@ $fishingMonsters = [
                 </div>
                 <span class="fishing-kicker">Herramienta requerida</span>
                 <h3>Mechanical Fishing Rod</h3>
-                <p>Al completar un uso correcto aparece el efecto visual 54 sobre el agua.</p>
+                <p>Al completar un uso correcto aparece un efecto visual sobre el agua.</p>
                 <div class="fishing-readiness" data-fishing-readiness>
                     <i><span data-fishing-readiness-bar></span></i>
                     <strong data-fishing-readiness-text>0 de 3 requisitos</strong>
