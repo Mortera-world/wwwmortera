@@ -80,7 +80,7 @@ $loteriaAssetBase = (defined('BASE_DIR') ? rtrim(BASE_DIR, '/') : '');
     <section class="loteria-gate">
         <span class="loteria-gate__eyebrow">54 barajas · 3 ganadores</span>
         <h1>Loteria Mexicana Online</h1>
-        <p>Inicia sesion con tu cuenta de MyAAC para crear salas, comprar cartas y recibir premios en Tibia Coins transferibles.</p>
+        <p>Inicia sesion con tu cuenta para crear salas, comprar cartas y recibir premios en Tibia Coins transferibles.</p>
         <a class="loteria-button loteria-button--primary" href="<?= htmlspecialchars(getLink('account/manage'), ENT_QUOTES, 'UTF-8') ?>">Iniciar sesion</a>
     </section>
 <?php elseif (!$loteriaReady): ?>

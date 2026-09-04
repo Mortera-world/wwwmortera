@@ -13,7 +13,7 @@ $phases = [
         'title' => 'Encuentra el Echo Raid',
         'label' => 'Hallazgo',
         'description' => 'Existe una probabilidad de 0.05%, aproximadamente 1 entre 2,000 muertes elegibles, de que aparezca el objeto Echo Raid.',
-        'detail' => 'El objeto ID 16092 aparece en la posicion donde murio la criatura y queda vinculado a esa especie.',
+        'detail' => 'El echo raid aparece en la posicion donde murio la criatura y queda vinculado a esa especie.',
     ],
     [
         'title' => 'Activalo a tiempo',
@@ -63,7 +63,7 @@ $units = [
             'Solo puede aparecer un Guardian por Echo Raid.',
             'Tiene aproximadamente 5% de probabilidad acumulada durante una raid completa y activa.',
             'Su nombre cambia a "Echo Guardian of [criatura]".',
-            'Puede recibir una tabla de loot adicional independiente; actualmente esta vacia.',
+            'Puede soltar tanto items vip como ultimatums aunque raramente.',
         ],
     ],
 ];
@@ -97,7 +97,7 @@ $units = [
                 <div>
                     <b>ER</b>
                     <img src="https://mortera-world.com/images/items/16092.gif"
-                         alt="Echo Raid item 16092"
+                         alt="Echo Raid"
                          onerror="this.style.display='none'">
                 </div>
                 <strong>5 minutos para activarlo</strong>
@@ -302,7 +302,7 @@ $units = [
                 <article>
                     <span>Loot adicional</span>
                     <strong>Preparado</strong>
-                    <p>El sistema acepta recompensas extra por tipo de unidad y monstruo, pero actualmente las listas estan vacias.</p>
+                    <p>Las criaturas de echo puedel solar tibia coins, red diamond coins e incluso Mystical Fragment y Sun Essences</p>
                 </article>
                 <article>
                     <span>Proteccion de quests</span>
